@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <ui:define name="title">Add employee</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="2">
+                <f:facet name="header">
+                    <h:panelGroup style="display: block; text-align: center;">
+                        <h:outputText value="Unos profesora" style="font-size: 20px;"/>
+                    </h:panelGroup>
+                </f:facet>
+                <h:outputLabel for="nameInput" value="Ime: "/>
+                <h:inputText id="nameInput" value="#{loggedInUserBean.username}"/>
+
+                <h:outputLabel for="passwordInput" value="Password: "/>
+                <h:inputText id="passwordInput" value="#{loggedInUserBean.password}"/>
+
+                <f:facet name="footer">
+                    <h:panelGroup style="display: block; text-align: center;">
+                        <h:commandButton value="Log in" action="#{loggedInUserBean.login}"/>
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

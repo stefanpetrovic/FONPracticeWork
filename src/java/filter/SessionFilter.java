@@ -33,7 +33,6 @@ public class SessionFilter implements Filter{
         String loginURL = ((HttpServletRequest)request).getContextPath()+ "/index.jsf";
         LoggedInUserBean liub = (LoggedInUserBean) ((HttpServletRequest) request).getSession().getAttribute("loggedInUserBean");
         if (liub == null || (liub.getLoggedInEmployee() == null && liub.getLoggedInStudent() == null)) {
-            System.out.println("niko nije ulogovan");
            ((HttpServletResponse) response).sendRedirect(loginURL);
            return;
         }else {
