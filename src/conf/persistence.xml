@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="Praksa2PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>dao.domain.core.Person</class>
+    <class>dao.domain.core.Commision</class>
+    <class>dao.domain.core.Student</class>
+    <class>dao.domain.core.Work</class>
+    <class>dao.domain.core.Employee</class>
+    <class>dao.domain.core.Subject</class>
+    <class>dao.domain.core.CommisionMember</class>
+    <class>dao.domain.core.Course</class>
+    <class>dao.domain.core.Department</class>
+    <class>dao.domain.core.Faculty</class>
+    <class>dao.domain.core.Keywords</class>
+    <class>dao.domain.core.Title</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/praksa"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>
