@@ -32,7 +32,7 @@ public class SessionFilter implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String loginURL = ((HttpServletRequest)request).getContextPath()+ "/index.jsf";
         LoggedInUserBean liub = (LoggedInUserBean) ((HttpServletRequest) request).getSession().getAttribute("loggedInUserBean");
-        if (liub == null || (liub.getLoggedInEmployee() == null && liub.getLoggedInStudent() == null)) {
+        if (liub == null || liub.getLoggedInPerson().isEmpty()) {
            ((HttpServletResponse) response).sendRedirect(loginURL);
            return;
         }else {

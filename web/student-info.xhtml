@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <ui:define name="title">Podaci o nalogu</ui:define>
+
+    <ui:define name="content">
+        <h:form style="display: inline; float: left;">
+            <h:panelGrid columns="2" >
+                <f:facet name="header">
+                    <h:panelGroup style="display: block; text-align: center;">
+                        <h:outputText value="Podaci o korisniku" style="font-size: 20px;"/>
+                    </h:panelGroup>
+                </f:facet>
+                <h:outputLabel for="nameInput" value="Ime: "/>
+                <h:outputText id="nameInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}"/>
+
+                <h:outputLabel for="surnameInput" value="Prezime: "/>
+                <h:outputText id="surnameInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].surname}"/>
+
+                <h:outputLabel for="indexNoInput" value="Broj indeksa: "/>
+                <h:outputText id="indexNoInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].student.indexNo}"/>
+                 
+                <h:outputLabel for="emailInput" value="e-mail: "/>
+                <h:inputText id="emailInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].email}"/>
+
+                <h:outputLabel for="usernameInput" value="Korisničko ime: "/>
+                <h:outputText id="usernameInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].username}"/>
+
+                <h:outputLabel for="jmbgInput" value="JMBG: "/>
+                <h:outputText id="jmbgInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].student.jmbg}"/>
+
+                <h:outputLabel for="courseDropbox" value="Smer: "/>
+                <h:outputText id="courseOutput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].student.course}"/>
+
+                <f:facet name="footer">
+                    <h:panelGroup style="display: block; text-align: center;">
+                        <h:commandButton value="Unesi" action="#{employeeBean.addEmployee}"/>
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+        </h:form>
+        <div id="image-box" style="display: inline; float: left;">
+            <p:graphicImage style="border: 1px solid;" library="images" name="#{(loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI == null) ? 'pic.jpg': loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI}"/>
+            <h:form enctype="multipart/form-data">
+                <p:growl id="messages" showDetail="true"/>
+                <p:fileUpload mode="simple" value="#{imageUploadBean.file}"/>
+                <p:commandButton value="Submit" ajax="false" actionListener="#{imageUploadBean.upload}"/>
+            </h:form>
+        </div>
+        
+    </ui:define>
+</ui:composition>

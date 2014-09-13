@@ -47,8 +47,10 @@ public class HibernatePersonDAO extends AbstractHibernateDAO<Person, Long> imple
             throw new EngineDAOException(e);
         }
         if (person == null) {
-            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
         }
+        getSession().getTransaction().commit();
         return person;
     }
     

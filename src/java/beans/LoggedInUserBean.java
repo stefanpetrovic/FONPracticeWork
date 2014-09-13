@@ -12,6 +12,7 @@ import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.exception.EngineDAOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -27,8 +28,8 @@ public class LoggedInUserBean implements Serializable{
     
     private String username;
     private String password;
-    private Employee loggedInEmployee;
-    private Student loggedInStudent;
+    private Class personIdentifier;
+    private HashMap<Class, Person> loggedInPerson = new HashMap<Class, Person>();
     
     public String getUsername() {
         return username;
@@ -45,35 +46,47 @@ public class LoggedInUserBean implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Employee getLoggedInEmployee() {
-        return loggedInEmployee;
+    
+    public Class getPersonIdentifier() {
+        return personIdentifier;
     }
 
-    public void setLoggedInEmployee(Employee loggedInEmployee) {
-        this.loggedInEmployee = loggedInEmployee;
+    public void setPersonIdentifier(Class personIdentifier) {
+        this.personIdentifier = personIdentifier;
     }
 
-    public Student getLoggedInStudent() {
-        return loggedInStudent;
+    public HashMap<Class, Person> getLoggedInPerson() {
+        return loggedInPerson;
     }
 
-    public void setLoggedInStudent(Student loggedInStudent) {
-        this.loggedInStudent = loggedInStudent;
+    public void setLoggedInPerson(HashMap<Class, Person> loggedInPerson) {
+        this.loggedInPerson = loggedInPerson;
+    }
+    
+    public void uploadImage() {
+        
     }
     
     public String login() {
         try {
-            Person loggedInPerson = Controller.getInstance().login(username, password);
-            if (loggedInPerson.getStudent() != null) {
-                loggedInStudent = loggedInPerson.getStudent();
+            Person person = Controller.getInstance().login(username, password);
+            if (person.getStudent() != null) {
+                personIdentifier = person.getStudent().getClass();
             }else {
-                loggedInEmployee = loggedInPerson.getEmployee();
+                personIdentifier = person.getEmployee().getClass();
             }
+            loggedInPerson.put(personIdentifier, person);
             return "first-page";
         } catch (EngineDAOException ex) {
             Logger.getLogger(LoggedInUserBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
+    
+    public String logout() {
+        personIdentifier = null;
+        loggedInPerson.clear();
+        return "index";
+    }
+
 }

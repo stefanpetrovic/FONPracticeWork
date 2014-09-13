@@ -6,9 +6,16 @@
 
 package businessLogic;
 
+import dao.domain.core.Course;
+import dao.domain.core.Department;
+import dao.domain.core.Employee;
 import dao.domain.core.Person;
+import dao.domain.core.Student;
+import dao.domain.core.Title;
 import dao.exception.EngineDAOException;
 import dao.hibernate.HibernatePersonDAO;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class responsible for communication with database.
@@ -26,9 +33,31 @@ public class Controller {
         if (instance == null) instance = new Controller();
         return instance;
     }
+    //this should be connected to HibernateTitleDAO
+    public List<Title> getTitles() {
+        return new ArrayList<Title>();
+    }
+    
+    //this should be connected to HibernateDepartmentDAO
+    public List<Department> getDepartments() {
+        return new ArrayList<Department>();
+    }
+    
+    //this should be connected to HibernateCourseDAO
+    public List<Course> getCourses() {
+        return new ArrayList<Course>();
+    }
     
     public Person login(String username, String password) throws EngineDAOException {
         HibernatePersonDAO hpDAO = new HibernatePersonDAO();
         return hpDAO.getPersonByUsernameAndPassword(username, password);
+    }
+    
+    public void addEmployee(Employee employee) {
+        //insert code that saves employee via DAO
+    }
+    
+    public void addStudent(Student student) {
+        //insert code that saves student via DAO
     }
 }
