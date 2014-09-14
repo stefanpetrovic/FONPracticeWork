@@ -5,25 +5,54 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
     <ui:define name="title">Login</ui:define>
 
+
     <ui:define name="content">
-        <h:form styleClass="col-md-8 col-md-offset-2" style="margin-top: 30px;">
-            <h:graphicImage library="images" name="fon-logo.jpg"/>
-            <h:panelGrid columns="2">
-                <f:facet name="header">
-                    <h:outputText value="Log in" style="font-size: 20px;"/>
-                </f:facet>
-                <h:outputLabel for="usernameInput" value="Username: "/>
-                <h:inputText id="usernameInput" value="#{loggedInUserBean.username}"/>
+        <h:form styleClass="col-md-8 col-md-offset-4 form-horizontal" style="margin-top: 30px;">
+            <h2>Log in</h2>
+            <h:graphicImage library="images" name="fon-logo.jpg" style="margin-bottom: 10px;"/>
 
-                <h:outputLabel for="passwordInput" value="Password: "/>
-                <h:inputText id="passwordInput" value="#{loggedInUserBean.password}"/>
 
-                <f:facet name="footer">
-                    <h:panelGroup style="display: block; text-align: center;">
-                        <h:commandButton value="Log in" action="#{loggedInUserBean.login}"/>
-                    </h:panelGroup>
-                </f:facet>
-            </h:panelGrid>
+            <!--<h:outputText value="Log in" style="font-size: 20px;"/>-->
+            <div class="form-group">
+                <h:outputLabel for="usernameInput" styleClass="col-md-3 control-label" value="Username: "/>
+                <div class="col-md-7">
+                    <h:inputText id="usernameInput" styleClass="form-control" value="#{loggedInUserBean.username}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="passwordInput"  styleClass="col-md-3 control-label" value="Password: "/>
+                <div class="col-md-7">
+                    <h:inputText id="passwordInput" styleClass="form-control" value="#{loggedInUserBean.password}"/>
+                </div>
+            </div>
+            
+
+            <h:commandButton value="Log in" styleClass="btn btn-default pull-right" action="#{loggedInUserBean.login}"/>
+
         </h:form>
     </ui:define>
+
+
+
+    <!--    <ui:define name="content">
+            <h:form styleClass="col-md-8 col-md-offset-2 form-horizontal" style="margin-top: 30px;">
+                <h:graphicImage library="images" name="fon-logo.jpg"/>
+                <h:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:outputText value="Log in" style="font-size: 20px;"/>
+                    </f:facet>
+                    <h:outputLabel for="usernameInput" value="Username: "/>
+                    <h:inputText id="usernameInput" value="#{loggedInUserBean.username}"/>
+    
+                    <h:outputLabel for="passwordInput" value="Password: "/>
+                    <h:inputText id="passwordInput" value="#{loggedInUserBean.password}"/>
+    
+                    <f:facet name="footer">
+                        <h:panelGroup style="display: block; text-align: center;">
+                            <h:commandButton value="Log in" action="#{loggedInUserBean.login}"/>
+                        </h:panelGroup>
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>-->
 </ui:composition>

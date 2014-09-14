@@ -107,7 +107,7 @@ and open the template in the editor.
 }
 
 .badge:hover{
-    background-color: #b92c28;
+    /*background-color: #b92c28;*/
 }
 
 /* end of hover properties*/
