@@ -43,7 +43,7 @@
             </h:panelGrid>
         </h:form>
         <div id="image-box" style="display: inline; float: left;">
-            <p:graphicImage style="border: 1px solid;" library="images" name="#{(loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI == null) ? 'pic.jpg': loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI}"/>
+            <p:graphicImage style="border: 1px solid;" value="/uploads/profilePictures/#{(loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI == '') ? 'pic.jpg': loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI}" alt="nema slike"/>
             <h:form enctype="multipart/form-data">
                 <p:growl id="messages" showDetail="true"/>
                 <p:fileUpload mode="simple" value="#{imageUploadBean.file}"/>

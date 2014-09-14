@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beans;
 
 import java.io.BufferedInputStream;
@@ -13,7 +12,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -28,13 +30,13 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 public class ImageUploadBean {
-    
-    private String pathToImg = "C:\\praksa\\images";
+
+    private String pathToImg = "C:\\praksa\\uploads\\profilePictures";
     private UploadedFile file;
     private String destination;
-    @ManagedProperty(value="#{loggedInUserBean}")
+    @ManagedProperty(value = "#{loggedInUserBean}")
     private LoggedInUserBean loggedInUserBean;
-    
+
     public UploadedFile getFile() {
         return file;
     }
@@ -46,22 +48,40 @@ public class ImageUploadBean {
     public void setLoggedInUserBean(LoggedInUserBean loggedInUserBean) {
         this.loggedInUserBean = loggedInUserBean;
     }
-    
+
     public void setFile(UploadedFile file) {
         this.file = file;
     }
-    
+
     public void upload() {
-        
+        //delete previous user image if exists
+        String picname = loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()).getPictureURI();
+        if (!picname.equals("")) {
+            String url = pathToImg + "\\" + picname;
+            try {
+                Files.deleteIfExists(new File(url).toPath());
+                System.out.println("Prethodna slika obrisana");
+            } catch (IOException ex) {
+                Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
 
         String filename = loggedInUserBean.getUsername();
         String type = file.getFileName();
         type = type.substring(type.lastIndexOf("."));
+        File saveFile;
         try {
-            File saveFile = File.createTempFile(filename, type,new File(pathToImg));
-            InputStream in = file.getInputstream();
-            Files.copy(in, saveFile.toPath());
-        } catch (IOException ex) {
+            //saveFile = File.createTempFile(filename, type, new File(pathToImg));
+            saveFile = new File(pathToImg + "\\" + filename + type);
+            try (InputStream in = file.getInputstream()) {
+                Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println(saveFile.getName());
+                loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()).setPictureURI(saveFile.getName());
+            } catch (IOException ex) {
+                Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (Exception ex) {
             Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        File saveFile = new File(folder + "resources\\images\\" + filename + type);
@@ -74,9 +94,7 @@ public class ImageUploadBean {
 //        } catch (IOException ex) {
 //            Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-       
-        
+
     }
 
-    
 }
