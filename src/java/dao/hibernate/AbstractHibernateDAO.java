@@ -35,23 +35,31 @@ public abstract class AbstractHibernateDAO<T, K> implements BasePersistentDAO<T,
 
     @Override
     public T selectByKey(final K key) throws EngineDAOException {
+        T t;
         try {
-            //getSession().getTransaction();
-            return (T) getSession().get(persistentClass, (Serializable) key);
+            getSession().getTransaction().begin();
+            t = (T) getSession().get(persistentClass, (Serializable) key);
+            getSession().getTransaction().commit();
         } catch (RuntimeException r) {
+            getSession().getTransaction().rollback();
             throw new EngineDAOException(r);
         }
+        return t;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<T> findAll() throws EngineDAOException {
-        /*try {
-            return hibernateTemplate.loadAll(persistentClass);
+        List<T> all;
+        try {
+            getSession().beginTransaction();
+            all = getSession().createCriteria(persistentClass).list();
+            getSession().getTransaction().commit();
         } catch (RuntimeException r) {
+            getSession().getTransaction().rollback();
             throw new EngineDAOException(r);
-        }  */
-        return new ArrayList<T>();
+        }  
+        return all;
     }
 
     @Override

@@ -8,6 +8,9 @@ package beans;
 
 import businessLogic.Controller;
 import dao.domain.core.Student;
+import dao.exception.EngineDAOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -28,7 +31,11 @@ public class StudentBean {
     }
     
     public String addStudent() {
-        Controller.getInstance().addStudent(student);
+        try {
+            Controller.getInstance().addStudent(student);
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(StudentBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // add message about successfull save
         return null;
     }

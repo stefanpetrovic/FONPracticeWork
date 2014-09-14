@@ -14,6 +14,7 @@ import dao.domain.core.Student;
 import dao.domain.core.Title;
 import dao.exception.EngineDAOException;
 import dao.hibernate.HibernatePersonDAO;
+import dao.hibernate.HibernateStudentDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +58,18 @@ public class Controller {
         //insert code that saves employee via DAO
     }
     
-    public void addStudent(Student student) {
-        //insert code that saves student via DAO
+    public void addStudent(Student student) throws EngineDAOException {
+        HibernatePersonDAO hpd = new HibernatePersonDAO();
+        HibernateStudentDAO spd = new HibernateStudentDAO();
+        Person p = student.getPerson();
+        p = hpd.getPersonByUsername(p.getUsername());
+        if(p == null){
+           return;
+        }
+
+        hpd.makePersistent(p);
+        p = hpd.getPersonByUsername(p.getUsername());
+        student.setStudentID(p.getPersonID());
+        spd.makePersistent(student);
     }
 }

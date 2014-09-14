@@ -15,4 +15,5 @@ import dao.exception.EngineDAOException;
 public interface PersonDAO extends BasePersistentDAO<Person, Long>{
     
     public Person getPersonByUsernameAndPassword(String username, String password) throws EngineDAOException;
+    public Person getPersonByUsername(String username) throws EngineDAOException;
 }

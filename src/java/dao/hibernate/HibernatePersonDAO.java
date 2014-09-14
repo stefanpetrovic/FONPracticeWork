@@ -53,6 +53,25 @@ public class HibernatePersonDAO extends AbstractHibernateDAO<Person, Long> imple
         getSession().getTransaction().commit();
         return person;
     }
+
+    @Override
+    public Person getPersonByUsername(String username) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(USERNAME, username));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Person person = null;
+        try {
+            person = (Person) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (person == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return person;    }
     
     
 }
