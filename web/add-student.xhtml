@@ -6,47 +6,123 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
     <ui:define name="title">Add student</ui:define>
 
+    <ui:define name="heading">
+        <h1 class="col-md-offset-2">Unos studenta</h1>
+    </ui:define>
+
     <ui:define name="content">
-        <h:form>
-            <h:panelGrid columns="2">
-                <f:facet name="header">
-                    <h:panelGroup style="display: block; text-align: center;">
-                        <h:outputText value="Unos studenta" style="font-size: 20px;"/>
-                    </h:panelGroup>
-                </f:facet>
-                <h:outputLabel for="nameInput" value="Ime: "/>
-                <h:inputText id="nameInput" value="#{studentBean.student.person.name}"/>
+        <h:form role="form" styleClass="col-md-12 form-horizontal">
 
-                <h:outputLabel for="surnameInput" value="Prezime: "/>
-                <h:inputText id="surnameInput" value="#{studentBean.student.person.surname}"/>
+            <div class="form-group">
+                <h:outputLabel for="nameInput" styleClass="col-md-2 control-label" value="Ime: "/>
+                <div class="col-md-10">
+                    <h:inputText id="nameInput" styleClass="form-control" value="#{studentBean.student.person.name}"/>
+                </div>
+            </div>
 
-                <h:outputLabel for="indexNoInput" value="Broj indeksa: "/>
-                <h:inputText id="indexNoInput" value="#{studentBean.student.indexNo}"/>
+            <div class="form-group">
+                <h:outputLabel for="surnameInput"  styleClass="col-md-2 control-label" value="Prezime: "/>
+                <div class="col-md-10">
+                    <h:inputText id="surnameInput" styleClass="form-control" value="#{studentBean.student.person.surname}"/>
+                </div>
+            </div>
 
-                <h:outputLabel for="emailInput" value="e-mail: "/>
-                <h:inputText id="emailInput" value="#{studentBean.student.person.email}"/>
+            <div class="form-group">
+                <h:outputLabel for="indexNoInput"  styleClass="col-md-2 control-label" value="Broj indeksa: "/>
+                <div class="col-md-10">
+                    <h:inputText id="indexNoInput" styleClass="form-control" value="#{studentBean.student.indexNo}"/>
+                </div>
+            </div>
 
-                <h:outputLabel for="usernameInput" value="Korisničko ime: "/>
-                <h:inputText id="usernameInput" value="#{studentBean.student.person.username}"/>
+            <div class="form-group">
+                <h:outputLabel for="emailInput"  styleClass="col-md-2 control-label" value="e-mail: "/>
+                <div class="col-md-10">
+                    <h:inputText id="emailInput" styleClass="form-control" value="#{studentBean.student.person.email}"/>
+                </div>
+            </div>
 
-                <h:outputLabel for="passwordInput" value="Korisnička šifra: "/>
-                <h:inputText id="passwordInput" value="#{studentBean.student.person.password}"/>
+            <div class="form-group">
+                <h:outputLabel for="usernameInput"  styleClass="col-md-2 control-label" value="Korisničko ime: "/>
+                <div class="col-md-10">
+                    <h:inputText id="usernameInput" styleClass="form-control" value="#{studentBean.student.person.username}"/>
+                </div>
+            </div>
 
-                <h:outputLabel for="jmbgInput" value="JMBG: "/>
-                <h:inputText id="jmbgInput" value="#{studentBean.student.jmbg}"/>
+            <div class="form-group">
+                <h:outputLabel for="passwordInput"  styleClass="col-md-2 control-label" value="Korisnička šifra: "/>
+                <div class="col-md-10">
+                    <h:inputText id="passwordInput" styleClass="form-control" value="#{studentBean.student.person.password}"/>
+                </div>
+            </div>
 
-                <h:outputLabel for="courseDropbox" value="Smer: "/>
-                <p:selectOneMenu id="courseDropbox" value="#{studentBean.student.course}">
-                    <f:converter converterId="courseConverter"/>
-                    <f:selectItems value="#{dropboxesDataBean.courses}"/>
-                </p:selectOneMenu>
+            <div class="form-group">
+                <h:outputLabel for="jmbgInput"  styleClass="col-md-2 control-label" value="JMBG: "/>
+                <div class="col-md-10">
+                    <h:inputText id="jmbgInput" styleClass="form-control" value="#{studentBean.student.jmbg}"/>
+                </div>
+            </div>
 
-                <f:facet name="footer">
-                    <h:panelGroup style="display: block; text-align: center;">
-                        <h:commandButton value="Unesi" action="#{employeeBean.addEmployee}"/>
-                    </h:panelGroup>
-                </f:facet>
-            </h:panelGrid>
+            <div class="form-group">
+                <h:outputLabel for="courseDropbox"  styleClass="col-md-2 control-label" value="Smer: "/>
+                <div class="col-md-10">
+                    <h:selectOneMenu id="courseDropbox"  styleClass="form-control" value="#{studentBean.student.course}">
+                        <f:converter converterId="courseConverter"/>
+                        <f:selectItems value="#{dropboxesDataBean.courses}"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
+
+            
+
+
+                <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{employeeBean.addEmployee}"/>
+
+
+
         </h:form>
     </ui:define>
+
+    <!--    <ui:define name="content">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:panelGroup style="display: block; text-align: center;">
+                            <h:outputText value="Unos studenta" style="font-size: 20px;"/>
+                        </h:panelGroup>
+                    </f:facet>
+                    <h:outputLabel for="nameInput" value="Ime: "/>
+                    <h:inputText id="nameInput" value="#{studentBean.student.person.name}"/>
+    
+                    <h:outputLabel for="surnameInput" value="Prezime: "/>
+                    <h:inputText id="surnameInput" value="#{studentBean.student.person.surname}"/>
+    
+                    <h:outputLabel for="indexNoInput" value="Broj indeksa: "/>
+                    <h:inputText id="indexNoInput" value="#{studentBean.student.indexNo}"/>
+    
+                    <h:outputLabel for="emailInput" value="e-mail: "/>
+                    <h:inputText id="emailInput" value="#{studentBean.student.person.email}"/>
+    
+                    <h:outputLabel for="usernameInput" value="Korisničko ime: "/>
+                    <h:inputText id="usernameInput" value="#{studentBean.student.person.username}"/>
+    
+                    <h:outputLabel for="passwordInput" value="Korisnička šifra: "/>
+                    <h:inputText id="passwordInput" value="#{studentBean.student.person.password}"/>
+    
+                    <h:outputLabel for="jmbgInput" value="JMBG: "/>
+                    <h:inputText id="jmbgInput" value="#{studentBean.student.jmbg}"/>
+    
+                    <h:outputLabel for="courseDropbox" value="Smer: "/>
+                    <p:selectOneMenu id="courseDropbox" value="#{studentBean.student.course}">
+                        <f:converter converterId="courseConverter"/>
+                        <f:selectItems value="#{dropboxesDataBean.courses}"/>
+                    </p:selectOneMenu>
+    
+                    <f:facet name="footer">
+                        <h:panelGroup style="display: block; text-align: center;">
+                            <h:commandButton value="Unesi" action="#{employeeBean.addEmployee}"/>
+                        </h:panelGroup>
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>-->
 </ui:composition>

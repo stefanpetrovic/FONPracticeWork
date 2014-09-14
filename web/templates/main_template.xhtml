@@ -18,10 +18,21 @@
         <script src="http://code.jquery.com/jquery.js"></script>
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
         <h:outputStylesheet name="css/menu.css" />
+        <h:outputStylesheet name="css/forms.css" />
         <h:outputScript name="bootstrap/js/bootstrap.js" />
 
     </h:head>
     <h:body>
-        <ui:insert name="content">Content</ui:insert>
+             <ui:include src="/templates/header-t.xhtml" />
+             <div class="col-md-11">
+                 <div class="col-md-4 text-left form-heading">
+                     <ui:insert name="heading">Naslov</ui:insert>
+                 </div>
+                 <div class="col-md-7" style="margin-top: 30px;">
+                 <ui:insert name="content">Content</ui:insert>
+                 </div>  
+             </div>
+                 
+        
     </h:body>
 </html>
