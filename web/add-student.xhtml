@@ -78,48 +78,6 @@
 
                 <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{employeeBean.addEmployee}"/>
 
-
-
-        <h:form >
-            <h:panelGrid columns="2" >
-                <f:facet name="header">
-                    <h:panelGroup style="display: block; text-align: center;">
-                        <h:outputText value="Unos studenta" style="font-size: 20px;"/>
-                    </h:panelGroup>
-                </f:facet>
-                <h:outputLabel for="nameInput" value="Ime: "/>
-                <h:inputText id="nameInput" value="#{studentBean.student.person.name}"/>
-
-                <h:outputLabel for="surnameInput" value="Prezime: "/>
-                <h:inputText id="surnameInput" value="#{studentBean.student.person.surname}"/>
-
-                <h:outputLabel for="indexNoInput" value="Broj indeksa: "/>
-                <h:inputText id="indexNoInput" value="#{studentBean.student.indexNo}"/>
-
-                <h:outputLabel for="emailInput" value="e-mail: "/>
-                <h:inputText id="emailInput" value="#{studentBean.student.person.email}"/>
-
-                <h:outputLabel for="usernameInput" value="Korisničko ime: "/>
-                <h:inputText id="usernameInput" value="#{studentBean.student.person.username}"/>
-
-                <h:outputLabel for="passwordInput" value="Korisnička šifra: "/>
-                <h:inputText id="passwordInput" value="#{studentBean.student.person.password}"/>
-
-                <h:outputLabel for="jmbgInput" value="JMBG: "/>
-                <h:inputText id="jmbgInput" value="#{studentBean.student.jmbg}"/>
-
-                <h:outputLabel for="courseDropbox" value="Smer: "/>
-                <p:selectOneMenu id="courseDropbox" value="#{studentBean.student.course}">
-                    <f:converter converterId="courseConverter"/>
-                    <f:selectItems value="#{dropboxesDataBean.courses}"/>
-                </p:selectOneMenu>
-
-                <f:facet name="footer">
-                    <h:panelGroup style="display: block; text-align: center;">
-                        <h:commandButton value="Unesi" action="#{employeeBean.addEmployee}"/>
-                    </h:panelGroup>
-                </f:facet>
-            </h:panelGrid>
         </h:form>
     </ui:define>
 
