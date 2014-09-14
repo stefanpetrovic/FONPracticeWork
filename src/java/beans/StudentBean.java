@@ -7,6 +7,7 @@
 package beans;
 
 import businessLogic.Controller;
+import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.exception.EngineDAOException;
 import java.util.logging.Level;
@@ -22,6 +23,10 @@ public class StudentBean {
     
     private Student student;
 
+    public StudentBean() {
+        student = new Student();
+        student.setPerson(new Person());
+    }
     public Student getStudent() {
         return student;
     }

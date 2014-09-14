@@ -8,7 +8,11 @@ package converter;
 
 import businessLogic.Controller;
 import dao.domain.core.Title;
+import dao.exception.EngineDAOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -24,7 +28,12 @@ public class TitleConverter implements Converter{
     private List<Title> titles;
     
     public TitleConverter() {
-        titles = Controller.getInstance().getTitles();
+        try {
+            titles = Controller.getInstance().getTitles();
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(TitleConverter.class.getName()).log(Level.SEVERE, null, ex);
+            titles = new ArrayList<>();
+        }
     }
     
     @Override

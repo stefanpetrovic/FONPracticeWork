@@ -13,8 +13,11 @@ import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.domain.core.Title;
 import dao.exception.EngineDAOException;
+import dao.hibernate.HibernateCourseDAO;
+import dao.hibernate.HibernateDepartmentDAO;
 import dao.hibernate.HibernatePersonDAO;
 import dao.hibernate.HibernateStudentDAO;
+import dao.hibernate.HibernateTitleDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,18 +38,21 @@ public class Controller {
         return instance;
     }
     //this should be connected to HibernateTitleDAO
-    public List<Title> getTitles() {
-        return new ArrayList<Title>();
+    public List<Title> getTitles() throws EngineDAOException {
+        HibernateTitleDAO hcd = new HibernateTitleDAO();
+        return hcd.findAll();
     }
     
     //this should be connected to HibernateDepartmentDAO
-    public List<Department> getDepartments() {
-        return new ArrayList<Department>();
+    public List<Department> getDepartments() throws EngineDAOException {
+        HibernateDepartmentDAO hcd = new HibernateDepartmentDAO();
+        return hcd.findAll();
     }
     
     //this should be connected to HibernateCourseDAO
-    public List<Course> getCourses() {
-        return new ArrayList<Course>();
+    public List<Course> getCourses() throws EngineDAOException {
+        HibernateCourseDAO hcd = new HibernateCourseDAO();
+        return hcd.findAll();
     }
     
     public Person login(String username, String password) throws EngineDAOException {
@@ -62,10 +68,8 @@ public class Controller {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         HibernateStudentDAO spd = new HibernateStudentDAO();
         Person p = student.getPerson();
-        p = hpd.getPersonByUsername(p.getUsername());
-        if(p == null){
-           return;
-        }
+        //p = hpd.getPersonByUsername(p.getUsername());
+        
 
         hpd.makePersistent(p);
         p = hpd.getPersonByUsername(p.getUsername());
