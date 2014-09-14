@@ -8,7 +8,11 @@ package converter;
 
 import businessLogic.Controller;
 import dao.domain.core.Department;
+import dao.exception.EngineDAOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -24,7 +28,12 @@ public class DepartmentConverter implements Converter{
     private List<Department> departments;
     
     public DepartmentConverter() {
-        departments = Controller.getInstance().getDepartments();
+        try {
+            departments = Controller.getInstance().getDepartments();
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(DepartmentConverter.class.getName()).log(Level.SEVERE, null, ex);
+            departments = new ArrayList<>();
+        }
     }
     
     @Override
