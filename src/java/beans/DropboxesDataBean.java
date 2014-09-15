@@ -36,6 +36,8 @@ public class DropboxesDataBean {
         try {
             titles = Controller.getInstance().getTitles();
             departments = Controller.getInstance().getDepartments();
+            courses = Controller.getInstance().getCourses();
+            subjects = Controller.getInstance().getSubjects();
         } catch (EngineDAOException ex) {
             Logger.getLogger(DropboxesDataBean.class.getName()).log(Level.SEVERE, null, ex);
             titles = new ArrayList<>();

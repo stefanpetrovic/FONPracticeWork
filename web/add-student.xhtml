@@ -13,7 +13,9 @@
     <ui:define name="content">
 
         <h:form styleClass="col-md-12 form-horizontal">
-
+            
+            <p:growl id="infoMessage" life="3000"/>
+            <p:growl id="errorMessage" life="3000"/>
             <div class="form-group">
                 <h:outputLabel for="nameInput" styleClass="col-md-2 control-label" value="Ime: "/>
                 <div class="col-md-10">
@@ -38,14 +40,18 @@
             <div class="form-group">
                 <h:outputLabel for="emailInput"  styleClass="col-md-2 control-label" value="e-mail: "/>
                 <div class="col-md-10">
-                    <h:inputText id="emailInput" styleClass="form-control" value="#{studentBean.student.person.email}"/>
+                    <h:inputText id="emailInput" styleClass="form-control" value="#{studentBean.student.person.email}" required="true"
+                                 requiredMessage="Morate uneti email" validator="#{studentBean.validateEmail}"/>
+                    <p:message for="emailInput" />
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="usernameInput"  styleClass="col-md-2 control-label" value="Korisničko ime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="usernameInput" styleClass="form-control" value="#{studentBean.student.person.username}"/>
+                    <h:inputText id="usernameInput" styleClass="form-control" value="#{studentBean.student.person.username}" required="true"
+                                 requiredMessage="Morate uneti email" validator="#{studentBean.validateUsername}"/>
+                    <p:message for="usernameInput"/>
                 </div>
             </div>
 
@@ -76,7 +82,7 @@
 
 
 
-            <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{employeeBean.addEmployee}"/>
+            <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{studentBean.addStudent}"/>
 
         </h:form>
     </ui:define>

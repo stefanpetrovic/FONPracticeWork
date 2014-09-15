@@ -7,6 +7,7 @@
 package beans;
 
 import dao.domain.core.Employee;
+import dao.domain.core.Person;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -20,6 +21,7 @@ public class EmployeeBean {
     
     public EmployeeBean() {
         employee = new Employee();
+        employee.setPerson(new Person());
     }
 
     public Employee getEmployee() {
