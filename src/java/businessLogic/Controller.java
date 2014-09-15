@@ -15,8 +15,6 @@ import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.domain.core.Title;
 import dao.exception.EngineDAOException;
-import dao.hibernate.HibernateCommisionDAO;
-import dao.hibernate.HibernateCommisionMemberDAO;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
 import dao.hibernate.HibernateEmployeeDAO;

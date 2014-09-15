@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <ui:define name="title">Ocena rada</ui:define>
+
+    <ui:define name="heading">
+        <h1 class="col-md-offset-2">Dodaj komisiju</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form  styleClass="col-md-12 form-horizontal">
+
+            <div class="form-group">
+                <h:outputLabel for="studentName" styleClass="col-md-2 control-label" value="Student" />
+                <div class="col-md-10">
+                    <h:outputText id="studentName" value="#{bean}"/>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
+                <div class="col-md-10">
+                    <h:outputText id="subject" value="#{bean}"/>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
+                <div class="col-md-10">
+                    <h:outputText id="subject" value="#{bean}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="ocena" styleClass="col-md-2 control-label" value="Ocena" />
+                <div class="col-md-2">
+
+
+                    <h:selectOneMenu id="ocena"  styleClass="form-control" value="#{bean}">
+                        <f:converter converterId="courseConverter"/>
+                        <f:selectItems value="#{bean}"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
+
+            <h:commandButton value="Oceni" styleClass="btn btn-primary center-block" action="d" /> 
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

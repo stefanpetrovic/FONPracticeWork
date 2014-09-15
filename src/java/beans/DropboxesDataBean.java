@@ -9,8 +9,13 @@ package beans;
 import businessLogic.Controller;
 import dao.domain.core.Course;
 import dao.domain.core.Department;
+import dao.domain.core.Subject;
 import dao.domain.core.Title;
+import dao.exception.EngineDAOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -25,10 +30,19 @@ public class DropboxesDataBean {
     private List<Title> titles;
     private List<Department> departments;
     private List<Course> courses;
+    private List<Subject> subjects;
     
     public DropboxesDataBean() {
-        titles = Controller.getInstance().getTitles();
-        departments = Controller.getInstance().getDepartments();
+        try {
+            titles = Controller.getInstance().getTitles();
+            departments = Controller.getInstance().getDepartments();
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(DropboxesDataBean.class.getName()).log(Level.SEVERE, null, ex);
+            titles = new ArrayList<>();
+            departments = new ArrayList<>();
+            courses = new ArrayList<>();
+            subjects = new ArrayList<>();
+        }
     }
     
     public List<Title> getTitles() {
@@ -53,6 +67,14 @@ public class DropboxesDataBean {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
     
     
