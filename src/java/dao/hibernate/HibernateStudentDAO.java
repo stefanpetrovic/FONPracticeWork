@@ -47,7 +47,62 @@ public class HibernateStudentDAO extends AbstractHibernateDAO<Student, Long> imp
         } catch (RuntimeException e) {
             throw new EngineDAOException(e);
         }
-        if (person == null) {
+        if (student == null) {
+            throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
+        }
+        return student;
+    }
+
+    @Override
+    public Student getStudentByIndexNo(String indexNo) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(INDEX_NO, indexNo));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Student student = null;
+        try {
+            student = (Student) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (student == null) {
+            throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
+        }
+        return student;
+    }
+
+    @Override
+    public Student getStudentByIndexNoAndJMBG(String indexNo, String jmbg) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(INDEX_NO, indexNo));
+        criteria.add(Restrictions.eq(JMBG, jmbg));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Student student = null;
+        try {
+            student = (Student) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (student == null) {
+            throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
+        }
+        return student;
+    }
+
+    @Override
+    public Student getStudentByJMBG(String jmbg) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(JMBG, jmbg));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Student student = null;
+        try {
+            student = (Student) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (student == null) {
             throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
         }
         return student;
