@@ -7,6 +7,7 @@ package dao;
 
 import dao.domain.core.Department;
 import dao.domain.core.Employee;
+import dao.exception.EngineDAOException;
 import java.util.List;
 
 /**
@@ -15,6 +16,6 @@ import java.util.List;
  */
 public interface EmployeeDAO extends BasePersistentDAO<Employee, Long>{
     
-    public List<Employee> getEmployeeByDepartment(Department department);
-    
+    public List<Employee> getEmployeesByDepartment(Department department);
+    public List<Employee> getEmployeesByName(String name) throws EngineDAOException;
 }
