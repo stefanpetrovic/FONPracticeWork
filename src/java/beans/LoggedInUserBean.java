@@ -15,8 +15,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -64,7 +66,13 @@ public class LoggedInUserBean implements Serializable{
     }
     
     public void updateUser() {
-        Controller.getInstance().updatePerson(loggedInPerson.get(personIdentifier));
+        try {
+            Controller.getInstance().updatePerson(loggedInPerson.get(personIdentifier));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Korisnik uspesno izmenjen."));
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(LoggedInUserBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Greska prilikom izmene."));
+        }
     }
     
     public String login() {

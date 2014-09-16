@@ -13,6 +13,7 @@
     <ui:define name="content">
         <h:form styleClass="col-md-7 form-horizontal">
            
+            <p:growl life="3000" showDetail="true"/>
                         
             <div class="form-group">
                 <h:outputLabel for="nameInput" styleClass="col-md-4 text-right"  value="Ime: "/>
@@ -51,7 +52,7 @@
 
             <div class="form-group">
                
-                <h:commandButton value="Izmeni" styleClass="btn btn-primary center-block" action="#{loggedInUserBean.updateUser}"/>
+                <h:commandButton value="Sacuvaj izmene" styleClass="btn btn-primary center-block" action="#{loggedInUserBean.updateUser}"/>
                  
                      </div>
 

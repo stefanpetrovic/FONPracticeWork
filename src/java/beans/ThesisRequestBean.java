@@ -47,10 +47,6 @@ public class ThesisRequestBean {
         this.work = work;
     }
     
-    public String sendThesis() {
-        return null;
-    }
-
     public List<Employee> getProfessors() {
         return professors;
     }
