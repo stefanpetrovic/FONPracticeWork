@@ -77,6 +77,7 @@ public class ImageUploadBean {
                 Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(saveFile.getName());
                 loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()).setPictureURI(saveFile.getName());
+                loggedInUserBean.updateUser();
             } catch (IOException ex) {
                 Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
             }

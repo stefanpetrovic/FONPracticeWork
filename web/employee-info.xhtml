@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <ui:define name="title">Podaci o nalogu</ui:define>
+    
+     <ui:define name="heading">
+        <h1 class="col-md-offset-2">Podaci o nalogu</h1>
+    </ui:define>
+    
+    <ui:define name="content">
+        <h:form styleClass="col-md-7 form-horizontal">
+           
+                        
+            <div class="form-group">
+                <h:outputLabel for="nameInput" styleClass="col-md-4 text-right"  value="Ime: "/>
+                <h:outputText id="nameInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}"/>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="surnameInput" styleClass="col-md-4 text-right"  value="Prezime: "/>
+                <h:outputText id="surnameInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].surname}"/>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="titleOutput" styleClass="col-md-4 text-right"  value="Titula: "/>
+                <h:outputText id="titleInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].employee.title}"/>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel for="departmentOutput" styleClass="col-md-4 text-right"  value="Katedra: "/>
+                <h:outputText id="departmentInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].employee.department}"/>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel for="subjectOutput" styleClass="col-md-4 text-right"  value="Predmet: "/>
+                <h:outputText id="subjectInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].employee.subject}"/>
+            </div>
+
+            <div class="form-group">               
+                <h:outputLabel for="emailInput" styleClass="col-md-4 text-right"  value="e-mail: "/>
+                <h:inputText id="emailInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].email}"/>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="usernameInput" styleClass="col-md-4 text-right"  value="Korisničko ime: "/>
+                <h:outputText id="usernameInput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].username}"/>
+            </div>
+
+
+            <div class="form-group">
+                <h:commandButton value="Izmeni" styleClass="btn btn-primary center-block" action="#{loggedInUserBean.updateUser}"/>
+            </div>
+
+            
+        </h:form>
+        
+        <div id="image-box" class="col-md-5" style="display: inline; float: left;">
+            <p:graphicImage styleClass="center-block" style="border: 1px solid;" height="200" width="150" value="/uploads/profilePictures/#{(loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI == '') ? 'pic.jpg': loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].pictureURI}" alt="nema slike"/>
+            <h:form enctype="multipart/form-data">
+                <p:growl id="messages" showDetail="true"/>
+                <p:fileUpload mode="simple" styleClass="btn btn-defult" value="#{imageUploadBean.file}" style="margin: 10px 4px;"/>
+                <p:commandButton styleClass="btn btn-success"  value="Submit" ajax="false" actionListener="#{imageUploadBean.upload}" style="margin: 10px 4px;"/>
+            </h:form>
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

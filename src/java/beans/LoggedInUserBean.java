@@ -63,8 +63,8 @@ public class LoggedInUserBean implements Serializable{
         this.loggedInPerson = loggedInPerson;
     }
     
-    public void uploadImage() {
-        
+    public void updateUser() {
+        Controller.getInstance().updatePerson(loggedInPerson.get(personIdentifier));
     }
     
     public String login() {

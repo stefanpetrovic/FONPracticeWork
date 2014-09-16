@@ -99,6 +99,10 @@ public class Controller {
         return hed.selectByKey(id);
     }
     
+    public void updatePerson(Person person) {
+        //dodati kod za update podataka osobe, obavezno neka baca exception
+    }
+    
     /*public void makeCommision(Commision commision, List<CommisionMember> commisionMembers) throws EngineDAOException{
         HibernateCommisionDAO hcd = new HibernateCommisionDAO();
         HibernateCommisionMemberDAO hcmd = new HibernateCommisionMemberDAO();
