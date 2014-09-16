@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Subject.findBySubjectID", query = "SELECT s FROM Subject s WHERE s.subjectID = :subjectID"),
     @NamedQuery(name = "Subject.findByName", query = "SELECT s FROM Subject s WHERE s.name = :name")})
 public class Subject implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+    private List<Work> workList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -129,6 +131,15 @@ public class Subject implements Serializable {
     @Override
     public String toString() {
         return "dao.domain.core.Subject[ subjectID=" + subjectID + " ]";
+    }
+
+    @XmlTransient
+    public List<Work> getWorkList() {
+        return workList;
+    }
+
+    public void setWorkList(List<Work> workList) {
+        this.workList = workList;
     }
     
 }
