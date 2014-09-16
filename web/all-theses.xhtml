@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <ui:define name="title">Svi radovi</ui:define>
+
+    <ui:define name="heading">
+        <h1 class="col-md-offset-2">Svi radovi</h1> 
+        <h3>
+        <h:outputText value="doc. dr. Ime Prezime"  styleClass="col-md-offset-2" style="margin-bottom: 25px;"/> 
+        </h3>
+    </ui:define>
+
+    <ui:define name="content">
+       
+                 
+<!--         <ui:repeat value="#{bookCatalog.books}" var="book">
+        <li>
+            <h:link value="#{book.title}" outcome="book">
+                <f:param name="id" value="#{book.id}" />
+            </h:link>
+        </li>
+    </ui:repeat>-->
+        <div class="col-md-12">
+               <a href="#">
+                <div class="col-md-12" style="margin: 10px 0px;">
+                    <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
+                    <div class="col-md-10 student-communication" style="height:100px">
+                         <h4>
+                            <h:outputText value="NaslovNaslov NaslovNaslovNaslov NaslovNaslov NaslovNaslov Naslov NaslovNaslov Naslov Naslov Naslov Naslov Naslov"  styleClass="col-md-12 col-md-offset-1"/> 
+                        </h4>
+                        <h:outputText value="Ime Prezime" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
+                       <h:outputText value="Predmet" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; color: #b92c28"/>
+                    </div>
+                </div>
+            </a>
+
+             <a href="#">
+                <div class="col-md-12" style="margin: 10px 0px;">
+                    <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
+                    <div class="col-md-10 student-communication" style="height:100px">
+                         <h4>
+                            <h:outputText value="NaslovNaslov NaslovNaslovNaslov NaslovNaslov NaslovNaslov Naslov NaslovNaslov Naslov Naslov Naslov Naslov Naslov"  styleClass="col-md-12 col-md-offset-1"/> 
+                        </h4>
+                        <h:outputText value="Ime Prezime" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
+                       <h:outputText value="Predmet" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; color: #b92c28"/>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </ui:define>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--    <ui:define name="content">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:panelGroup style="display: block; text-align: center;">
+                            <h:outputText value="Unos profesora" style="font-size: 20px;"/>
+                        </h:panelGroup>
+                    </f:facet>
+                    <h:outputLabel for="nameInput" value="Ime: "/>
+                    <h:inputText id="nameInput" value="#{employeeBean.employee.person.name}"/>
+    
+                    <h:outputLabel for="surnameInput" value="Prezime: "/>
+                    <h:inputText id="surnameInput" value="#{employeeBean.employee.person.surname}"/>
+    
+                    <h:outputLabel for="titleDropbox" value="Titula: "/>
+                    <p:selectOneMenu id="titleDropbox" value="#{employeeBean.employee.title}">
+                        <f:converter converterId="titleConverter"/>
+                        <f:selectItems value="#{dropboxesDataBean.titles}"/>
+                    </p:selectOneMenu>
+    
+                    <h:outputLabel for="departmentDropbox" value="Katedra: "/>
+                    <p:selectOneMenu id="departmentDropbox" value="#{employeeBean.employee.department}">
+                        <f:converter converterId="departmentConverter"/>
+                        <f:selectItems value="#{dropboxesDataBean.departments}"/>
+                    </p:selectOneMenu>
+    
+                    <h:outputLabel for="emailInput" value="e-mail: "/>
+                    <h:inputText id="emailInput" value="#{employeeBean.employee.person.email}"/>
+    
+                    <h:outputLabel for="usernameInput" value="Korisničko ime: "/>
+                    <h:inputText id="usernameInput" value="#{employeeBean.employee.person.username}"/>
+    
+                    <h:outputLabel for="passwordInput" value="Korisnička šifra: "/>
+                    <h:inputText id="passwordInput" value="#{employeeBean.employee.person.password}"/>
+    
+                    <f:facet name="footer">
+                        <h:panelGroup style="display: block; text-align: center;">
+                            <h:commandButton value="Unesi" action="#{employeeBean.addEmployee}"/>
+                        </h:panelGroup>
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>-->
+</ui:composition>

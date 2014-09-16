@@ -1,143 +1,157 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-               
+
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
-    
+
     <!--<ui:define name="title">menu</ui:define>-->
 
 
 
     <!--<ui:define name="content">-->
-        <div class="col-md-12 col-lg-12 col-xs-12 menu-holder">
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.jsf">FON diplomski</a>
-                    </div>
+    <div class="col-md-12 col-lg-12 col-xs-12 menu-holder">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.jsf">FON diplomski</a>
+                </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                                <!-- Submenu with links to other pages -->
-                                <ul class="dropdown-menu" id="submenu">
-                                    <li>
-                                        <div class="col-md-12 row" id="submenu-main-container">
-                                            <a href="add-student.jsf" class="submenu-link">
-                                                <div class="col-md-2 submenu-container">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/figure-student-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Unos studenta</p>
-                                                </div>
-                                            </a>
-                                            <a href="add-employee.jsf" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #d43f3a;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/figure-prof-wh2.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Unos profesora</p>
-                                                </div>
-                                            </a>
-                                            <a href="student-info.jsf" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #419641;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/user-data-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Podaci o korisniku</p>
-                                                </div>
-                                            </a>
-                                            <a href="thesis-request.jsf" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #ec971f;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/thesis-req-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Zahtev za temu</p>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #7143E6;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/thesis-search-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Pretraga radova</p>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="submenu-link">
-                                                <div class="col-md-2 submenu-container">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/communication-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Komunikacija</p>
-                                                </div>
-                                            </a>
-                                            <a href="thesis-approve.jsf" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #d43f3a;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/approve-thesis-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Odobravanje tema</p>
-                                                </div>
-                                            </a>
-                                            <a href="send-final-version.jsf" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #419641;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/final-send-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Slanje završne verzije</p>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="submenu-link">
-                                                <div class="col-md-2 submenu-container" style="background-color: #ec971f;">
-                                                    <h:graphicImage library="images" name="menu_thumbnails/theses-all-wh.png" styleClass="center-block submenu-image"/>
-                                                    <p class="text-center submenu-text">Radovi</p>
-                                                </div>
-                                            </a>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <!-- Submenu with links to other pages -->
+                            <ul class="dropdown-menu" id="submenu">
+                                <li>
+                                    <div class="col-md-12 row" id="submenu-main-container">
+                                        <a href="add-student.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container">
+                                                <h:graphicImage library="images" name="menu_thumbnails/figure-student-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Unos studenta</p>
+                                            </div>
+                                        </a>
+                                        <a href="add-employee.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #d43f3a;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/figure-prof-wh2.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Unos profesora</p>
+                                            </div>
+                                        </a>
+                                        <a href="student-info.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #419641;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/user-data-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Podaci o korisniku</p>
+                                            </div>
+                                        </a>
+                                        <a href="thesis-request.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #ec971f;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/thesis-req-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Zahtev za temu</p>
+                                            </div>
+                                        </a>
+                                        <a href="search.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #7143E6;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/thesis-search-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Pretraga radova</p>
+                                            </div>
+                                        </a>
+                                        <a href="communications-list.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container">
+                                                <h:graphicImage library="images" name="menu_thumbnails/communication-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Komunikacija</p>
+                                            </div>
+                                        </a>
+                                        <a href="thesis-approve.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #d43f3a;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/approve-thesis-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Odobravanje tema</p>
+                                            </div>
+                                        </a>
+                                        <a href="send-final-version.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #419641;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/final-send-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Slanje završne verzije</p>
+                                            </div>
+                                        </a>
+                                        <a href="all-theses.jsf" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #ec971f;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/theses-all-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Radovi</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 row" id="submenu-main-container">
+                                        <a href="#" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #7143E6;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/search-professor-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Pretraga profesora</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="submenu-link">
+                                            <div class="col-md-2 submenu-container" style="background-color: #d43f3a;">
+                                                <h:graphicImage library="images" name="menu_thumbnails/search-student-wh.png" styleClass="center-block submenu-image"/>
+                                                <p class="text-center submenu-text">Pretraga studenata</p>
+                                            </div>
+                                        </a>
 
-                                        </div>
-                                    </li>
-                                </ul>  <!-- End of submenu -->
-                            </li>
-                        </ul>
-                        <!-- user data dropdown -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ime Prezime</a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Podaci</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Odjavi se</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!-- messages and notification dropdown -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-comment" style="margin-right: 5px;"></span>
-                                    <span class="badge pull-right">4332</span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Poruka 1</a></li>
-                                    <li><a href="#">Poruka 2</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-        </div>
+                                    </div>
+                                </li>
+                            </ul>  <!-- End of submenu -->
+                        </li>
+                    </ul>
+                    <!-- user data dropdown -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ime Prezime</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Podaci</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Odjavi se</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- messages and notification dropdown -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-comment" style="margin-right: 5px;"></span>
+                                <span class="badge pull-right">4332</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Poruka 1</a></li>
+                                <li><a href="#">Poruka 2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
 
-        <!-- Content example to check transparency -->
-        <!--        <div class="col-md-12">
-                    <div class="col-md-9 col-md-offset-2">
-                        <h1>Unos novog ovog onog</h1>
-                        <p>Gentrify fingerstache kale chips, Helvetica banh mi four loko food truck single-origin coffee meggings. Pug XOXO blog aesthetic. Semiotics Etsy cray, sriracha pork belly umami Godard tattooed blog farm-to-table ethnic Tonx messenger bag Tumblr. Thundercats street art Echo Park, fanny pack meggings occupy irony XOXO seitan next level. Next level literally gastropub, Blue Bottle hoodie Intelligentsia umami wayfarers. Keffiyeh viral distillery pop-up, aesthetic sustainable before they sold out. Helvetica PBRB messenger bag art party pop-up Odd Future.</p>
-        
-                        <p>Chillwave deep v bitters PBRB gastropub meh, Truffaut Echo Park raw denim Marfa Neutra hella art party. Retro fixie Pinterest keytar XOXO. VHS Odd Future fixie, Kickstarter selfies Etsy kitsch Banksy cred Pitchfork pickled lo-fi Intelligentsia sriracha stumptown. Pop-up photo booth ethnic blog selvage, wayfarers seitan slow-carb. Fashion axe Wes Anderson scenester artisan brunch. Hashtag pork belly disrupt, banh mi Cosby sweater farm-to-table selvage. Asymmetrical mumblecore tattooed, tote bag organic vinyl Etsy salvia DIY.</p>
-        
-                        <p>Umami keytar Odd Future, Wes Anderson chambray artisan banh mi iPhone. Fixie slow-carb Banksy, High Life blog cornhole Kickstarter photo booth seitan whatever wayfarers tote bag Williamsburg Portland. Irony trust fund Cosby sweater, mlkshk sustainable post-ironic tousled lo-fi ethical. Tote bag 90's paleo, pickled synth vinyl seitan Austin mlkshk banjo single-origin coffee bitters. Keytar flannel narwhal, leggings cardigan ugh umami Etsy single-origin coffee Cosby sweater letterpress Echo Park 8-bit kogi. Tofu kogi Cosby sweater irony bitters. Crucifix vinyl try-hard, pug bicycle rights fap keffiyeh forage asymmetrical hoodie leggings post-ironic next level lomo.</p>
-        
-                        <p>Seitan flexitarian keytar sustainable 8-bit fingerstache pug irony. Raw denim kale chips Odd Future photo booth seitan, gentrify Pinterest vegan direct trade quinoa pug. Trust fund tousled direct trade, pop-up literally Cosby sweater stumptown fanny pack deep v scenester jean shorts. Actually typewriter street art, Shoreditch twee plaid scenester ugh keytar DIY Godard. Brunch photo booth PBR, pour-over fingerstache yr Carles Tumblr ugh Bushwick Wes Anderson flexitarian. Ugh put a bird on it keytar, hella street art blog Wes Anderson chillwave semiotics irony brunch retro meh squid single-origin coffee. Four loko mumblecore mustache narwhal.</p>
-        
-        
-                    </div>
-                </div>-->
+    <!-- Content example to check transparency -->
+    <!--        <div class="col-md-12">
+                <div class="col-md-9 col-md-offset-2">
+                    <h1>Unos novog ovog onog</h1>
+                    <p>Gentrify fingerstache kale chips, Helvetica banh mi four loko food truck single-origin coffee meggings. Pug XOXO blog aesthetic. Semiotics Etsy cray, sriracha pork belly umami Godard tattooed blog farm-to-table ethnic Tonx messenger bag Tumblr. Thundercats street art Echo Park, fanny pack meggings occupy irony XOXO seitan next level. Next level literally gastropub, Blue Bottle hoodie Intelligentsia umami wayfarers. Keffiyeh viral distillery pop-up, aesthetic sustainable before they sold out. Helvetica PBRB messenger bag art party pop-up Odd Future.</p>
+    
+                    <p>Chillwave deep v bitters PBRB gastropub meh, Truffaut Echo Park raw denim Marfa Neutra hella art party. Retro fixie Pinterest keytar XOXO. VHS Odd Future fixie, Kickstarter selfies Etsy kitsch Banksy cred Pitchfork pickled lo-fi Intelligentsia sriracha stumptown. Pop-up photo booth ethnic blog selvage, wayfarers seitan slow-carb. Fashion axe Wes Anderson scenester artisan brunch. Hashtag pork belly disrupt, banh mi Cosby sweater farm-to-table selvage. Asymmetrical mumblecore tattooed, tote bag organic vinyl Etsy salvia DIY.</p>
+    
+                    <p>Umami keytar Odd Future, Wes Anderson chambray artisan banh mi iPhone. Fixie slow-carb Banksy, High Life blog cornhole Kickstarter photo booth seitan whatever wayfarers tote bag Williamsburg Portland. Irony trust fund Cosby sweater, mlkshk sustainable post-ironic tousled lo-fi ethical. Tote bag 90's paleo, pickled synth vinyl seitan Austin mlkshk banjo single-origin coffee bitters. Keytar flannel narwhal, leggings cardigan ugh umami Etsy single-origin coffee Cosby sweater letterpress Echo Park 8-bit kogi. Tofu kogi Cosby sweater irony bitters. Crucifix vinyl try-hard, pug bicycle rights fap keffiyeh forage asymmetrical hoodie leggings post-ironic next level lomo.</p>
+    
+                    <p>Seitan flexitarian keytar sustainable 8-bit fingerstache pug irony. Raw denim kale chips Odd Future photo booth seitan, gentrify Pinterest vegan direct trade quinoa pug. Trust fund tousled direct trade, pop-up literally Cosby sweater stumptown fanny pack deep v scenester jean shorts. Actually typewriter street art, Shoreditch twee plaid scenester ugh keytar DIY Godard. Brunch photo booth PBR, pour-over fingerstache yr Carles Tumblr ugh Bushwick Wes Anderson flexitarian. Ugh put a bird on it keytar, hella street art blog Wes Anderson chillwave semiotics irony brunch retro meh squid single-origin coffee. Four loko mumblecore mustache narwhal.</p>
+    
+    
+                </div>
+            </div>-->
 
     <!--</ui:define>-->
 
