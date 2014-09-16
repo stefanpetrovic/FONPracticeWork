@@ -25,5 +25,6 @@
     <mapping class="dao.domain.core.Title"/>
     <mapping class="dao.domain.core.Work"/>
     <mapping class="dao.domain.core.Keywords"/>
+    <mapping class="dao.domain.core.EmployeeSubject"/>
   </session-factory>
 </hibernate-configuration>

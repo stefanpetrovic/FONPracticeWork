@@ -57,7 +57,6 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
     @Column(name = "pictureURI")
     private String pictureURI;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
@@ -72,14 +71,13 @@ public class Person implements Serializable {
         this.personID = personID;
     }
 
-    public Person(Long personID, String name, String surname, String email, String username, String password, String pictureURI) {
+    public Person(Long personID, String name, String surname, String email, String username, String password) {
         this.personID = personID;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.pictureURI = pictureURI;
     }
 
     public Long getPersonID() {
@@ -176,9 +174,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" + "personID=" + personID + ", name=" + name + ", surname=" + surname + ", email=" + email + ", username=" + username + ", password=" + password + ", pictureURI=" + pictureURI + ", student=" + student + ", employee=" + employee + '}';
+        return "dao.domain.core.Person[ personID=" + personID + " ]";
     }
-
-    
     
 }

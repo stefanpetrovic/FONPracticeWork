@@ -46,10 +46,14 @@ public class Main {
             //s.setStudentID(p.getPersonID());
             
             Controller.getInstance().addStudent(s);*/
-            List<Person> persons = new ArrayList<>();
+            /*List<Person> persons = new ArrayList<>();
             persons = hpd.getPersonsByName("Sinisa");
             System.out.println(persons.get(0).getEmployee());
-            System.out.println(Controller.getInstance().isUsernameUnique("probros"));
+            System.out.println(Controller.getInstance().isUsernameUnique("probros"));*/
+            Person person = hpd.selectByKey(new Long("1"));
+            person.setName("Djordje");
+            person.getStudent().setJmbg("212");
+            Controller.getInstance().updatePerson(person);
             
         } catch (EngineDAOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

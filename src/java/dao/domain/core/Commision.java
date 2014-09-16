@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,10 +38,10 @@ public class Commision implements Serializable {
     @Basic(optional = false)
     @Column(name = "commisionID")
     private Long commisionID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commision")
-    private Collection<Work> workCollection;
+    @OneToMany(mappedBy = "commision")
+    private List<Work> workList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "commisionID")
-    private Collection<CommisionMember> commisionMemberCollection;
+    private List<CommisionMember> commisionMemberList;
 
     public Commision() {
     }
@@ -59,21 +59,21 @@ public class Commision implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Work> getWorkCollection() {
-        return workCollection;
+    public List<Work> getWorkList() {
+        return workList;
     }
 
-    public void setWorkCollection(Collection<Work> workCollection) {
-        this.workCollection = workCollection;
+    public void setWorkList(List<Work> workList) {
+        this.workList = workList;
     }
 
     @XmlTransient
-    public Collection<CommisionMember> getCommisionMemberCollection() {
-        return commisionMemberCollection;
+    public List<CommisionMember> getCommisionMemberList() {
+        return commisionMemberList;
     }
 
-    public void setCommisionMemberCollection(Collection<CommisionMember> commisionMemberCollection) {
-        this.commisionMemberCollection = commisionMemberCollection;
+    public void setCommisionMemberList(List<CommisionMember> commisionMemberList) {
+        this.commisionMemberList = commisionMemberList;
     }
 
     @Override
