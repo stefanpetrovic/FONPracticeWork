@@ -15,6 +15,7 @@ import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.domain.core.Subject;
 import dao.domain.core.Title;
+import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
@@ -106,6 +107,11 @@ public class Controller {
         return hed.selectByKey(id);
     }
     
+    public List<Employee> getAllProfessors() {
+        //treba da vrati sve profesore-zaposlene i obavezno da baci izuzetak
+        return new ArrayList<>();
+    }
+    
     public void updatePerson(Person person) {
         //dodati kod za update podataka osobe, obavezno neka baca exception
     }
@@ -155,4 +161,9 @@ public class Controller {
             return true;
         }
     } 
+    
+    public void addThesisRequest(Work thesis) {
+        // dodati cuvanje work-a(podaci koji se dobijaju ovde su profesor, student, naslov)
+        //obavezno da baca exception
+    }
 }
