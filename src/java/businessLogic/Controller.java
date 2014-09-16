@@ -106,8 +106,17 @@ public class Controller {
         return hed.selectByKey(id);
     }
     
-    public void updatePerson(Person person) {
-        //dodati kod za update podataka osobe, obavezno neka baca exception
+    public void updatePerson(Person person) throws EngineDAOException {
+        HibernatePersonDAO hpd = new HibernatePersonDAO();
+        HibernateStudentDAO hsd = new HibernateStudentDAO();
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        hpd.makePersistent(person);
+        if(person.getStudent()!=null){
+            hsd.makePersistent(person.getStudent());
+        }
+        if(person.getEmployee()!=null){
+            hed.makePersistent(person.getEmployee());
+        }
     }
     
     /*public void makeCommision(Commision commision, List<CommisionMember> commisionMembers) throws EngineDAOException{
