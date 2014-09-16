@@ -43,6 +43,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Work.findByGrade", query = "SELECT w FROM Work w WHERE w.grade = :grade"),
     @NamedQuery(name = "Work.findByStatus", query = "SELECT w FROM Work w WHERE w.status = :status")})
 public class Work implements Serializable {
+    @Column(name = "grade")
+    private Integer grade;
+    @Column(name = "status")
+    private Boolean status;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,12 +67,6 @@ public class Work implements Serializable {
     @Column(name = "examDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date examDate;
-    @Basic(optional = false)
-    @Column(name = "grade")
-    private int grade;
-    @Basic(optional = false)
-    @Column(name = "status")
-    private boolean status;
     @JoinColumn(name = "mentor", referencedColumnName = "employeeID")
     @ManyToOne(optional = false)
     private Employee mentor;
@@ -138,21 +136,6 @@ public class Work implements Serializable {
         this.examDate = examDate;
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
 
     public Employee getMentor() {
         return mentor;
@@ -210,6 +193,22 @@ public class Work implements Serializable {
     @Override
     public String toString() {
         return "dao.domain.core.Work[ workID=" + workID + " ]";
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
     
 }

@@ -73,7 +73,11 @@ public class Controller {
     public void addEmployee(Employee employee) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
-        hpd.makePersistent(employee.getPerson());
+        if(isUsernameUnique(employee.getPerson().getUsername()) && isEmailUnique(employee.getPerson().getUsername())){
+            hpd.makePersistent(employee.getPerson());
+        }else{
+            throw new EngineDAOException("Username or Email already exist");
+        }
         Person person = hpd.getPersonByUsername(employee.getPerson().getUsername());
         employee.setEmployeeID(person.getPersonID());
         hed.makePersistent(employee);
@@ -82,11 +86,14 @@ public class Controller {
     public void addStudent(Student student) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         HibernateStudentDAO spd = new HibernateStudentDAO(Student.class);
-        Person p = student.getPerson();
-        hpd.makePersistent(p);
-        p = hpd.getPersonByUsername(p.getUsername());
-        student.setStudentID(p.getPersonID());
-        spd.makePersistent(student);
+        if(isUsernameUnique(student.getPerson().getUsername()) && isEmailUnique(student.getPerson().getUsername()) && isJMBGUnique(student.getJmbg()) && isIndexNoUnique(student.getIndexNo())){
+            hpd.makePersistent(student.getPerson());
+            Person person = hpd.getPersonByUsername(student.getPerson().getUsername());
+            student.setStudentID(person.getPersonID());
+            spd.makePersistent(student);
+        }else{
+            throw new EngineDAOException("Username, Email, JMBG or Index Number already exist.");
+        }      
     }
     
     public Student getStudentById(Long id) throws EngineDAOException{
@@ -119,6 +126,16 @@ public class Controller {
         }
     }
     
+    public boolean isIndexNoUnique(String indexNo){
+        HibernateStudentDAO hsd = new HibernateStudentDAO();
+        try{
+            hsd.getStudentByIndexNo(indexNo);
+            return false;
+        }catch(EngineDAOException ex){
+            return true;
+        }
+    }
+    
     public boolean isEmailUnique(String email){
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         try{
@@ -130,7 +147,12 @@ public class Controller {
     }
     
     public boolean isJMBGUnique(String jmbg) {
-        //fali implementacija;
-        return true;
+        HibernateStudentDAO hsd = new HibernateStudentDAO();
+        try{
+            hsd.getStudentByJMBG(jmbg);
+            return false;
+        }catch(EngineDAOException ex){
+            return true;
+        }
     } 
 }

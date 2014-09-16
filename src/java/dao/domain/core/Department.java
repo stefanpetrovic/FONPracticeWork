@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByDepartmentID", query = "SELECT d FROM Department d WHERE d.departmentID = :departmentID"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name")})
 public class Department implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
+    private Collection<Subject> subjectCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -129,6 +131,15 @@ public class Department implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    @XmlTransient
+    public Collection<Subject> getSubjectCollection() {
+        return subjectCollection;
+    }
+
+    public void setSubjectCollection(Collection<Subject> subjectCollection) {
+        this.subjectCollection = subjectCollection;
     }
     
 }
