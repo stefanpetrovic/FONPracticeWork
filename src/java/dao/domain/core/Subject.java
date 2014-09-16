@@ -130,7 +130,7 @@ public class Subject implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.Subject[ subjectID=" + subjectID + " ]";
+        return name;
     }
     
 }

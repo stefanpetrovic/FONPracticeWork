@@ -33,7 +33,6 @@ public class ImageUploadBean {
 
     private String pathToImg = "C:\\praksa\\uploads\\profilePictures";
     private UploadedFile file;
-    private String destination;
     @ManagedProperty(value = "#{loggedInUserBean}")
     private LoggedInUserBean loggedInUserBean;
 

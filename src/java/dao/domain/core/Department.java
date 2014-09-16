@@ -128,7 +128,7 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.Department[ departmentID=" + departmentID + " ]";
+        return name;
     }
     
 }

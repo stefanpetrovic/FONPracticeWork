@@ -90,7 +90,6 @@ public class SubmitFinalPaper {
             try (InputStream in = file.getInputstream()) {
                 Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(saveFile.getName());
-                user.getLoggedInPerson().get(user.getPersonIdentifier()).setPictureURI(saveFile.getName());
             } catch (IOException ex) {
                 Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
             }

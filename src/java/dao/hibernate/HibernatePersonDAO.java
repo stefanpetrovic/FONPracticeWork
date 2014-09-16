@@ -9,6 +9,7 @@ import dao.PersonDAO;
 import dao.domain.core.Person;
 import dao.exception.EngineDAOException;
 import java.text.MessageFormat;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
@@ -72,6 +73,87 @@ public class HibernatePersonDAO extends AbstractHibernateDAO<Person, Long> imple
         }
         getSession().getTransaction().commit();
         return person;    }
+
+    @Override
+    public List<Person> getPersonsByName(String name) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(NAME, name));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Person> persons = null;
+        try {
+            persons = criteria.list();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (persons == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return persons;  
+    }
+
+    @Override
+    public List<Person> getPersonsByLastname(String lastname) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(SURNAME, lastname));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Person> persons = null;
+        try {
+            persons = criteria.list();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (persons == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return persons; 
+    }
+
+    @Override
+    public List<Person> getPersonsByNameAndLastname(String name, String lastname) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(NAME, name));
+        criteria.add(Restrictions.eq(SURNAME, lastname));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Person> persons = null;
+        try {
+            persons = criteria.list();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (persons == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return persons; 
+    }
+
+    @Override
+    public Person getPersonByEmail(String email) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(EMAIL, email));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Person person = null;
+        try {
+            person = (Person) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (person == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return person;
+    }
     
     
 }

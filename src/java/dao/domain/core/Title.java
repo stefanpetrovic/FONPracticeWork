@@ -104,7 +104,7 @@ public class Title implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.Title[ titleID=" + titleID + " ]";
+        return name;
     }
     
 }

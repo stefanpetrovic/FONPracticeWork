@@ -13,53 +13,69 @@
     <ui:define name="content">
 
         <h:form styleClass="col-md-12 form-horizontal">
-
+           
+            <p:growl  life="3000" showDetail="true" />
+            
             <div class="form-group">
                 <h:outputLabel for="nameInput" styleClass="col-md-2 control-label" value="Ime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="nameInput" styleClass="form-control" value="#{studentBean.student.person.name}"/>
+                    <h:inputText id="nameInput" styleClass="form-control" value="#{studentBean.student.person.name}" 
+                                 required="true" requiredMessage="Morate uneti ime"/>
+                    <p:message for="nameInput" severity="error"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="surnameInput"  styleClass="col-md-2 control-label" value="Prezime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="surnameInput" styleClass="form-control" value="#{studentBean.student.person.surname}"/>
+                    <h:inputText id="surnameInput" styleClass="form-control" value="#{studentBean.student.person.surname}"
+                                 required="true" requiredMessage="Morate uneti prezime"/>
+                    <p:message for="surnameInput" severity="error"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="indexNoInput"  styleClass="col-md-2 control-label" value="Broj indeksa: "/>
                 <div class="col-md-10">
-                    <h:inputText id="indexNoInput" styleClass="form-control" value="#{studentBean.student.indexNo}"/>
+                    <h:inputText id="indexNoInput" styleClass="form-control" value="#{studentBean.student.indexNo}" 
+                                 required="true" requiredMessage="Morate uneti broj indeksa"/>
+                    <p:message for="indexNoInput" severity="error"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="emailInput"  styleClass="col-md-2 control-label" value="e-mail: "/>
                 <div class="col-md-10">
-                    <h:inputText id="emailInput" styleClass="form-control" value="#{studentBean.student.person.email}"/>
+                    <p:inputText id="emailInput" styleClass="form-control" value="#{studentBean.student.person.email}" required="true" 
+                                 requiredMessage="Morate uneti email" validator="#{studentBean.validateEmail}"/>
+                    <p:message for="emailInput" severity="error"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="usernameInput"  styleClass="col-md-2 control-label" value="Korisničko ime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="usernameInput" styleClass="form-control" value="#{studentBean.student.person.username}"/>
+                    <p:inputText id="usernameInput" styleClass="form-control" value="#{studentBean.student.person.username}" required="true" 
+                                 requiredMessage="Morate uneti username" validator="#{studentBean.validateUsername}"/>
+                    <p:message for="usernameInput" severity="error"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="passwordInput"  styleClass="col-md-2 control-label" value="Korisnička šifra: "/>
                 <div class="col-md-10">
-                    <h:inputText id="passwordInput" styleClass="form-control" value="#{studentBean.student.person.password}"/>
+                    <h:inputText id="passwordInput" styleClass="form-control" value="#{studentBean.student.person.password}"
+                                 required="true" requiredMessage="Morate uneti password"/>
+                    <p:message for="passwordInput"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="jmbgInput"  styleClass="col-md-2 control-label" value="JMBG: "/>
                 <div class="col-md-10">
-                    <h:inputText id="jmbgInput" styleClass="form-control" value="#{studentBean.student.jmbg}"/>
+                    <h:inputText id="jmbgInput" styleClass="form-control" value="#{studentBean.student.jmbg}" required="true" 
+                                 requiredMessage="Morate uneti jmbg" validator="#{studentBean.validateJMBG}"/>
+                    <p:message for="jmbgInput"/>
                 </div>
             </div>
 
@@ -76,7 +92,7 @@
 
 
 
-            <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{employeeBean.addEmployee}"/>
+            <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{studentBean.addStudent}"/>
 
         </h:form>
     </ui:define>
