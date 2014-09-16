@@ -105,7 +105,7 @@ public class Controller {
         hcd.makePersistent(commision);
         Commision c = 
     }*/
-    public boolean isUsernameUnique(String username) throws EngineDAOException{
+    public boolean isUsernameUnique(String username){
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         try{
             hpd.getPersonByUsername(username);
@@ -124,4 +124,9 @@ public class Controller {
             return true;
         }
     }
+    
+    public boolean isJMBGUnique(String jmbg) {
+        //fali implementacija;
+        return true;
+    } 
 }

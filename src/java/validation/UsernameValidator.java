@@ -6,6 +6,8 @@
 
 package validation;
 
+import businessLogic.Controller;
+
 
 
 /**
@@ -25,9 +27,7 @@ public class UsernameValidator{
     }
     
     public boolean isValid() {
-        //ubaciti poziv kontorlera i logiku validacije
-       
-        return false;
+        return Controller.getInstance().isUsernameUnique(username);
     }
     
 }

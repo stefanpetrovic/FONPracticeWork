@@ -13,21 +13,24 @@
     <ui:define name="content">
         <h:form styleClass="col-md-12 form-horizontal">
 
-           
-              
                 <!--<h:outputText value="Unos profesora" style="font-size: 20px;"/>-->
 
+                <p:growl showDetail="true" life="3000"/>
             
             <div class="form-group">
                 <h:outputLabel for="nameInput" styleClass="col-md-2 control-label" value="Ime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="nameInput" styleClass="form-control" value="#{employeeBean.employee.person.name}"/>
+                    <h:inputText id="nameInput" styleClass="form-control" value="#{employeeBean.employee.person.name}"
+                                 required="true" requiredMessage="Morate uneti ime"/>
+                    <p:message for="nameInput"/>
                 </div>
             </div>
             <div class="form-group">
                 <h:outputLabel for="surnameInput" styleClass="col-md-2 control-label" value="Prezime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="surnameInput" styleClass="form-control" value="#{employeeBean.employee.person.surname}"/>
+                    <h:inputText id="surnameInput" styleClass="form-control" value="#{employeeBean.employee.person.surname}"
+                                 required="true" requiredMessage="Morate uneti prezime"/>
+                    <p:message for="surnameInput"/>
                 </div>
             </div>
             <div class="form-group">
@@ -49,21 +52,36 @@
                 </div>
             </div>
             <div class="form-group">
+                <h:outputLabel for="subjectDropbox" styleClass="col-md-2 control-label"  value="Predmet: "/>
+                <div class="col-md-10">
+                    <h:selectOneMenu id="subjectDropbox" styleClass="form-control" value="#{employeeBean.employee.subject}">
+                        <f:converter converterId="subjectConverter"/>
+                        <f:selectItems value="#{dropboxesDataBean.subjects}"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>                
+            <div class="form-group">
                 <h:outputLabel for="emailInput" styleClass="col-md-2 control-label"  value="e-mail: "/>
                 <div class="col-md-10">
-                    <h:inputText id="emailInput" styleClass="form-control" value="#{employeeBean.employee.person.email}"/>
+                    <h:inputText id="emailInput" styleClass="form-control" value="#{employeeBean.employee.person.email}"
+                                 required="true" requiredMessage="Morate uneti email" validator="#{employeeBean.validateEmail}"/>
+                    <p:message for="emailInput"/>
                 </div>
             </div>
             <div class="form-group">
                 <h:outputLabel for="usernameInput" styleClass="col-md-2 control-label"   value="Korisničko ime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="usernameInput"  styleClass="form-control" value="#{employeeBean.employee.person.username}"/>
+                    <h:inputText id="usernameInput"  styleClass="form-control" value="#{employeeBean.employee.person.username}"
+                                 required="true" requiredMessage="Morate uneti username" validator="#{employeeBean.validateUsername}"/>
+                    <p:message for="usernameInput"/>
                 </div>
             </div>
             <div class="form-group">
                 <h:outputLabel for="passwordInput" styleClass="col-md-2 control-label"  value="Korisnička šifra: "/>
                 <div class="col-md-10">
-                    <h:inputText id="passwordInput" styleClass="form-control" value="#{employeeBean.employee.person.password}"/>
+                    <h:inputText id="passwordInput" styleClass="form-control" value="#{employeeBean.employee.person.password}"
+                                 required="true" requiredMessage="Morate uneti password"/>
+                    <p:message for="passwordInput"/>
                 </div>
             </div>
 

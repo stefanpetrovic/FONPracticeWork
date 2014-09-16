@@ -6,6 +6,8 @@
 
 package validation;
 
+import businessLogic.Controller;
+
 /**
  *
  * @author stefan
@@ -23,7 +25,6 @@ public class EmailValidator {
     }
     
     public boolean isValid() {
-        //ubaciti poziv ka kontroleru i logiku validacije
-        return false;
+        return Controller.getInstance().isEmailUnique(email);
     }
 }
