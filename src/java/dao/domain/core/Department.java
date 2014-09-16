@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,8 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByDepartmentID", query = "SELECT d FROM Department d WHERE d.departmentID = :departmentID"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name")})
 public class Department implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    private Collection<Subject> subjectCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,14 +44,16 @@ public class Department implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @JoinColumn(name = "chief", referencedColumnName = "employeeID")
-    @ManyToOne(optional = false)
-    private Employee chief;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
+    private List<Subject> subjectList;
     @JoinColumn(name = "faculty", referencedColumnName = "facultyID")
     @ManyToOne(optional = false)
     private Faculty faculty;
+    @JoinColumn(name = "chief", referencedColumnName = "employeeID")
+    @ManyToOne
+    private Employee chief;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    private Collection<Employee> employeeCollection;
+    private List<Employee> employeeList;
 
     public Department() {
     }
@@ -83,12 +83,13 @@ public class Department implements Serializable {
         this.name = name;
     }
 
-    public Employee getChief() {
-        return chief;
+    @XmlTransient
+    public List<Subject> getSubjectList() {
+        return subjectList;
     }
 
-    public void setChief(Employee chief) {
-        this.chief = chief;
+    public void setSubjectList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
 
     public Faculty getFaculty() {
@@ -99,13 +100,21 @@ public class Department implements Serializable {
         this.faculty = faculty;
     }
 
-    @XmlTransient
-    public Collection<Employee> getEmployeeCollection() {
-        return employeeCollection;
+    public Employee getChief() {
+        return chief;
     }
 
-    public void setEmployeeCollection(Collection<Employee> employeeCollection) {
-        this.employeeCollection = employeeCollection;
+    public void setChief(Employee chief) {
+        this.chief = chief;
+    }
+
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
     @Override
@@ -130,16 +139,7 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return name;
-    }
-
-    @XmlTransient
-    public Collection<Subject> getSubjectCollection() {
-        return subjectCollection;
-    }
-
-    public void setSubjectCollection(Collection<Subject> subjectCollection) {
-        this.subjectCollection = subjectCollection;
+        return "dao.domain.core.Department[ departmentID=" + departmentID + " ]";
     }
     
 }

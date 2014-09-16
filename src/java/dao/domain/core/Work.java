@@ -6,8 +6,8 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -43,10 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Work.findByGrade", query = "SELECT w FROM Work w WHERE w.grade = :grade"),
     @NamedQuery(name = "Work.findByStatus", query = "SELECT w FROM Work w WHERE w.status = :status")})
 public class Work implements Serializable {
-    @Column(name = "grade")
-    private Integer grade;
-    @Column(name = "status")
-    private Boolean status;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,28 +53,33 @@ public class Work implements Serializable {
     @Basic(optional = false)
     @Column(name = "title")
     private String title;
-    @Basic(optional = false)
     @Column(name = "finalFileURI")
     private String finalFileURI;
-    @Basic(optional = false)
     @Column(name = "acceptanceDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date acceptanceDate;
-    @Basic(optional = false)
     @Column(name = "examDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date examDate;
+    @Column(name = "grade")
+    private Integer grade;
+    @Column(name = "status")
+    private Boolean status;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "description")
+    private String description;
+    @JoinColumn(name = "commision", referencedColumnName = "commisionID")
+    @ManyToOne
+    private Commision commision;
     @JoinColumn(name = "mentor", referencedColumnName = "employeeID")
     @ManyToOne(optional = false)
     private Employee mentor;
     @JoinColumn(name = "student", referencedColumnName = "studentID")
     @ManyToOne(optional = false)
     private Student student;
-    @JoinColumn(name = "commision", referencedColumnName = "commisionID")
-    @ManyToOne(optional = false)
-    private Commision commision;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "work")
-    private Collection<Keywords> keywordsCollection;
+    private List<Keywords> keywordsList;
 
     public Work() {
     }
@@ -86,14 +88,10 @@ public class Work implements Serializable {
         this.workID = workID;
     }
 
-    public Work(Long workID, String title, String finalFileURI, Date acceptanceDate, Date examDate, int grade, boolean status) {
+    public Work(Long workID, String title, String description) {
         this.workID = workID;
         this.title = title;
-        this.finalFileURI = finalFileURI;
-        this.acceptanceDate = acceptanceDate;
-        this.examDate = examDate;
-        this.grade = grade;
-        this.status = status;
+        this.description = description;
     }
 
     public Long getWorkID() {
@@ -136,6 +134,37 @@ public class Work implements Serializable {
         this.examDate = examDate;
     }
 
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Commision getCommision() {
+        return commision;
+    }
+
+    public void setCommision(Commision commision) {
+        this.commision = commision;
+    }
 
     public Employee getMentor() {
         return mentor;
@@ -153,21 +182,13 @@ public class Work implements Serializable {
         this.student = student;
     }
 
-    public Commision getCommision() {
-        return commision;
-    }
-
-    public void setCommision(Commision commision) {
-        this.commision = commision;
-    }
-
     @XmlTransient
-    public Collection<Keywords> getKeywordsCollection() {
-        return keywordsCollection;
+    public List<Keywords> getKeywordsList() {
+        return keywordsList;
     }
 
-    public void setKeywordsCollection(Collection<Keywords> keywordsCollection) {
-        this.keywordsCollection = keywordsCollection;
+    public void setKeywordsList(List<Keywords> keywordsList) {
+        this.keywordsList = keywordsList;
     }
 
     @Override
@@ -193,22 +214,6 @@ public class Work implements Serializable {
     @Override
     public String toString() {
         return "dao.domain.core.Work[ workID=" + workID + " ]";
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
     
 }

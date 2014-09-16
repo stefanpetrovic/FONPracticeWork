@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,7 +47,7 @@ public class Student implements Serializable {
     @Column(name = "jmbg")
     private String jmbg;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Collection<Work> workCollection;
+    private List<Work> workList;
     @JoinColumn(name = "course", referencedColumnName = "courseID")
     @ManyToOne(optional = false)
     private Course course;
@@ -93,12 +93,12 @@ public class Student implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Work> getWorkCollection() {
-        return workCollection;
+    public List<Work> getWorkList() {
+        return workList;
     }
 
-    public void setWorkCollection(Collection<Work> workCollection) {
-        this.workCollection = workCollection;
+    public void setWorkList(List<Work> workList) {
+        this.workList = workList;
     }
 
     public Course getCourse() {

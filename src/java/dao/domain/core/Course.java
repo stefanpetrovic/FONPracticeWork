@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,8 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Course.findByCourseID", query = "SELECT c FROM Course c WHERE c.courseID = :courseID"),
     @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")})
 public class Course implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Collection<Subject> subjectCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +43,9 @@ public class Course implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Collection<Student> studentCollection;
+    private List<Student> studentList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private List<Subject> subjectList;
 
     public Course() {
     }
@@ -76,12 +76,21 @@ public class Course implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Student> getStudentCollection() {
-        return studentCollection;
+    public List<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setStudentCollection(Collection<Student> studentCollection) {
-        this.studentCollection = studentCollection;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    @XmlTransient
+    public List<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public void setSubjectList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
 
     @Override
@@ -106,16 +115,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return name;
-    }
-
-    @XmlTransient
-    public Collection<Subject> getSubjectCollection() {
-        return subjectCollection;
-    }
-
-    public void setSubjectCollection(Collection<Subject> subjectCollection) {
-        this.subjectCollection = subjectCollection;
+        return "dao.domain.core.Course[ courseID=" + courseID + " ]";
     }
     
 }

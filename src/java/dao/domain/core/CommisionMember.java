@@ -40,12 +40,12 @@ public class CommisionMember implements Serializable {
     @Basic(optional = false)
     @Column(name = "role")
     private String role;
-    @JoinColumn(name = "commisionID", referencedColumnName = "commisionID")
-    @ManyToOne(optional = false)
-    private Commision commisionID;
     @JoinColumn(name = "professor", referencedColumnName = "employeeID")
     @ManyToOne(optional = false)
     private Employee professor;
+    @JoinColumn(name = "commisionID", referencedColumnName = "commisionID")
+    @ManyToOne(optional = false)
+    private Commision commisionID;
 
     public CommisionMember() {
     }
@@ -75,20 +75,20 @@ public class CommisionMember implements Serializable {
         this.role = role;
     }
 
-    public Commision getCommisionID() {
-        return commisionID;
-    }
-
-    public void setCommisionID(Commision commisionID) {
-        this.commisionID = commisionID;
-    }
-
     public Employee getProfessor() {
         return professor;
     }
 
     public void setProfessor(Employee professor) {
         this.professor = professor;
+    }
+
+    public Commision getCommisionID() {
+        return commisionID;
+    }
+
+    public void setCommisionID(Commision commisionID) {
+        this.commisionID = commisionID;
     }
 
     @Override
