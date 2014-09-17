@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beans;
 
 import businessLogic.Controller;
@@ -24,13 +23,13 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class LoggedInUserBean implements Serializable{
-    
+public class LoggedInUserBean implements Serializable {
+
     private String username;
     private String password;
     private Class personIdentifier;
     private HashMap<Class, Person> loggedInPerson = new HashMap<Class, Person>();
-    
+
     public String getUsername() {
         return username;
     }
@@ -46,7 +45,7 @@ public class LoggedInUserBean implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public Class getPersonIdentifier() {
         return personIdentifier;
     }
@@ -62,17 +61,17 @@ public class LoggedInUserBean implements Serializable{
     public void setLoggedInPerson(HashMap<Class, Person> loggedInPerson) {
         this.loggedInPerson = loggedInPerson;
     }
-    
+
     public void uploadImage() {
-        
+
     }
-    
+
     public String login() {
         try {
             Person person = Controller.getInstance().login(username, password);
             if (person.getStudent() != null) {
                 personIdentifier = person.getStudent().getClass();
-            }else {
+            } else {
                 personIdentifier = person.getEmployee().getClass();
             }
             loggedInPerson.put(personIdentifier, person);
@@ -82,11 +81,23 @@ public class LoggedInUserBean implements Serializable{
             return null;
         }
     }
-    
+
     public String logout() {
         personIdentifier = null;
+        username = password = null;
         loggedInPerson.clear();
+        System.out.println("LOGOUT");
         return "index";
+    }
+
+    //returns name of menu file to include in template
+    public String returnMenu() {
+        if (personIdentifier == Student.class) {
+            return "student-menu";
+        } else if (personIdentifier == Employee.class) {
+            return "professor-menu";
+        }
+        return "default";
     }
 
 }

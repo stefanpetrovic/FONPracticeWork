@@ -34,17 +34,7 @@
                             <ul class="dropdown-menu" id="submenu">
                                 <li>
                                     <div class="col-md-12 row" id="submenu-main-container">
-                                        <ui:include src="/templates/menu-items/add-student-mi.xhtml" />
-                                       <ui:include src="/templates/menu-items/add-professor-mi.xhtml" />
-                                    <ui:include src="/templates/menu-items/student-info-mi.xhtml" />
-                                      <ui:include src="/templates/menu-items/thesis-request-mi.xhtml" />
-                                      <ui:include src="/templates/menu-items/search-mi.xhtml" />
-                                       <ui:include src="/templates/menu-items/communications-list-mi.xhtml" />
-                                     <ui:include src="/templates/menu-items/thesis-aprove-mi.xhtml" />
-                                    <ui:include src="/templates/menu-items/send-final-version-mi.xhtml" />
-                                     <ui:include src="/templates/menu-items/all-theses-mi.xhtml" />
-                                     <ui:include src="/templates/menu-items/search-professor-mi.xhtml" />   
-                                     <ui:include src="/templates/menu-items/search-student-mi.xhtml" />                                    
+                                          <ui:insert name="menu-config"></ui:insert>
                                     </div>
                                 </li>
                             </ul>  <!-- End of submenu -->
@@ -53,11 +43,19 @@
                     <!-- user data dropdown -->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ime Prezime</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              #{loggedInUserBean.username}
+<!--                                Ime Prezime-->
+                            </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Podaci</a></li>
+                                <li><a href="student-info.jsf">Podaci</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Odjavi se</a></li>
+                                <li>
+                                    <h:form>
+                                    <h:commandLink action="#{loggedInUserBean.logout}" target="_blank" value="Odjavi se"/>
+                                    </h:form>
+                                    <!--<a href="#">Odjavi se</a>-->
+                                </li>
                             </ul>
                         </li>
                     </ul>

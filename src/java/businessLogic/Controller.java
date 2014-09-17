@@ -15,6 +15,7 @@ import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.domain.core.Subject;
 import dao.domain.core.Title;
+import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
@@ -129,4 +130,19 @@ public class Controller {
         //fali implementacija;
         return true;
     } 
+
+    public ArrayList<Work> searchTheses(String heading, String keywords, Course course) throws EngineDAOException {
+        /*
+        Dakle metoda prima ova tri parametra. Upit treba da bude ovako:
+        - ako je heading postavljen - onda pretraga po naslovima za sve radove (LIKE klauzula)
+        - ako je postavljen keywords - onda pretraga za svaku ključnu reč. Rad mora
+        da sadrži sve ove ključne reči. Reči se unose razdvojene sa zarezom, pa ćeš morati da splituješ string, trimuješ razmake
+        i pretražuješ svaku reč ponaosob.
+        - ako je course odabran, onda samo radovi gde je taj predmet.
+        
+        Ako je više od ovih postavljeno, onda se spajaju AND klauzulom. Npr: naslov "deo naslova" i "ključnareč1,ključnareč2"
+        dakle sadrži i jedno i drugo...
+        */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
