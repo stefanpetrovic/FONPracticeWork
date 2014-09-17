@@ -11,6 +11,7 @@ import dao.domain.core.CommisionMember;
 import dao.domain.core.Course;
 import dao.domain.core.Department;
 import dao.domain.core.Employee;
+import dao.domain.core.EmployeeSubject;
 import dao.domain.core.Keywords;
 import dao.domain.core.Person;
 import dao.domain.core.Student;
@@ -21,6 +22,7 @@ import dao.exception.EngineDAOException;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
 import dao.hibernate.HibernateEmployeeDAO;
+import dao.hibernate.HibernateEmployeeSubjectDAO;
 import dao.hibernate.HibernateKeywordsDAO;
 import dao.hibernate.HibernatePersonDAO;
 import dao.hibernate.HibernateStudentDAO;
@@ -76,17 +78,19 @@ public class Controller {
         return hpDAO.getPersonByUsernameAndPassword(username, password);
     }
     
-    public void addEmployee(Employee employee) throws EngineDAOException {
+    public void addEmployee(EmployeeSubject employeeSubject) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
-        if(isUsernameUnique(employee.getPerson().getUsername()) && isEmailUnique(employee.getPerson().getUsername())){
-            hpd.makePersistent(employee.getPerson());
+        HibernateEmployeeSubjectDAO hesd = new HibernateEmployeeSubjectDAO();
+        if(isUsernameUnique(employeeSubject.getEmployee().getPerson().getUsername()) && isEmailUnique(employeeSubject.getEmployee().getPerson().getUsername())){
+            hpd.makePersistent(employeeSubject.getEmployee().getPerson());
         }else{
             throw new EngineDAOException("Username or Email already exist");
         }
-        Person person = hpd.getPersonByUsername(employee.getPerson().getUsername());
-        employee.setEmployeeID(person.getPersonID());
-        hed.makePersistent(employee);
+        Person person = hpd.getPersonByUsername(employeeSubject.getEmployee().getPerson().getUsername());
+        employeeSubject.getEmployee().setEmployeeID(person.getPersonID());
+        hed.makePersistent(employeeSubject.getEmployee());
+        hesd.makePersistent(employeeSubject);
     }
     
     public void addStudent(Student student) throws EngineDAOException {
@@ -112,14 +116,19 @@ public class Controller {
         return hed.selectByKey(id);
     }
     
-    public List<Employee> getAllProfessors() {
-        //treba da vrati sve profesore-zaposlene i obavezno da baci izuzetak
-        return new ArrayList<>();
+    public List<Employee> getAllProfessors() throws EngineDAOException {
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        return hed.findAll();
     }
     
-    public List<Subject> getAllSubjectsByProfessor(Employee employee) {
-        // na osnovu zaposlenog vratiti sve predmete,obavezno exception da baca
-        return new ArrayList<>();
+    public List<Subject> getAllSubjectsByProfessor(Employee employee) throws EngineDAOException {
+        HibernateEmployeeSubjectDAO hesd = new HibernateEmployeeSubjectDAO();
+        List<Subject> subjects = new ArrayList<>();
+        List<EmployeeSubject> es = hesd.getSubjectsByEmployee(employee);
+        for(EmployeeSubject es1 : es){
+            subjects.add(es1.getSubject());
+        }
+        return subjects;
     }
 
     public void updatePerson(Person person) throws EngineDAOException {
