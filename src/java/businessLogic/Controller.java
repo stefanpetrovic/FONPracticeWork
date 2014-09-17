@@ -26,6 +26,8 @@ import dao.hibernate.HibernateSubjectDAO;
 import dao.hibernate.HibernateTitleDAO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class responsible for communication with database.
@@ -193,5 +195,13 @@ public class Controller {
         // dodati cuvanje work-a(podaci koji se dobijaju ovde su profesor, student, naslov)
         //obavezno da baca exception
 
+    }
+    
+    public static void main(String[] args) {
+        try {
+            System.out.println(Controller.getInstance().getSubjects());
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -28,17 +28,16 @@ public class ThesisRequestBean {
     private Work work;
     private List<Employee> professors;
     
-    @ManagedProperty(value="#{loggedInUserBean}")
-    private LoggedInUserBean loggedInUser;
+    @ManagedProperty(value = "#{loggedInUserBean}")
+    private LoggedInUserBean loggedInUserBean;
     
-    @PostConstruct
-    public void setup() {
+    public void init() {
         work = new Work();
-        Person loggedInPerson = loggedInUser.getLoggedInPerson().get(loggedInUser.getPersonIdentifier());
+        Person loggedInPerson = loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier());
         work.setStudent(loggedInPerson.getStudent());
         professors = Controller.getInstance().getAllProfessors();
     }
-
+    
     public Work getWork() {
         return work;
     }
@@ -55,12 +54,12 @@ public class ThesisRequestBean {
         this.professors = professors;
     }
 
-    public LoggedInUserBean getLoggedInUser() {
-        return loggedInUser;
+    public LoggedInUserBean getLoggedInUserBean() {
+        return loggedInUserBean;
     }
 
-    public void setLoggedInUser(LoggedInUserBean loggedInUser) {
-        this.loggedInUser = loggedInUser;
+    public void setLoggedInUserBean(LoggedInUserBean loggedInUserBean) {
+        this.loggedInUserBean = loggedInUserBean;
     }
     
     public String sendRequest() {

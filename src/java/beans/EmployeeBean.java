@@ -8,8 +8,12 @@ package beans;
 
 import businessLogic.Controller;
 import dao.domain.core.Employee;
+import dao.domain.core.EmployeeSubject;
 import dao.domain.core.Person;
+import dao.domain.core.Subject;
 import dao.exception.EngineDAOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -28,10 +32,12 @@ import validation.UsernameValidator;
 public class EmployeeBean {
     
     private Employee employee;
+    private List<Subject> selectedSubjects;
     
     public EmployeeBean() {
         employee = new Employee();
         employee.setPerson(new Person());
+        selectedSubjects = new ArrayList<>();
     }
 
     public Employee getEmployee() {
@@ -40,6 +46,14 @@ public class EmployeeBean {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public List<Subject> getSelectedSubjects() {
+        return selectedSubjects;
+    }
+
+    public void setSelectedSubjects(List<Subject> selectedSubjects) {
+        this.selectedSubjects = selectedSubjects;
     }
     
     public void validateEmail(FacesContext context, UIComponent componentToValidate, Object value) throws ValidatorException {
@@ -62,6 +76,13 @@ public class EmployeeBean {
     
     public String addEmployee() {
         employee.getPerson().setPictureURI("");
+        List<EmployeeSubject> subjects = employee.getEmployeeSubjectList();
+        for(Subject s : selectedSubjects) {
+            EmployeeSubject es = new EmployeeSubject();
+            es.setEmployee(employee);
+            es.setSubject(s);
+            subjects.add(es);
+        }
         try {
             Controller.getInstance().addEmployee(employee);
             FacesContext.getCurrentInstance().addMessage(null, 
