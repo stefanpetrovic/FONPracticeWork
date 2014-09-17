@@ -29,6 +29,8 @@ import dao.hibernate.HibernateTitleDAO;
 import dao.hibernate.HibernateWorkDAO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class responsible for communication with database.
@@ -226,5 +228,13 @@ public class Controller {
     public void addThesisRequest(Work thesis) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         hwd.makePersistent(thesis);
+    }
+    
+    public static void main(String[] args) {
+        try {
+            System.out.println(Controller.getInstance().getSubjects());
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

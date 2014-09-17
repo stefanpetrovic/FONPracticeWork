@@ -52,12 +52,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <h:outputLabel for="subjectDropbox" styleClass="col-md-2 control-label"  value="Predmet: "/>
+                <h:outputLabel for="subjectDropbox" styleClass="col-md-2 control-label"   value="Predmet: "/>
                 <div class="col-md-10">
-                    <h:selectOneMenu id="subjectDropbox" styleClass="form-control" value="#{employeeBean.employee.subject}">
-                        <f:converter converterId="subjectConverter"/>
+                    <p:selectManyMenu id="subjectDropbox" value="#{employeeBean.selectedSubjects}" style="width: 300px;" converter="subjectConverter" showCheckbox="true">
                         <f:selectItems value="#{dropboxesDataBean.subjects}"/>
-                    </h:selectOneMenu>
+                    </p:selectManyMenu>
                 </div>
             </div>                
             <div class="form-group">
