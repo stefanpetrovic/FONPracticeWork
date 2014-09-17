@@ -11,7 +11,10 @@ import dao.domain.core.Employee;
 import dao.domain.core.Person;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
+import dao.exception.EngineDAOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -63,7 +66,11 @@ public class ThesisRequestBean {
     }
     
     public String sendRequest() {
-        Controller.getInstance().addThesisRequest(work); 
+        try { 
+            Controller.getInstance().addThesisRequest(work);
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(ThesisRequestBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 }

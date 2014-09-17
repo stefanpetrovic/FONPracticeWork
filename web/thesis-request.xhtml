@@ -15,9 +15,9 @@
             <div class="form-group">
                 <h:outputLabel for="profesorName" styleClass="col-md-2 control-label" value="Profesor" />
                 <div class="col-md-10">
-                    <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{thesisRequestBean.professors}">
+                    <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{thesisRequestBean.work.mentor}">
                         <f:converter converterId="courseConverter"/>
-                        <f:selectItems value="#{thesisRequestBean.work.mentor}"/>
+                        <f:selectItems value="#{thesisRequestBean.professors}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
@@ -25,9 +25,9 @@
                 <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
                 <div class="col-md-10">
                     
-                    <h:selectOneMenu id="subject"  styleClass="form-control" value="#{dropboxesDataBean.subjects}">
+                    <h:selectOneMenu id="subject"  styleClass="form-control" value="#{thesisRequestBean.work.subject}">
                         <f:converter converterId="subjectConverter"/>
-                        <f:selectItems value="#{thesisRequestBean.work.subject}"/>
+                        <f:selectItems value="#{dropboxesDataBean.subjects}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
@@ -40,7 +40,7 @@
              <div class="form-group">
                 <h:outputLabel for="description" styleClass="col-md-2 control-label" value="Opis" />
                 <div class="col-md-10">
-                    <p:editor id="description" width="300" widgetVar="editor" value="#{thesisRequestBean.work.description}"/>
+                    <p:inputTextarea id="description" rows="5" cols="74" value="#{thesisRequestBean.work.description}"/>
                     <h:outputText value="(do 500 karaktera)" styleClass="pull-right"/>
                 </div>
             </div>

@@ -77,6 +77,7 @@ public class EmployeeBean {
     public String addEmployee() {
         employee.getPerson().setPictureURI("");
         List<EmployeeSubject> subjects = employee.getEmployeeSubjectList();
+        if (subjects == null) subjects = new ArrayList<EmployeeSubject>();
         for(Subject s : selectedSubjects) {
             EmployeeSubject es = new EmployeeSubject();
             es.setEmployee(employee);
