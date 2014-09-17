@@ -64,7 +64,7 @@ public class ThesesSearch {
     }
 
     public String search() {
-        try {
+        /*try {
             resultTheses = Controller.getInstance().searchTheses(heading, keywords, course);
             if (resultTheses.size() > 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
@@ -77,7 +77,7 @@ public class ThesesSearch {
         } catch (EngineDAOException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
 
-        }
+        }*/
         return null;
     }
 
