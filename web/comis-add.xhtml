@@ -39,16 +39,16 @@
              <div class="form-group">
                 <h:outputLabel for="clan1" styleClass="col-md-2 control-label" value="Član 1:" />
                 <div class="col-md-10">
-                    <h:outputText id="clan1" value="#{bean}"/>
+                    <h:outputText id="clan1" value="#{loggedInUserBean.loggedInPerson.name}"/>
                 </div>
             </div>
             
             <div class="form-group">
                 <h:outputLabel for="clan2" styleClass="col-md-2 control-label" value="Član 2:" />
                 <div class="col-md-10">
-                    <h:selectOneMenu id="clan2"  styleClass="form-control" value="#{bean}">
+                    <h:selectOneMenu id="clan2"  styleClass="form-control" value="#{addCommisionBean.secondMember}">
                         <!--<f:converter converterId="courseConverter"/>-->
-                        <f:selectItems value="#{bean}"/>
+                        <f:selectItems value="#{dropboxesDataBean.professors}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
@@ -58,15 +58,15 @@
             <div class="form-group">
                 <h:outputLabel for="clan3" styleClass="col-md-2 control-label" value="Član 3:" />
                 <div class="col-md-10">
-                    <h:selectOneMenu id="clan3"  styleClass="form-control" value="#{bean}">
+                    <h:selectOneMenu id="clan3"  styleClass="form-control" value="#{addCommisionBean.thirdMember}">
                         <!--<f:converter converterId="courseConverter"/>-->
-                        <f:selectItems value="#{bean}"/>
+                        <f:selectItems value="#{dropboxesDataBean.professors}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
             
    
-                <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="d" /> 
+            <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{addCommisionBean.addCommision()}" /> 
                 
 
 

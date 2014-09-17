@@ -248,4 +248,14 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void addCommision(Work work, Employee firstMember, Employee secondMember, Employee thirdMember) {
+       /*
+        Metoda kreira novu komisiju. Zatim pravi tri commision member objekta na osnovu ova tri Employee. Na kraju 
+        u work upise id te komisije.
+        
+        */
+        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
