@@ -75,8 +75,8 @@ and open the template in the editor.
     color: #fff;
     border: 0px;
     -webkit-border-radius: 0 !important;
-     -moz-border-radius: 0 !important;
-          border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -123,14 +123,22 @@ and open the template in the editor.
 .dropdown-menu{
     /*color: #fff;*/
     /*background-color: #ddd;*/
-/*    border: 0px solid #ccc; 
-    border: 0px solid rgba(0, 0, 0, .15); 
-    border-radius: 0px; 
-*/
+    /*    border: 0px solid #ccc; 
+        border: 0px solid rgba(0, 0, 0, .15); 
+        border-radius: 0px; 
+    */
     -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.0); 
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.0); 
 }
 
 .dropdown-menu > li > a{
     /*color: #fff;*/
+}
+
+.logout-btn{
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    width: 100%;
+    text-align: left;
 }

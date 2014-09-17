@@ -10,6 +10,7 @@ import dao.domain.core.Course;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -21,16 +22,16 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 public class ThesesSearch {
 
-    private ArrayList<Work> resultTheses;
+    private List<Work> resultTheses;
     private String heading;
     private String keywords;
     private Course course;
 
-    public ArrayList<Work> getResultTheses() {
+    public List<Work> getResultTheses() {
         return resultTheses;
     }
 
-    public void setResultTheses(ArrayList<Work> resultTheses) {
+    public void setResultTheses(List<Work> resultTheses) {
         this.resultTheses = resultTheses;
     }
 
@@ -59,6 +60,7 @@ public class ThesesSearch {
     }
 
     public ThesesSearch() {
+        resultTheses = new ArrayList<>();
     }
 
     public String search() {
