@@ -6,11 +6,13 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Faculty implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "facultyID")
     private Long facultyID;
@@ -40,7 +43,7 @@ public class Faculty implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
-    private Collection<Department> departmentCollection;
+    private List<Department> departmentList;
 
     public Faculty() {
     }
@@ -71,12 +74,12 @@ public class Faculty implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Department> getDepartmentCollection() {
-        return departmentCollection;
+    public List<Department> getDepartmentList() {
+        return departmentList;
     }
 
-    public void setDepartmentCollection(Collection<Department> departmentCollection) {
-        this.departmentCollection = departmentCollection;
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
     }
 
     @Override

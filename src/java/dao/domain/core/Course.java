@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,7 +43,9 @@ public class Course implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Collection<Student> studentCollection;
+    private List<Student> studentList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private List<Subject> subjectList;
 
     public Course() {
     }
@@ -74,12 +76,21 @@ public class Course implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Student> getStudentCollection() {
-        return studentCollection;
+    public List<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setStudentCollection(Collection<Student> studentCollection) {
-        this.studentCollection = studentCollection;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    @XmlTransient
+    public List<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public void setSubjectList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
 
     @Override
@@ -104,7 +115,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return "dao.domain.core.Course[ courseID=" + courseID + " ]";
     }
     
 }

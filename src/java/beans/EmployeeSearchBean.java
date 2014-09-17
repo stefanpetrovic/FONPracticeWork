@@ -48,7 +48,8 @@ public class EmployeeSearchBean {
     }
     
     public void findEmployees() {
-        Person p = new Person(1L, "neso", "nesto", null, null, null, null);
+        
+        Person p = new Person(1L, "neso", "nesto", null, null, null);
         Employee e = new Employee();
         e.setPerson(p);
         e.setTitle(new Title(1L, "Profesor"));

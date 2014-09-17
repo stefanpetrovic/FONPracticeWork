@@ -15,36 +15,35 @@
             <div class="form-group">
                 <h:outputLabel for="profesorName" styleClass="col-md-2 control-label" value="Profesor" />
                 <div class="col-md-10">
-                     <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{bean}">
-                        <!--<f:converter converterId="courseConverter"/>-->
-                        <f:selectItems value="#{bean}"/>
+                    <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{thesisRequestBean.professors}">
+                        <f:converter converterId="courseConverter"/>
+                        <f:selectItems value="#{thesisRequestBean.work.mentor}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
                 <div class="col-md-10">
-                    <h:selectOneMenu id="subject"  styleClass="form-control" value="#{bean}">
-                        <!--<f:converter converterId="courseConverter"/>-->
-                        <f:selectItems value="#{bean}"/>
+                    <h:selectOneMenu id="subject"  styleClass="form-control" value="#{dropboxesDataBean.subjects}">
+                        <f:converter converterId="subjectConverter"/>
+                        <f:selectItems value="#{thesisRequestBean.work}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
                 <div class="col-md-10">
-                    <h:inputText id="heading" styleClass="form-control" value="#{bean}"/>
+                    <h:inputText id="heading" styleClass="form-control" value="#{thesisRequestBean.work.title}"/>
                 </div>
             </div>
              <div class="form-group">
                 <h:outputLabel for="description" styleClass="col-md-2 control-label" value="Opis" />
                 <div class="col-md-10">
-                    <!--<h:inputText id="description" styleClass="form-control" value=""/>-->
-                    <h:inputTextarea id="description" styleClass="form-control" value="#{bean}" rows="10"/>
+                    <p:editor id="description" width="300" height="200" widgetVar="editor" value="#{thesisRequestBean.work.description}"/>
                     <h:outputText value="(do 500 karaktera)" styleClass="pull-right"/>
                 </div>
             </div>
-             <h:commandButton value="Pošalji" styleClass="btn btn-primary pull-right" action="d"/>
+            <h:commandButton value="Pošalji" styleClass="btn btn-primary pull-right" action="#{thesisRequestBean.sendRequest}"/>
 
         </h:form>
     </ui:define>

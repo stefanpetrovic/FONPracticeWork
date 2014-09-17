@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,23 +39,22 @@ public class Employee implements Serializable {
     @Column(name = "employeeID")
     private Long employeeID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
-    private Collection<Work> workCollection;
+    private List<Work> workList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
-    private Collection<CommisionMember> commisionMemberCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chief")
-    private Collection<Department> departmentCollection;
-    @JoinColumn(name = "subject", referencedColumnName = "subjectID")
+    private List<CommisionMember> commisionMemberList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<EmployeeSubject> employeeSubjectList;
+    @OneToMany(mappedBy = "chief")
+    private List<Department> departmentList;
+    @JoinColumn(name = "title", referencedColumnName = "titleID")
     @ManyToOne(optional = false)
-    private Subject subject;
+    private Title title;
     @JoinColumn(name = "department", referencedColumnName = "departmentID")
     @ManyToOne(optional = false)
     private Department department;
     @JoinColumn(name = "employeeID", referencedColumnName = "personID", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Person person;
-    @JoinColumn(name = "title", referencedColumnName = "titleID")
-    @ManyToOne(optional = false)
-    private Title title;
 
     public Employee() {
     }
@@ -73,38 +72,47 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Work> getWorkCollection() {
-        return workCollection;
+    public List<Work> getWorkList() {
+        return workList;
     }
 
-    public void setWorkCollection(Collection<Work> workCollection) {
-        this.workCollection = workCollection;
-    }
-
-    @XmlTransient
-    public Collection<CommisionMember> getCommisionMemberCollection() {
-        return commisionMemberCollection;
-    }
-
-    public void setCommisionMemberCollection(Collection<CommisionMember> commisionMemberCollection) {
-        this.commisionMemberCollection = commisionMemberCollection;
+    public void setWorkList(List<Work> workList) {
+        this.workList = workList;
     }
 
     @XmlTransient
-    public Collection<Department> getDepartmentCollection() {
-        return departmentCollection;
+    public List<CommisionMember> getCommisionMemberList() {
+        return commisionMemberList;
     }
 
-    public void setDepartmentCollection(Collection<Department> departmentCollection) {
-        this.departmentCollection = departmentCollection;
+    public void setCommisionMemberList(List<CommisionMember> commisionMemberList) {
+        this.commisionMemberList = commisionMemberList;
     }
 
-    public Subject getSubject() {
-        return subject;
+    @XmlTransient
+    public List<EmployeeSubject> getEmployeeSubjectList() {
+        return employeeSubjectList;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setEmployeeSubjectList(List<EmployeeSubject> employeeSubjectList) {
+        this.employeeSubjectList = employeeSubjectList;
+    }
+
+    @XmlTransient
+    public List<Department> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
+
+    public Title getTitle() {
+        return title;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
     }
 
     public Department getDepartment() {
@@ -121,14 +129,6 @@ public class Employee implements Serializable {
 
     public void setPerson(Person person) {
         this.person = person;
-    }
-
-    public Title getTitle() {
-        return title;
-    }
-
-    public void setTitle(Title title) {
-        this.title = title;
     }
 
     @Override
@@ -153,7 +153,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return person.getName() + " " + person.getSurname();
+        return "dao.domain.core.Employee[ employeeID=" + employeeID + " ]";
     }
     
 }

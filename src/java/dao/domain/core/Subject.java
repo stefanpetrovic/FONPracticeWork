@@ -6,7 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,10 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Subject.findAll", query = "SELECT s FROM Subject s"),
     @NamedQuery(name = "Subject.findBySubjectID", query = "SELECT s FROM Subject s WHERE s.subjectID = :subjectID"),
-    @NamedQuery(name = "Subject.findByName", query = "SELECT s FROM Subject s WHERE s.name = :name"),
-    @NamedQuery(name = "Subject.findByDepartment", query = "SELECT s FROM Subject s WHERE s.department = :department"),
-    @NamedQuery(name = "Subject.findByCourse", query = "SELECT s FROM Subject s WHERE s.course = :course")})
+    @NamedQuery(name = "Subject.findByName", query = "SELECT s FROM Subject s WHERE s.name = :name")})
 public class Subject implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+    private List<Work> workList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,14 +46,14 @@ public class Subject implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @Column(name = "department")
-    private long department;
-    @Basic(optional = false)
-    @Column(name = "course")
-    private long course;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
-    private Collection<Employee> employeeCollection;
+    private List<EmployeeSubject> employeeSubjectList;
+    @JoinColumn(name = "course", referencedColumnName = "courseID")
+    @ManyToOne(optional = false)
+    private Course course;
+    @JoinColumn(name = "department", referencedColumnName = "departmentID")
+    @ManyToOne(optional = false)
+    private Department department;
 
     public Subject() {
     }
@@ -60,11 +62,9 @@ public class Subject implements Serializable {
         this.subjectID = subjectID;
     }
 
-    public Subject(Long subjectID, String name, long department, long course) {
+    public Subject(Long subjectID, String name) {
         this.subjectID = subjectID;
         this.name = name;
-        this.department = department;
-        this.course = course;
     }
 
     public Long getSubjectID() {
@@ -83,29 +83,29 @@ public class Subject implements Serializable {
         this.name = name;
     }
 
-    public long getDepartment() {
-        return department;
+    @XmlTransient
+    public List<EmployeeSubject> getEmployeeSubjectList() {
+        return employeeSubjectList;
     }
 
-    public void setDepartment(long department) {
-        this.department = department;
+    public void setEmployeeSubjectList(List<EmployeeSubject> employeeSubjectList) {
+        this.employeeSubjectList = employeeSubjectList;
     }
 
-    public long getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(long course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
-    @XmlTransient
-    public Collection<Employee> getEmployeeCollection() {
-        return employeeCollection;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setEmployeeCollection(Collection<Employee> employeeCollection) {
-        this.employeeCollection = employeeCollection;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override
@@ -130,7 +130,16 @@ public class Subject implements Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return "dao.domain.core.Subject[ subjectID=" + subjectID + " ]";
+    }
+
+    @XmlTransient
+    public List<Work> getWorkList() {
+        return workList;
+    }
+
+    public void setWorkList(List<Work> workList) {
+        this.workList = workList;
     }
     
 }

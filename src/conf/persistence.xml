@@ -14,6 +14,7 @@
     <class>dao.domain.core.Faculty</class>
     <class>dao.domain.core.Keywords</class>
     <class>dao.domain.core.Title</class>
+    <class>dao.domain.core.EmployeeSubject</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/praksa"/>
