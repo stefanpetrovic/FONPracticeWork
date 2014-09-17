@@ -112,13 +112,15 @@ public class Controller {
         return hed.selectByKey(id);
     }
     
-
     public List<Employee> getAllProfessors() {
         //treba da vrati sve profesore-zaposlene i obavezno da baci izuzetak
         return new ArrayList<>();
     }
     
-    
+    public List<Subject> getAllSubjectsByProfessor(Employee employee) {
+        // na osnovu zaposlenog vratiti sve predmete,obavezno exception da baca
+        return new ArrayList<>();
+    }
 
     public void updatePerson(Person person) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
