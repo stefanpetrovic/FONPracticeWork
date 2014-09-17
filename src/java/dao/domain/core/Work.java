@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,6 +45,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Work.findByGrade", query = "SELECT w FROM Work w WHERE w.grade = :grade"),
     @NamedQuery(name = "Work.findByStatus", query = "SELECT w FROM Work w WHERE w.status = :status")})
 public class Work implements Serializable {
+    @JoinColumn(name = "subject", referencedColumnName = "subjectID")
+    @ManyToOne(optional = false)
+    private Subject subject;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -214,6 +218,14 @@ public class Work implements Serializable {
     @Override
     public String toString() {
         return "dao.domain.core.Work[ workID=" + workID + " ]";
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
     
 }

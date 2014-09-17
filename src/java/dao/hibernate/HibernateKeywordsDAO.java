@@ -7,6 +7,16 @@ package dao.hibernate;
 
 import dao.KeywordsDAO;
 import dao.domain.core.Keywords;
+import dao.domain.core.Work;
+import dao.exception.EngineDAOException;
+import static dao.hibernate.HibernatePersonDAO.ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD;
+import static dao.hibernate.HibernateWorkDAO.TITLE;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -24,6 +34,30 @@ public class HibernateKeywordsDAO extends AbstractHibernateDAO<Keywords, Long> i
 
     public HibernateKeywordsDAO() {
         super(Keywords.class);
+    }
+
+    @Override
+    public List<Keywords> getKeywordsByKeywords(List<Keywords> keywords) throws EngineDAOException {
+        List<Keywords> keys = new ArrayList<>();
+        for(Keywords k : keywords){
+            getSession().beginTransaction();
+            Criteria criteria = getSession().createCriteria(persistentClass);
+            criteria.add(Restrictions.eq(KEYWORD, k.getKeyword()));
+            criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+            Keywords keyword;
+            try {
+                keyword = (Keywords) criteria.uniqueResult();
+            } catch (RuntimeException e) {
+                throw new EngineDAOException(e);
+            }
+            if (keyword == null) {
+                getSession().getTransaction().rollback();
+                throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+            }
+            getSession().getTransaction().commit();
+            keys.add(keyword);
+        }
+        return keys;
     }
     
     

@@ -5,10 +5,19 @@
  */
 package dao;
 
+import dao.domain.core.Subject;
+import dao.domain.core.Work;
+import dao.exception.EngineDAOException;
+import java.util.List;
+
 /**
  *
  * @author Djole
  */
 public interface WorkDAO {
+    
+    public List<Work> getWorkByTitle(String title) throws EngineDAOException;
+    public List<Work> getWorksByTitleAndSubject(String title, Subject subject) throws EngineDAOException;
+    public List<Work> getWorksBySubject(Subject subject) throws EngineDAOException;
     
 }

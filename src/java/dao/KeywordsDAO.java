@@ -5,10 +5,15 @@
  */
 package dao;
 
+import dao.domain.core.Keywords;
+import dao.exception.EngineDAOException;
+import java.util.List;
+
 /**
  *
  * @author Djole
  */
 public interface KeywordsDAO {
     
+    public List<Keywords> getKeywordsByKeywords(List<Keywords> keywords) throws EngineDAOException;
 }

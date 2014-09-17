@@ -11,6 +11,7 @@ import dao.domain.core.CommisionMember;
 import dao.domain.core.Course;
 import dao.domain.core.Department;
 import dao.domain.core.Employee;
+import dao.domain.core.Keywords;
 import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.domain.core.Subject;
@@ -20,10 +21,12 @@ import dao.exception.EngineDAOException;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
 import dao.hibernate.HibernateEmployeeDAO;
+import dao.hibernate.HibernateKeywordsDAO;
 import dao.hibernate.HibernatePersonDAO;
 import dao.hibernate.HibernateStudentDAO;
 import dao.hibernate.HibernateSubjectDAO;
 import dao.hibernate.HibernateTitleDAO;
+import dao.hibernate.HibernateWorkDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,24 +177,54 @@ public class Controller {
         }
     } 
 
-    public ArrayList<Work> searchTheses(String heading, String keywords, Course course) throws EngineDAOException {
-        /*
-        Dakle metoda prima ova tri parametra. Upit treba da bude ovako:
-        - ako je heading postavljen - onda pretraga po naslovima za sve radove (LIKE klauzula)
-        - ako je postavljen keywords - onda pretraga za svaku ključnu reč. Rad mora
-        da sadrži sve ove ključne reči. Reči se unose razdvojene sa zarezom, pa ćeš morati da splituješ string, trimuješ razmake
-        i pretražuješ svaku reč ponaosob.
-        - ako je course odabran, onda samo radovi gde je taj predmet.
-        
-        Ako je više od ovih postavljeno, onda se spajaju AND klauzulom. Npr: naslov "deo naslova" i "ključnareč1,ključnareč2"
-        dakle sadrži i jedno i drugo...
-        */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Work> searchTheses(String heading, List<String> keywords, Subject subject) throws EngineDAOException {
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        HibernateKeywordsDAO hkd = new HibernateKeywordsDAO();
+        List<Work> finalWorks = new ArrayList<>();
+        if(heading!=null && keywords==null && subject==null){
+            return hwd.getWorkByTitle(heading);
+        }
+        if(heading!=null && keywords==null && subject!=null){
+            return hwd.getWorksByTitleAndSubject(heading, subject);
+        }
+        if(keywords!=null){
+            List<Keywords> keys = new ArrayList<>();
+            for(String k : keywords){
+                Keywords keyword = new Keywords();
+                keyword.setKeyword(k);
+                keys.add(keyword);
+            }
+            keys = hkd.getKeywordsByKeywords(keys);
+            List<Work> works = new ArrayList<>();
+            if(heading!=null && subject==null){
+                works = hwd.getWorkByTitle(heading);
+            }
+            if(heading!=null && subject!=null){
+                works = hwd.getWorksByTitleAndSubject(heading, subject);
+            }
+            if(heading==null && subject!=null){
+                works = hwd.getWorksBySubject(subject);
+            }
+            if(heading==null && subject==null){
+                works = hwd.findAll();
+            }
+            for(Keywords k : keys){
+                for(Work work : works){
+                    if(k.getWork().getWorkID().equals(work.getWorkID()) && !finalWorks.contains(work)){
+                        finalWorks.add(work);
+                    }
+                }
+            }
+            return finalWorks;
+        }
+        if(heading==null && keywords==null && subject!=null){
+            return hwd.getWorksBySubject(subject);
+        }
+        return finalWorks;
 
     }
-    public void addThesisRequest(Work thesis) {
-        // dodati cuvanje work-a(podaci koji se dobijaju ovde su profesor, student, naslov)
-        //obavezno da baca exception
-
+    public void addThesisRequest(Work thesis) throws EngineDAOException {
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        hwd.makePersistent(thesis);
     }
 }
