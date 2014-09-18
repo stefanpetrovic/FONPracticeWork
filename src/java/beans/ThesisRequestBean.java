@@ -12,6 +12,7 @@ import dao.domain.core.Person;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,11 +35,17 @@ public class ThesisRequestBean {
     @ManagedProperty(value = "#{loggedInUserBean}")
     private LoggedInUserBean loggedInUserBean;
     
+    @PostConstruct
     public void init() {
         work = new Work();
         Person loggedInPerson = loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier());
         work.setStudent(loggedInPerson.getStudent());
-        professors = Controller.getInstance().getAllProfessors();
+        try {
+            professors = Controller.getInstance().getAllProfessors();
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(ThesisRequestBean.class.getName()).log(Level.SEVERE, null, ex);
+            professors = new ArrayList<>();
+        }
     }
     
     public Work getWork() {

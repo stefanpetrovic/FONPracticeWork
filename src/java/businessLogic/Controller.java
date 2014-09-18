@@ -243,7 +243,7 @@ public class Controller {
     
     public static void main(String[] args) {
         try {
-            System.out.println(Controller.getInstance().getSubjects());
+            System.out.println(Controller.getInstance().getAllProfessors());
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

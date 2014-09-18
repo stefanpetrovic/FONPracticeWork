@@ -16,7 +16,7 @@
                 <h:outputLabel for="profesorName" styleClass="col-md-2 control-label" value="Profesor" />
                 <div class="col-md-10">
                     <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{thesisRequestBean.work.mentor}">
-                        <f:converter converterId="courseConverter"/>
+                        <f:converter converterId="employeeConverter"/>
                         <f:selectItems value="#{thesisRequestBean.professors}"/>
                     </h:selectOneMenu>
                 </div>

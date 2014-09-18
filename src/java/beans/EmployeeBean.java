@@ -84,13 +84,15 @@ public class EmployeeBean {
             es.setSubject(s);
             subjects.add(es);
         }
+        employee.setEmployeeSubjectList(subjects);
         try {
-            Controller.getInstance().addEmployee(employee);
+            Controller.getInstance().addEmployee(employee.getEmployeeSubjectList().get(0));
             FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Zaposleni je uspesno sacuvan"));
             employee = new Employee();
             employee.setPerson(new Person());
-        } catch (EngineDAOException ex) {
+            selectedSubjects = new ArrayList<>();
+        } catch (Exception ex) {
             Logger.getLogger(EmployeeBean.class.getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Greska prilikom cuvanja zaposlenog"));
