@@ -39,9 +39,9 @@
                 <div class="col-md-2">
 
 
-                    <h:selectOneMenu id="ocena"  styleClass="form-control" value="#{bean}">
+                    <h:selectOneMenu id="ocena"  styleClass="form-control" value="#{gradeWorkBean.grade}">
                         <f:converter converterId="courseConverter"/>
-                        <f:selectItems value="#{bean}"/>
+                        <f:selectItems value="#{gradeWorkBean.availableGrades}"/>
                     </h:selectOneMenu>
                 </div>
             </div>

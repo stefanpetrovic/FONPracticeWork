@@ -7,9 +7,11 @@ package beans;
 
 import businessLogic.Controller;
 import dao.domain.core.Course;
+import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -21,16 +23,16 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 public class ThesesSearch {
 
-    private ArrayList<Work> resultTheses;
+    private List<Work> resultTheses;
     private String heading;
     private String keywords;
-    private Course course;
+    private Subject subject;
 
-    public ArrayList<Work> getResultTheses() {
+    public List<Work> getResultTheses() {
         return resultTheses;
     }
 
-    public void setResultTheses(ArrayList<Work> resultTheses) {
+    public void setResultTheses(List<Work> resultTheses) {
         this.resultTheses = resultTheses;
     }
 
@@ -50,20 +52,28 @@ public class ThesesSearch {
         this.keywords = keywords;
     }
 
-    public Course getCourse() {
-        return course;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
+
+    
 
     public ThesesSearch() {
+        resultTheses = new ArrayList<>();
     }
 
     public String search() {
-        /*try {
-            resultTheses = Controller.getInstance().searchTheses(heading, keywords, course);
+        try {
+            String[] keyw = keywords.split(",");
+            List<String> keywordsList =new ArrayList<>();
+            for (String k : keyw) {
+                keywordsList.add(k.trim());
+            }
+            resultTheses = Controller.getInstance().searchTheses(heading, keywordsList, subject);
             if (resultTheses.size() > 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
                 return null;
@@ -75,8 +85,66 @@ public class ThesesSearch {
         } catch (EngineDAOException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
 
-        }*/
+        }
         return null;
     }
+    
+    
+     public String searchUnapproved() {
+        try {         
+            resultTheses = Controller.getInstance().searchUnapprovedTheses();
+            if (resultTheses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+    }
+     
+      public String searchUncommisioned(){
+        try {
+            resultTheses = Controller.getInstance().searchUncommisionedTheses();
+            if (resultTheses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+        
+        
+    }
+      
+      public String searchUngraded(){
+        try {
+            resultTheses = Controller.getInstance().searchUngradedTheses();
+            if (resultTheses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+
+
 
 }

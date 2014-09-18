@@ -9,7 +9,7 @@
             <div class="form-group">
                 <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Naslov: "/>
                 <div class="col-md-10">
-                    <h:inputText id="subject" styleClass="form-control" value="#{bean}"/>
+                    <h:inputText id="subject" styleClass="form-control" value="#{thesesSearch.heading}"/>
                 </div>
             </div>
             
@@ -17,24 +17,28 @@
             <div class="form-group">
                 <h:outputLabel for="keywords" styleClass="col-md-2 control-label" value="Ključne reči: "/>
                 <div class="col-md-10">
-                    <h:inputText id="keywords" styleClass="form-control" value="#{bean}"/>
+                    <h:inputText id="keywords" styleClass="form-control" value="#{thesesSearch.keywords}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="course"  styleClass="col-md-2 control-label" value="Predmet: "/>
                 <div class="col-md-10">
-                    <h:selectOneMenu id="course"  styleClass="form-control" value="#{bean}">
+                    <h:selectOneMenu id="course"  styleClass="form-control" value="#{thesesSearch.subject}">
                         <f:converter converterId="courseConverter"/>
-                        <f:selectItems value="#{bean}"/>
+                        <f:selectItems value="#{dropboxesDataBean.subjects}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
 
-            <h:commandButton value="Pretraži" styleClass="btn btn-primary pull-right" action="#{bean}"/>
+            <h:commandButton value="Pretraži" styleClass="btn btn-primary pull-right" action="#{thesesSearch.search()}"/>
 
         </h:form>
     </div>
+    
+    <ui:repeat var="work" value="#{thesesSearch.resultTheses}" >
+        <h1>#{work.subject}</h1>
+    </ui:repeat>
         
 
 </ui:composition>
