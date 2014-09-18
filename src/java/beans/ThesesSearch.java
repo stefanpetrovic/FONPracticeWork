@@ -88,5 +88,63 @@ public class ThesesSearch {
         }
         return null;
     }
+    
+    
+     public String searchUnapproved() {
+        try {         
+            resultTheses = Controller.getInstance().searchUnapprovedTheses();
+            if (resultTheses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+    }
+     
+      public String searchUncommisioned(){
+        try {
+            resultTheses = Controller.getInstance().searchUncommisionedTheses();
+            if (resultTheses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+        
+        
+    }
+      
+      public String searchUngraded(){
+        try {
+            resultTheses = Controller.getInstance().searchUngradedTheses();
+            if (resultTheses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+
+
 
 }
