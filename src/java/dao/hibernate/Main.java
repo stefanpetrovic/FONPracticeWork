@@ -60,7 +60,7 @@ public class Main {
             person.setName("Djordje");
             person.getStudent().setJmbg("212");
             Controller.getInstance().updatePerson(person);*/
-            String s1 = "goran";
+            /*String s1 = "goran";
             String s2 = "maturski";
             List<String> str = new ArrayList<>();
             str.add(s1);
@@ -84,6 +84,7 @@ public class Main {
                 System.out.println(k.getKeyword());
                 System.out.println(k.getWork());
             }*/
+            Controller.getInstance().addCommision(null, null, null, null);
         } catch (EngineDAOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
