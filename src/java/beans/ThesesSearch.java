@@ -60,8 +60,6 @@ public class ThesesSearch {
         this.subject = subject;
     }
 
-    
-
     public ThesesSearch() {
         resultTheses = new ArrayList<>();
     }
@@ -69,7 +67,7 @@ public class ThesesSearch {
     public String search() {
         try {
             String[] keyw = keywords.split(",");
-            List<String> keywordsList =new ArrayList<>();
+            List<String> keywordsList = new ArrayList<>();
             for (String k : keyw) {
                 keywordsList.add(k.trim());
             }
@@ -88,10 +86,9 @@ public class ThesesSearch {
         }
         return null;
     }
-    
-    
-     public String searchUnapproved() {
-        try {         
+
+    public String searchUnapproved() {
+        try {
             resultTheses = Controller.getInstance().searchUnapprovedTheses();
             if (resultTheses.size() > 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
@@ -107,8 +104,8 @@ public class ThesesSearch {
         }
         return null;
     }
-     
-      public String searchUncommisioned(){
+
+    public String searchUncommisioned() {
         try {
             resultTheses = Controller.getInstance().searchUncommisionedTheses();
             if (resultTheses.size() > 0) {
@@ -124,11 +121,10 @@ public class ThesesSearch {
 
         }
         return null;
-        
-        
+
     }
-      
-      public String searchUngraded(){
+
+    public String searchUngraded() {
         try {
             resultTheses = Controller.getInstance().searchUngradedTheses();
             if (resultTheses.size() > 0) {
@@ -145,6 +141,7 @@ public class ThesesSearch {
         }
         return null;
 
-      }
+    }
+
 
 }

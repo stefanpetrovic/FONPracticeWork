@@ -18,6 +18,8 @@ import dao.domain.core.Subject;
 import dao.domain.core.Title;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
+import dao.hibernate.HibernateCommisionDAO;
+import dao.hibernate.HibernateCommisionMemberDAO;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
 import dao.hibernate.HibernateEmployeeDAO;
@@ -253,42 +255,51 @@ public class Controller {
         }
     }
 
-    public void addCommision(Work work, Employee firstMember, Employee secondMember, Employee thirdMember) {
-        /*
-         Metoda kreira novu komisiju. Zatim pravi tri commision member objekta na osnovu ova tri Employee. Na kraju 
-         u work upise id te komisije.
-        
-         */
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addCommision(Work work, Employee firstMember, Employee secondMember, Employee thirdMember) throws EngineDAOException {
+        HibernateCommisionDAO hcd = new HibernateCommisionDAO();
+        HibernateCommisionMemberDAO hcmd = new HibernateCommisionMemberDAO();
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        Commision commision = new Commision();
+        //save commision
+        hcd.makePersistent(commision);
+        //save mentor
+        CommisionMember member1 = new CommisionMember();
+        member1.setCommisionID(commision);
+        member1.setProfessor(firstMember);
+        member1.setRole("mentor");
+        //save commision members
+        CommisionMember member2 = new CommisionMember();
+        member2.setCommisionID(commision);
+        member2.setProfessor(secondMember);
+        member2.setRole("commision member");
+        CommisionMember member3 = new CommisionMember();
+        member3.setCommisionID(commision);
+        member3.setProfessor(thirdMember);
+        member3.setRole("commision member");
+        work.setCommision(commision);
+        //update work
+        hwd.makePersistent(work);
     }
 
     public List<Work> searchUnapprovedTheses() throws EngineDAOException {
-        /*
-         Vraca samo teme koje nisu odobrene   
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        return hwd.getUnapprovedWorks();
     }
 
     public List<Work> searchUncommisionedTheses() throws EngineDAOException {
-        /*
-         Vraca samo teme kojima komisija nije postavljena
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        return hwd.getUncommisionedWorks();
     }
 
     public List<Work> searchUngradedTheses() throws EngineDAOException {
-        /*
-         vraca neocenjene radove
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        return hwd.getUngradedWorks();
     }
 
     public void gradeWork(Work work, int grade) throws EngineDAOException {
-        /*
-         Upisuje ocenu u rad
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        work.setGrade(grade);
+        hwd.makePersistent(work);
     }
     
     public List<Integer> createGrades(){
