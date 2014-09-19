@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beans;
 
 import businessLogic.Controller;
@@ -27,13 +26,13 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 @ApplicationScoped
 public class DropboxesDataBean {
-    
+
     private List<Title> titles;
     private List<Department> departments;
     private List<Course> courses;
     private List<Subject> subjects;
-       private List<Employee> employees;
-    
+    private List<Employee> employees;
+
     public DropboxesDataBean() {
         try {
             titles = Controller.getInstance().getTitles();
@@ -50,7 +49,7 @@ public class DropboxesDataBean {
             employees = new ArrayList<>();
         }
     }
-    
+
     public List<Title> getTitles() {
         return titles;
     }
@@ -90,7 +89,5 @@ public class DropboxesDataBean {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
-    
-     
-    
+
 }

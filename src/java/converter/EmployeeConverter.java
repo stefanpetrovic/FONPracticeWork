@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package converter;
 
 import businessLogic.Controller;
 import dao.domain.core.Employee;
+import dao.domain.core.Person;
 import dao.exception.EngineDAOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,10 @@ import javax.faces.convert.FacesConverter;
  * @author stefan
  */
 @FacesConverter("employeeConverter")
-public class EmployeeConverter implements Converter{
+public class EmployeeConverter implements Converter {
 
     private List<Employee> employees;
-    
+
     public EmployeeConverter() {
         try {
             employees = Controller.getInstance().getAllProfessors();
@@ -35,7 +35,7 @@ public class EmployeeConverter implements Converter{
             employees = new ArrayList<>();
         }
     }
-    
+
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         try {
@@ -44,8 +44,8 @@ public class EmployeeConverter implements Converter{
                 if (e.getEmployeeID() == eid) {
                     return e;
                 }
-            }            
-        }catch (NumberFormatException nfe) {
+            }
+        } catch (NumberFormatException nfe) {
             nfe.printStackTrace();
         }
         return null;
@@ -55,5 +55,5 @@ public class EmployeeConverter implements Converter{
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         return ((Employee) o).getEmployeeID().toString();
     }
-    
+
 }

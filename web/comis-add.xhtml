@@ -20,21 +20,21 @@
             <div class="form-group">
                 <h:outputLabel for="studentName" styleClass="col-md-2 control-label" value="Student" />
                 <div class="col-md-10">
-                    <h:outputText id="studentName" value="#{addCommisionBean.id}"/>
+                    <h:outputText id="studentName" value="#{addCommisionBean.studentName}"/>
 
                 </div>
             </div>
             <div class="form-group">
                 <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
                 <div class="col-md-10">
-                    <h:outputText id="subject" value="#{bean}"/>
+                    <h:outputText id="subject" value="#{addCommisionBean.subjectName}"/>
 
                 </div>
             </div>
             <div class="form-group">
                 <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
                 <div class="col-md-10">
-                    <h:outputText id="heading" value="#{bean}"/>
+                    <h:outputText id="heading" value="#{addCommisionBean.work.title}"/>
                 </div>
             </div>
 
@@ -43,48 +43,33 @@
             <div class="form-group">
                 <h:outputLabel for="clan1" styleClass="col-md-2 control-label" value="Član 1:" />
                 <div class="col-md-10">
-                    <h:outputText id="clan1" value="#{loggedInUserBean.loggedInPerson.name}"/>
+                    <h:outputText id="clan1" value="#{loggedInUserBean.username}"/>
                 </div>
             </div>
 
-            <div class="col-md-10">
+            <div class="form-group">
                 <h:outputLabel for="clan2" styleClass="col-md-2 control-label" value="Član 2:" />
                 <div class="col-md-10">
-                    <h:selectOneMenu id="course"  styleClass="form-control" value="#{thesesSearch.subject}">
-                        <f:converter converterId="courseConverter"/>
-                        <f:selectItems value="#{dropboxesDataBean.subjects}"/>
+                    <h:selectOneMenu id="clan2"  styleClass="form-control" value="#{addCommisionBean.secondMember}">
+                        <f:converter converterId="employeeConverter"/>
+
+                        <f:selectItems value="#{dropboxesDataBean.employees}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
 
-            <!--            <div class="form-group">
-                            <h:outputLabel for="clan2" styleClass="col-md-2 control-label" value="Član 2:" />
-                            <div class="col-md-10">
-                                <h:selectOneMenu id="clan2"  styleClass="form-control" value="">
-                                    <f:converter converterId="courseConverter"/>
-            
-                                    <f:selectItems value=""/>
-                                </h:selectOneMenu>
-                            </div>
-                        </div>
-                        
-            
-            
-                        <div class="form-group">
-                            <h:outputLabel for="clan3" styleClass="col-md-2 control-label" value="Član 3:" />
-                            <div class="col-md-10">
-            
-                                <h:selectOneMenu id="clan3"  styleClass="form-control" value="">
-                                    <f:converter converterId="courseConverter"/>
-                                    <f:selectItems value=""/>
-                                </h:selectOneMenu>
-                            </div>
-                        </div>-->
+            <div class="form-group">
+                <h:outputLabel for="clan3" styleClass="col-md-2 control-label" value="Član 2:" />
+                <div class="col-md-10">
+                    <h:selectOneMenu id="clan3"  styleClass="form-control" value="#{addCommisionBean.thirdMember}">
+                        <f:converter converterId="employeeConverter"/>
 
+                        <f:selectItems value="#{dropboxesDataBean.employees}"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
 
             <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{addCommisionBean.addCommision()}" /> 
-
-
 
         </h:form>
     </ui:define>

@@ -7,7 +7,13 @@ package beans;
 
 import businessLogic.Controller;
 import dao.domain.core.Employee;
+import dao.domain.core.Person;
+import dao.domain.core.Student;
+import dao.domain.core.Subject;
 import dao.domain.core.Work;
+import dao.exception.EngineDAOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -23,7 +29,8 @@ public class AddCommisionBean {
     private Employee firstMember;
     private Employee secondMember;
     private Employee thirdMember;
-    private String idval;
+    private String studentName;
+    private String subjectName;
     private Long id;
 
     public Long getId() {
@@ -32,16 +39,26 @@ public class AddCommisionBean {
 
     public void setId(Long id) {
         this.id = id;
+        makeWork(id);
     }
 
-    public String getIdval() {
-        return idval;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setIdval(String idval) {
-        this.idval = idval;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    
     public Work getWork() {
         return work;
     }
@@ -74,14 +91,31 @@ public class AddCommisionBean {
         this.thirdMember = thirdMember;
     }
 
-    public AddCommisionBean() {
-        work = Controller.getInstance().getWork(id);
+    //@PostConstruct
+    public void makeWork(Long id) {
+        try {
+            work = Controller.getInstance().getWork(id);
+            Student st = work.getStudent();
+            setStudentName(st.getPerson().getName() + " " + st.getPerson().getSurname());
+            Subject s = work.getSubject();
+            setSubjectName(s.getName());
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(AddCommisionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-    
+
+    public AddCommisionBean() {
+
+    }
 
     public String addCommision() {
-        Controller.getInstance().addCommision(work, firstMember, secondMember, thirdMember);
+        try {
+            Controller.getInstance().addCommision(work, firstMember, secondMember, thirdMember);
+            //return null;
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(AddCommisionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 }

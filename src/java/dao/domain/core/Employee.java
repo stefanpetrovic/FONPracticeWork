@@ -153,7 +153,8 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.Employee[ employeeID=" + employeeID + " ]";
+        //return "dao.domain.core.Employee[ employeeID=" + employeeID + " ]";
+        return person.getSurname() + " " + person.getName() + ", " + person.getEmployee().getTitle().getName();
     }
     
 }
