@@ -38,6 +38,10 @@ public class HibernateWorkDAO extends AbstractHibernateDAO<Work, Long> implement
     public static final String DESCRIPTION = "description";
     public static final String SUBJECT = "subject";
 
+    public static final int REJECTED = -1;
+    public static final int UNAPPROVED = 0;
+    public static final int APPROVED = 1;
+    
     public HibernateWorkDAO(Class<Work> persistentClass) {
         super(persistentClass);
     }
@@ -92,6 +96,66 @@ public class HibernateWorkDAO extends AbstractHibernateDAO<Work, Long> implement
         getSession().beginTransaction();
         Criteria criteria = getSession().createCriteria(persistentClass);
         criteria.add(Restrictions.eq(SUBJECT, subject));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Work> works;
+        try {
+            works = criteria.list();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (works == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return works;
+    }
+
+    @Override
+    public List<Work> getUnapprovedWorks() throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(STATUS, UNAPPROVED));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Work> works;
+        try {
+            works = criteria.list();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (works == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return works;
+    }
+
+    @Override
+    public List<Work> getUncommisionedWorks() throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(COMMISION, null));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Work> works;
+        try {
+            works = criteria.list();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (works == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return works;
+    }
+
+    @Override
+    public List<Work> getUngradedWorks() throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(GRADE, null));
         criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         List<Work> works;
         try {
