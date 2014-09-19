@@ -314,12 +314,9 @@ public class Controller {
                 
     }
 
-    public Work getWork(Long id) {
-        /*
-            treba da vrati rad po id-ju
-        */
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Work getWork(Long id) throws EngineDAOException {
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        return hwd.selectByKey(id);
     }
     
   
