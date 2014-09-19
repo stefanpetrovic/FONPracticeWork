@@ -9,6 +9,7 @@ package beans;
 import businessLogic.Controller;
 import dao.domain.core.Course;
 import dao.domain.core.Department;
+import dao.domain.core.Employee;
 import dao.domain.core.Subject;
 import dao.domain.core.Title;
 import dao.exception.EngineDAOException;
@@ -31,6 +32,7 @@ public class DropboxesDataBean {
     private List<Department> departments;
     private List<Course> courses;
     private List<Subject> subjects;
+       private List<Employee> employees;
     
     public DropboxesDataBean() {
         try {
@@ -38,12 +40,14 @@ public class DropboxesDataBean {
             departments = Controller.getInstance().getDepartments();
             courses = Controller.getInstance().getCourses();
             subjects = Controller.getInstance().getSubjects();
+            employees = Controller.getInstance().getAllProfessors();
         } catch (EngineDAOException ex) {
             Logger.getLogger(DropboxesDataBean.class.getName()).log(Level.SEVERE, null, ex);
             titles = new ArrayList<>();
             departments = new ArrayList<>();
             courses = new ArrayList<>();
             subjects = new ArrayList<>();
+            employees = new ArrayList<>();
         }
     }
     
@@ -78,6 +82,15 @@ public class DropboxesDataBean {
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
     
+     
     
 }

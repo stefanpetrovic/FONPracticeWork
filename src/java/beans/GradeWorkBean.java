@@ -24,13 +24,7 @@ public class GradeWorkBean {
     private List<Integer> availableGrades;
 
     public GradeWorkBean() {
-        availableGrades = new ArrayList<>();
-        availableGrades.add(5);
-        availableGrades.add(6);
-        availableGrades.add(7);
-        availableGrades.add(8);
-        availableGrades.add(9);
-        availableGrades.add(10);
+        availableGrades = Controller.getInstance().createGrades();
     }
 
     public Work getWork() {

@@ -290,5 +290,26 @@ public class Controller {
          */
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<Integer> createGrades(){
+        ArrayList<Integer> availableGrades = new ArrayList<>();
+        availableGrades.add(5);
+        availableGrades.add(6);
+        availableGrades.add(7);
+        availableGrades.add(8);
+        availableGrades.add(9);
+        availableGrades.add(10);
+        return availableGrades;
+                
+    }
 
+    public Work getWork(Long id) {
+        /*
+            treba da vrati rad po id-ju
+        */
+        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+  
 }

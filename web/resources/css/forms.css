@@ -14,3 +14,20 @@ and open the template in the editor.
 .student-communication:hover{
     background-color: #ddd;
 }
+
+.theses-action{
+    /*width:100;*/
+    display:inline-block;
+    margin: 4px;
+    border: 0px solid;
+    
+     -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+.theses-opt-main-button{
+    margin-bottom: 10px;
+    display: inline;
+    /*width:100%;*/
+}

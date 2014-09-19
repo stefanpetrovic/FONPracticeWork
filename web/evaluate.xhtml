@@ -7,7 +7,7 @@
     <ui:define name="title">Ocena rada</ui:define>
 
     <ui:define name="heading">
-        <h1 class="col-md-offset-2">Dodaj komisiju</h1>
+        <h1 class="col-md-offset-2">Oceni rad</h1>
     </ui:define>
 
     <ui:define name="content">
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
                 <div class="col-md-10">
-                    <h:outputText id="subject" value="#{bean}"/>
+                    <h:outputText id="heading" value="#{bean}"/>
                 </div>
             </div>
 
@@ -40,13 +40,13 @@
 
 
                     <h:selectOneMenu id="ocena"  styleClass="form-control" value="#{gradeWorkBean.grade}">
-                        <f:converter converterId="courseConverter"/>
+                        <f:converter converterId="gradesConverter"/>
                         <f:selectItems value="#{gradeWorkBean.availableGrades}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
 
-            <h:commandButton value="Oceni" styleClass="btn btn-primary center-block" action="d" /> 
+            <h:commandButton value="Oceni" styleClass="btn btn-primary center-block" action="#{gradeWorkBean.gradeWork()}" /> 
 
         </h:form>
     </ui:define>
