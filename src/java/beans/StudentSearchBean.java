@@ -6,8 +6,10 @@
 
 package beans;
 
+import businessLogic.Controller;
 import dao.domain.core.Person;
 import dao.domain.core.Student;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -20,6 +22,7 @@ import javax.faces.context.FacesContext;
 public class StudentSearchBean {
     
     private Student existingStudent;
+    private List<Student> foundStudents;
 
     public StudentSearchBean() {
         existingStudent = new Student();
@@ -34,7 +37,16 @@ public class StudentSearchBean {
         this.existingStudent = existingStudent;
     }
     
-    public void searchForStudent() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Student postoji", "Stefan Petrovic ISIT"));
+    public List<Student> getFoundStudents() {
+        return foundStudents;
     }
+
+    public void setFoundStudents(List<Student> foundStudents) {
+        this.foundStudents = foundStudents;
+    }
+    
+    public void searchForStudent() {
+        foundStudents = Controller.getInstance().getStudents(existingStudent);
+    }
+
 }
