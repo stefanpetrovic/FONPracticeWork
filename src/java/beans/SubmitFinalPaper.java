@@ -6,7 +6,9 @@
 
 package beans;
 
+import businessLogic.Controller;
 import dao.domain.core.Subject;
+import dao.domain.core.Work;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import org.primefaces.model.UploadedFile;
@@ -29,33 +32,20 @@ public class SubmitFinalPaper {
     
     @ManagedProperty(value="#{loggedInUserBean}")
     private LoggedInUserBean user;
-    
-    private String title;
-    private Subject subject;
+    private Work work;
     private UploadedFile file;
 
+    @PostConstruct
+    public void getWork() {
+        work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent());
+    }
+    
     public LoggedInUserBean getUser() {
         return user;
     }
 
     public void setUser(LoggedInUserBean user) {
         this.user = user;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
     }
 
     public UploadedFile getFile() {

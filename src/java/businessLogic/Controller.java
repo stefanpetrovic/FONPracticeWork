@@ -331,6 +331,12 @@ public class Controller {
             return employee.getWorkList();
         }
     }
+    
+    //returns current word of a student(word that is approved, but doesn't have final version uploaded)
+    public Work getStudentsCurrentWork(Student student) {
+        //obavezno exception i obrisati liniju ispod
+        return null;
+    }
 
     public List<Work> getUngradedTheses(Person person) throws EngineDAOException {
         HibernateEmployeeDAO hed = new HibernateEmployeeDAO();

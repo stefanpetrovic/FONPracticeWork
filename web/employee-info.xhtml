@@ -37,9 +37,12 @@
             
             <div class="form-group">
                 <h:outputLabel for="subjectOutput" styleClass="col-md-4 text-right"  value="Predmet: "/>
-                <p:dataList id="subjectOutput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].employee.employeeSubjectList}" var="empSub" type="ordered">
-                    #{empSub.subject.name}
-                </p:dataList>
+                <div style="width: 300px; display: inline; float: left;">
+                    <p:dataList id="subjectOutput" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].employee.employeeSubjectList}" var="empSub" type="ordered">
+                        #{empSub.subject.name}
+                    </p:dataList>
+                </div>
+                
             </div>
 
             <div class="form-group">               
