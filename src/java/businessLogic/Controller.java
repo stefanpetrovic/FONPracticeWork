@@ -320,34 +320,52 @@ public class Controller {
     }
 
     public List<Work> getPersonWorks(Person person) throws EngineDAOException {
-        /*
-         Vraca sve radove za osobu. Osoba je profesor, ali ako moze da se apstrahuje, uradi i da je za
-         studenta (da jedna metoda radi sve).
-        
-         */
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernatePersonDAO hpd = new HibernatePersonDAO();
+        if(person.getStudent()==null){
+            HibernateStudentDAO hsd = new HibernateStudentDAO();
+            Student student = hsd.selectByKey(person.getPersonID());
+            return student.getWorkList();
+        }else{
+            HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+            Employee employee = hed.selectByKey(person.getPersonID());
+            return employee.getWorkList();
+        }
     }
 
     public List<Work> getUngradedTheses(Person person) throws EngineDAOException {
-        /*
-         vraca teme koje nisu ocenjene za osobu - prof
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        Employee employee = hed.selectByKey(person.getPersonID());
+        List<Work> ungradedWorks = new ArrayList<>();
+        for(Work w : employee.getWorkList()){
+            if(w.getGrade()==null){
+                ungradedWorks.add(w);
+            }
+        }
+        return ungradedWorks;
     }
 
     public List<Work> getUncomissionedTheses(Person person) throws EngineDAOException {
-        /*
-         Vraca  teme bez komisije za osobu - pforesor
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        Employee employee = hed.selectByKey(person.getPersonID());
+        List<Work> uncommisionedWorks = new ArrayList<>();
+        for(Work w : employee.getWorkList()){
+            if(w.getCommision()==null){
+                uncommisionedWorks.add(w);
+            }
+        }
+        return uncommisionedWorks;
     }
 
     public List<Work> getUnaprovedTheses(Person person) throws EngineDAOException {
-        /*
-         Vraca neodobrene teme za osobu - pforesor
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        Employee employee = hed.selectByKey(person.getPersonID());
+        List<Work> unaprovedWorks = new ArrayList<>();
+        for(Work w : employee.getWorkList()){
+            if(w.getStatus()== HibernateWorkDAO.UNAPPROVED){
+                unaprovedWorks.add(w);
+            }
+        }
+        return unaprovedWorks;
     }
 
 }

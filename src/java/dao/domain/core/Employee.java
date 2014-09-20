@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -42,7 +43,7 @@ public class Employee implements Serializable {
     private List<Work> workList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
     private List<CommisionMember> commisionMemberList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.EAGER)
     private List<EmployeeSubject> employeeSubjectList;
     @OneToMany(mappedBy = "chief")
     private List<Department> departmentList;

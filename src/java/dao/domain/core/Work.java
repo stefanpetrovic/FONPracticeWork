@@ -45,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Work.findByGrade", query = "SELECT w FROM Work w WHERE w.grade = :grade"),
     @NamedQuery(name = "Work.findByStatus", query = "SELECT w FROM Work w WHERE w.status = :status")})
 public class Work implements Serializable {
+    @Column(name = "status")
+    private Integer status;
     @JoinColumn(name = "subject", referencedColumnName = "subjectID")
     @ManyToOne(optional = false)
     private Subject subject;
@@ -67,8 +69,6 @@ public class Work implements Serializable {
     private Date examDate;
     @Column(name = "grade")
     private Integer grade;
-    @Column(name = "status")
-    private Boolean status;
     @Basic(optional = false)
     @Lob
     @Column(name = "description")
@@ -146,13 +146,6 @@ public class Work implements Serializable {
         this.grade = grade;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
 
     public String getDescription() {
         return description;
@@ -226,6 +219,14 @@ public class Work implements Serializable {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
     
 }
