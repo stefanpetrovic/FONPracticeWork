@@ -14,7 +14,7 @@
         <h:form>
             <h:commandButton value="Na čekanju" styleClass="btn btn-danger pull-left col-md-offset-2 theses-opt-main-button" action="d" />
             <h:commandButton value="Za dodavanje komisije" styleClass="btn btn-warning pull-left col-md-offset-2 theses-opt-main-button" action="d" /> 
-         <h:commandButton value="Neocenjeni" styleClass="btn btn-success pull-left col-md-offset-2 theses-opt-main-button" action="d" /> 
+            <h:commandButton value="Neocenjeni" styleClass="btn btn-success pull-left col-md-offset-2 theses-opt-main-button" action="d" /> 
         </h:form>
     </ui:define>
 
@@ -28,48 +28,54 @@
 </h:link>
 </li>
 </ui:repeat>-->
-        <div class="col-md-12">
-            <a href="#">
-                <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
-                    <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
-                    <div class="col-md-10 student-communication" style="height:100px">
-                        <h4>
-                            <h:outputText value="NaslovNaslov NaslovNaslovNaslov NaslovNaslov NaslovNaslov Naslov NaslovNaslov Naslov Naslov Naslov Naslov Naslov"  styleClass="col-md-12"/> 
-                        </h4>
-                        <h:outputText value="Ime Prezime" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
-                        <h:outputText value="Predmet" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28"/>
-                    
-                       
-                    </div>
-                  <h:form styleClass="col-md-12">
-                            <h:commandButton value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-right" action="#{bean}"/>
-                            <h:commandButton value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-right" action="#{bean}"/>
-                            <h:commandButton value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-right" action="#{bean}"/>
-                            <h:commandButton value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-right" action="#{bean}"/>
-                        </h:form>
-                </div>
-            </a>
 
-            <a href="#">
-                <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
-                    <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
-                    <div class="col-md-10 student-communication" style="height:100px">
-                        <h4>
-                            <h:outputText value="NaslovNaslov NaslovNaslovNaslov NaslovNaslov NaslovNaslov Naslov NaslovNaslov Naslov Naslov Naslov Naslov Naslov"  styleClass="col-md-12"/> 
-                        </h4>
-                        <h:outputText value="Ime Prezime" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
-                        <h:outputText value="Predmet" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28"/>
-                    
-                       
-                    </div>
-                  <h:form styleClass="col-md-12">
+
+
+
+        <div class="col-md-12">
+            <ui:repeat value="#{bookCatalog.books}" var="book">
+                <a href="#">
+                     <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
+                        <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
+                        <div class="col-md-10 student-communication" style="height:100px">
+                            <h4>
+                                <h:outputText value="NaslovNaslov NaslovNaslovNaslov NaslovNaslov NaslovNaslov Naslov NaslovNaslov Naslov Naslov Naslov Naslov Naslov"  styleClass="col-md-12"/> 
+                            </h4>
+                            <h:outputText value="Ime Prezime" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
+                            <h:outputText value="Predmet" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28"/>
+           
+
+                        </div>
+                        <h:form styleClass="col-md-12">
                             <h:commandButton value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-right" action="#{bean}"/>
                             <h:commandButton value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-right" action="#{bean}"/>
                             <h:commandButton value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-right" action="#{bean}"/>
                             <h:commandButton value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-right" action="#{bean}"/>
                         </h:form>
-                </div>
-            </a>
+                    </div>
+                </a>
+            </ui:repeat>
+
+            <!--            <a href="#">
+                            <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
+                                <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
+                                <div class="col-md-10 student-communication" style="height:100px">
+                                    <h4>
+                                        <h:outputText value="NaslovNaslov NaslovNaslovNaslov NaslovNaslov NaslovNaslov Naslov NaslovNaslov Naslov Naslov Naslov Naslov Naslov"  styleClass="col-md-12"/> 
+                                    </h4>
+                                    <h:outputText value="Ime Prezime" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
+                                    <h:outputText value="Predmet" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28"/>
+                                
+                                   
+                                </div>
+                              <h:form styleClass="col-md-12">
+                                        <h:commandButton value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-right" action="#{bean}"/>
+                                        <h:commandButton value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-right" action="#{bean}"/>
+                                        <h:commandButton value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-right" action="#{bean}"/>
+                                        <h:commandButton value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-right" action="#{bean}"/>
+                                    </h:form>
+                            </div>
+                        </a>-->
         </div>
 
     </ui:define>

@@ -301,8 +301,8 @@ public class Controller {
         work.setGrade(grade);
         hwd.makePersistent(work);
     }
-    
-    public List<Integer> createGrades(){
+
+    public List<Integer> createGrades() {
         ArrayList<Integer> availableGrades = new ArrayList<>();
         availableGrades.add(5);
         availableGrades.add(6);
@@ -311,13 +311,61 @@ public class Controller {
         availableGrades.add(9);
         availableGrades.add(10);
         return availableGrades;
-                
+
     }
 
     public Work getWork(Long id) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         return hwd.selectByKey(id);
     }
-    
-  
+
+    public List<Work> getPersonWorks(Person person) throws EngineDAOException {
+        HibernatePersonDAO hpd = new HibernatePersonDAO();
+        if(person.getStudent()==null){
+            HibernateStudentDAO hsd = new HibernateStudentDAO();
+            Student student = hsd.selectByKey(person.getPersonID());
+            return student.getWorkList();
+        }else{
+            HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+            Employee employee = hed.selectByKey(person.getPersonID());
+            return employee.getWorkList();
+        }
+    }
+
+    public List<Work> getUngradedTheses(Person person) throws EngineDAOException {
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        Employee employee = hed.selectByKey(person.getPersonID());
+        List<Work> ungradedWorks = new ArrayList<>();
+        for(Work w : employee.getWorkList()){
+            if(w.getGrade()==null){
+                ungradedWorks.add(w);
+            }
+        }
+        return ungradedWorks;
+    }
+
+    public List<Work> getUncomissionedTheses(Person person) throws EngineDAOException {
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        Employee employee = hed.selectByKey(person.getPersonID());
+        List<Work> uncommisionedWorks = new ArrayList<>();
+        for(Work w : employee.getWorkList()){
+            if(w.getCommision()==null){
+                uncommisionedWorks.add(w);
+            }
+        }
+        return uncommisionedWorks;
+    }
+
+    public List<Work> getUnaprovedTheses(Person person) throws EngineDAOException {
+        HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
+        Employee employee = hed.selectByKey(person.getPersonID());
+        List<Work> unaprovedWorks = new ArrayList<>();
+        for(Work w : employee.getWorkList()){
+            if(w.getStatus()== HibernateWorkDAO.UNAPPROVED){
+                unaprovedWorks.add(w);
+            }
+        }
+        return unaprovedWorks;
+    }
+
 }
