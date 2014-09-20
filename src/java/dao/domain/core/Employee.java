@@ -22,6 +22,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -39,11 +41,13 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "employeeID")
     private Long employeeID;
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
     private List<Work> workList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "professor")
     private List<CommisionMember> commisionMemberList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private List<EmployeeSubject> employeeSubjectList;
     @OneToMany(mappedBy = "chief")
     private List<Department> departmentList;

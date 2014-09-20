@@ -85,8 +85,6 @@ public class Main {
                 System.out.println(k.getWork());
             }*/
             p = Controller.getInstance().login("probros", "123");
-            System.out.println(p);
-            System.out.println(p.getEmployee());
             System.out.println(p.getEmployee().getEmployeeSubjectList());
         } catch (EngineDAOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
