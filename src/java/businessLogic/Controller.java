@@ -333,13 +333,13 @@ public class Controller {
     public List<Work> getPersonWorks(Person person) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         if(person.getStudent()==null){
-            HibernateStudentDAO hsd = new HibernateStudentDAO();
-            Student student = hsd.selectByKey(person.getPersonID());
-            return student.getWorkList();
-        }else{
             HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
             Employee employee = hed.selectByKey(person.getPersonID());
             return employee.getWorkList();
+        }else{
+            HibernateStudentDAO hsd = new HibernateStudentDAO();
+            Student student = hsd.selectByKey(person.getPersonID());
+            return student.getWorkList();
         }
     }
     
