@@ -301,8 +301,8 @@ public class Controller {
         work.setGrade(grade);
         hwd.makePersistent(work);
     }
-    
-    public List<Integer> createGrades(){
+
+    public List<Integer> createGrades() {
         ArrayList<Integer> availableGrades = new ArrayList<>();
         availableGrades.add(5);
         availableGrades.add(6);
@@ -311,13 +311,43 @@ public class Controller {
         availableGrades.add(9);
         availableGrades.add(10);
         return availableGrades;
-                
+
     }
 
     public Work getWork(Long id) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         return hwd.selectByKey(id);
     }
-    
-  
+
+    public List<Work> getPersonWorks(Person person) throws EngineDAOException {
+        /*
+         Vraca sve radove za osobu. Osoba je profesor, ali ako moze da se apstrahuje, uradi i da je za
+         studenta (da jedna metoda radi sve).
+        
+         */
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Work> getUngradedTheses(Person person) throws EngineDAOException {
+        /*
+         vraca teme koje nisu ocenjene za osobu - prof
+         */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Work> getUncomissionedTheses(Person person) throws EngineDAOException {
+        /*
+         Vraca  teme bez komisije za osobu - pforesor
+         */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Work> getUnaprovedTheses(Person person) throws EngineDAOException {
+        /*
+         Vraca neodobrene teme za osobu - pforesor
+         */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

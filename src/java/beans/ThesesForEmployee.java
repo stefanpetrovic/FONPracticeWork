@@ -6,8 +6,8 @@
 package beans;
 
 import businessLogic.Controller;
-import dao.domain.core.Course;
-import dao.domain.core.Subject;
+import dao.domain.core.Employee;
+import dao.domain.core.Person;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import java.util.ArrayList;
@@ -21,129 +21,88 @@ import javax.faces.context.FacesContext;
  * @author MIRA
  */
 @ManagedBean
-public class ThesesSearch {
+public class ThesesForEmployee {
 
-    private List<Work> resultTheses;
-    private String heading;
-    private String keywords;
-    private Subject subject;
+    private List<Work> theses;
 
-    public List<Work> getResultTheses() {
-        return resultTheses;
+    public List<Work> getTheses() {
+        return theses;
     }
 
-    public void setResultTheses(List<Work> resultTheses) {
-        this.resultTheses = resultTheses;
+    public void setTheses(List<Work> theses) {
+        this.theses = theses;
     }
 
-    public String getHeading() {
-        return heading;
+    public ThesesForEmployee() {
+        theses = new ArrayList<>();
     }
 
-    public void setHeading(String heading) {
-        this.heading = heading;
-    }
-
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public ThesesSearch() {
-        resultTheses = new ArrayList<>();
-    }
-
-    public String search() {
+    public String returnAll(Person person) {
         try {
-            String[] keyw = keywords.split(",");
-            List<String> keywordsList = new ArrayList<>();
-            for (String k : keyw) {
-                keywordsList.add(k.trim());
-            }
-            resultTheses = Controller.getInstance().searchTheses(heading, keywordsList, subject);
-            if (resultTheses.size() > 0) {
+            theses = Controller.getInstance().getPersonWorks(person);
+            if (theses.size() > 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
                 return null;
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
                 return null;
             }
-
         } catch (EngineDAOException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
 
         }
         return null;
-    }
-
-    public String searchUnapproved() {
-        try {
-            resultTheses = Controller.getInstance().searchUnapprovedTheses();
-            if (resultTheses.size() > 0) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
-                return null;
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
-                return null;
-            }
-
-        } catch (EngineDAOException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
-
-        }
-        return null;
-    }
-
-    public String searchUncommisioned() {
-        try {
-            resultTheses = Controller.getInstance().searchUncommisionedTheses();
-            if (resultTheses.size() > 0) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
-                return null;
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
-                return null;
-            }
-
-        } catch (EngineDAOException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
-
-        }
-        return null;
-
-    }
-
-    public String searchUngraded() {
-        try {
-            resultTheses = Controller.getInstance().searchUngradedTheses();
-            if (resultTheses.size() > 0) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
-                return null;
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
-                return null;
-            }
-
-        } catch (EngineDAOException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
-
-        }
-        return null;
-
     }
     
-    
+    public String getUngradedTheses(Person person){
+        try {
+            theses = Controller.getInstance().getUngradedTheses(person);
+            if (theses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
 
+        }
+        return null;
+    }
+    
+    public String getUncomissionedTheses(Person person){
+        try {
+            theses = Controller.getInstance().getUncomissionedTheses(person);
+            if (theses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+    }
+    
+      public String getUnaprovedTheses (Person person){
+        try {
+            theses = Controller.getInstance().getUnaprovedTheses(person);
+            if (theses.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
+                return null;
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
+                return null;
+            }
+        } catch (EngineDAOException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "Greska prilikom pretrage radova."));
+
+        }
+        return null;
+    }
 
 }
