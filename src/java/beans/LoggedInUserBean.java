@@ -31,7 +31,7 @@ public class LoggedInUserBean implements Serializable {
     private String password;
     private Class personIdentifier;
     private HashMap<Class, Person> loggedInPerson = new HashMap<Class, Person>();
-
+    
     public String getUsername() {
         return username;
     }
@@ -64,7 +64,7 @@ public class LoggedInUserBean implements Serializable {
         this.loggedInPerson = loggedInPerson;
     }
 
-
+    //ova metoda je za brisanje
     public void uploadImage() {
     }
     

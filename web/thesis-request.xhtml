@@ -12,11 +12,12 @@
 
     <ui:define name="content">
         <h:form  styleClass="col-md-12 form-horizontal">
+            <p:growl life="3000" showDetail="true"/>
             <div class="form-group">
                 <h:outputLabel for="profesorName" styleClass="col-md-2 control-label" value="Profesor" />
                 <div class="col-md-10">
-                    <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{thesisRequestBean.work.mentor}">
-                        <f:converter converterId="employeeConverter"/>
+                    <h:selectOneMenu id="profesorName"  styleClass="form-control" value="#{thesisRequestBean.work.mentor}" converter="employeeConverter">
+                        <p:ajax event="click" listener="#{thesisRequestBean.onProfessorChange}" update="subject"/>
                         <f:selectItems value="#{thesisRequestBean.professors}"/>
                     </h:selectOneMenu>
                 </div>
@@ -25,9 +26,8 @@
                 <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
                 <div class="col-md-10">
                     
-                    <h:selectOneMenu id="subject"  styleClass="form-control" value="#{thesisRequestBean.work.subject}">
-                        <f:converter converterId="subjectConverter"/>
-                        <f:selectItems value="#{dropboxesDataBean.subjects}"/>
+                    <h:selectOneMenu id="subject"  styleClass="form-control" value="#{thesisRequestBean.work.subject}" converter="subjectConverter">
+                        <f:selectItems value="#{thesisRequestBean.subjects}"/>
                     </h:selectOneMenu>
                 </div>
             </div>

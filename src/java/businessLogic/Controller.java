@@ -76,7 +76,7 @@ public class Controller {
     public List<Subject> getSubjects() throws EngineDAOException {
         HibernateSubjectDAO hsd = new HibernateSubjectDAO(Subject.class);
         return hsd.findAll();
-    }
+    }   
 
     public Person login(String username, String password) throws EngineDAOException {
         HibernatePersonDAO hpDAO = new HibernatePersonDAO();
@@ -249,7 +249,7 @@ public class Controller {
 
     public static void main(String[] args) {
         try {
-            System.out.println(Controller.getInstance().getAllProfessors());
+            System.out.println(Controller.getInstance().login("sine", "123").getEmployee().getEmployeeSubjectList());
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
