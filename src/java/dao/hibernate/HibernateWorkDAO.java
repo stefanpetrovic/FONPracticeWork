@@ -7,6 +7,7 @@ package dao.hibernate;
 
 import dao.WorkDAO;
 import dao.domain.core.Person;
+import dao.domain.core.Student;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
@@ -169,6 +170,28 @@ public class HibernateWorkDAO extends AbstractHibernateDAO<Work, Long> implement
         }
         getSession().getTransaction().commit();
         return works;
+    }
+
+    @Override
+    public Work getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(FINAL_FILE_URI, null));
+        criteria.add(Restrictions.eq(STUDENT, student));
+        criteria.add(Restrictions.eq(STATUS, APPROVED));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Work work;
+        try {
+            work = (Work) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (work == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return work;
     }
 
 }
