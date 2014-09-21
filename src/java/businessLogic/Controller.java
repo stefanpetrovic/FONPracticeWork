@@ -194,6 +194,17 @@ public class Controller {
             return true;
         }
     }
+    //student object has firstName, surName or both set
+    public List<Student> getStudents(Student student) {
+        //search all students by name and/or surname and return result. Exception if none found.
+        return new ArrayList<>();
+    }
+    
+    //employee object has firstName, surName or both set
+    public List<Employee> getEmployees(Employee employee) {
+        //search all employees by name and/or surname and return result. Exception if none found.
+        return new ArrayList<>();
+    }
 
     public List<Work> searchTheses(String heading, List<String> keywords, Subject subject) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();

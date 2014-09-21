@@ -6,6 +6,7 @@
 
 package beans;
 
+import businessLogic.Controller;
 import dao.domain.core.Employee;
 import dao.domain.core.Person;
 import dao.domain.core.Title;
@@ -48,14 +49,7 @@ public class EmployeeSearchBean {
     }
     
     public void findEmployees() {
-        
-        Person p = new Person(1L, "neso", "nesto", null, null, null);
-        Employee e = new Employee();
-        e.setPerson(p);
-        e.setTitle(new Title(1L, "Profesor"));
-        foundEmployees.add(e);
-        
-        //umesto ovog koda ubaciti poziv ka kontroleru koji pretrazuje profesore
+        foundEmployees = Controller.getInstance().getEmployees(existingEmployee);
     }
     
 }
