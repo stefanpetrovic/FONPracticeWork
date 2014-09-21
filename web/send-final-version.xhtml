@@ -11,17 +11,18 @@
             <div class="form-group">
                 <h:outputLabel for="titleInput" styleClass="col-md-2 control-label" value="Naslov: "/>
                 <div class="col-md-10">
-                    <h:inputText id="nameInput" styleClass="form-control" value="#{submitFinalPaper.title}"/>
+                    <h:inputText id="nameInput" styleClass="form-control" value="#{submitFinalPaper.work.title}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="subjectDropbox"  styleClass="col-md-2 control-label" value="Predmet: "/>
                 <div class="col-md-10">
-                    <h:selectOneMenu id="subjectDropbox"  styleClass="form-control" value="#{submitFinalPaper.subject}">
+                    <h:outputText value="#{submitFinalPaper.work.subject}"/>
+<!--                    <h:selectOneMenu id="subjectDropbox"  styleClass="form-control" value="#{submitFinalPaper.work.subject}">
                         <f:converter converterId="subjectConverter"/>
                         <f:selectItems value="#{dropboxesDataBean.subjects}"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu>-->
                 </div>
             </div>
 

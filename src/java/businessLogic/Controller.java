@@ -198,13 +198,13 @@ public class Controller {
     public List<Student> getStudents(Student student) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         List<Person> persons = new ArrayList<>();
-        if(!student.getPerson().getName().equals(null) && !student.getPerson().getSurname().equals(null)){
+        if(student.getPerson().getName() !=null && student.getPerson().getSurname() != null){
             persons = hpd.getPersonsByNameAndLastname(student.getPerson().getName(), student.getPerson().getSurname());
         }
-        if(!student.getPerson().getName().equals(null) && student.getPerson().getSurname().equals(null)){
+        if(student.getPerson().getName() != null && student.getPerson().getSurname() ==null){
             persons = hpd.getPersonsByName(student.getPerson().getName());
         }
-        if(student.getPerson().getName().equals(null) && !student.getPerson().getSurname().equals(null)){
+        if(student.getPerson().getName() == null && student.getPerson().getSurname() != null){
             persons = hpd.getPersonsByLastname(student.getPerson().getSurname());
         }
         List<Student> students = new ArrayList<>();
@@ -218,13 +218,13 @@ public class Controller {
     public List<Employee> getEmployees(Employee employee) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         List<Person> persons = new ArrayList<>();
-        if(!employee.getPerson().getName().equals(null) && !employee.getPerson().getSurname().equals(null)){
+        if(employee.getPerson().getName() != null && employee.getPerson().getSurname() != null){
             persons = hpd.getPersonsByNameAndLastname(employee.getPerson().getName(), employee.getPerson().getSurname());
         }
-        if(!employee.getPerson().getName().equals(null) && employee.getPerson().getSurname().equals(null)){
+        if(employee.getPerson().getName() != null && employee.getPerson().getSurname() == null){
             persons = hpd.getPersonsByName(employee.getPerson().getName());
         }
-        if(employee.getPerson().getName().equals(null) && !employee.getPerson().getSurname().equals(null)){
+        if(employee.getPerson().getName() == null && employee.getPerson().getSurname() != null){
             persons = hpd.getPersonsByLastname(employee.getPerson().getSurname());
         }
         List<Employee> employees = new ArrayList<>();
@@ -288,7 +288,12 @@ public class Controller {
 
     public static void main(String[] args) {
         try {
-            System.out.println(Controller.getInstance().login("sine", "123").getEmployee().getEmployeeSubjectList());
+            Person s = Controller.getInstance().login("probros", "123");
+            System.out.println(s.getStudent());
+            Work w = s.getStudent().getWorkList().get(0);
+            System.out.println(w);
+            System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()));
+            
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
