@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.domain.core.Student;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
@@ -22,5 +23,6 @@ public interface WorkDAO {
     public List<Work> getUnapprovedWorks() throws EngineDAOException;
     public List<Work> getUncommisionedWorks() throws EngineDAOException;
     public List<Work> getUngradedWorks() throws EngineDAOException;
+    public List<Work> getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException;
     
 }

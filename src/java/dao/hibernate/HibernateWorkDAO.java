@@ -7,6 +7,7 @@ package dao.hibernate;
 
 import dao.WorkDAO;
 import dao.domain.core.Person;
+import dao.domain.core.Student;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
@@ -14,6 +15,7 @@ import static dao.hibernate.HibernatePersonDAO.ERROR_PERSON_NOT_FOUND_BY_USERNAM
 import static dao.hibernate.HibernatePersonDAO.PASSWORD;
 import static dao.hibernate.HibernatePersonDAO.USERNAME;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -169,6 +171,29 @@ public class HibernateWorkDAO extends AbstractHibernateDAO<Work, Long> implement
         }
         getSession().getTransaction().commit();
         return works;
+    }
+
+    @Override
+    public List<Work> getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.isNull(FINAL_FILE_URI));
+        criteria.add(Restrictions.eq(STUDENT, student));
+        criteria.add(Restrictions.eq(STATUS, APPROVED));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        List<Work> work = new ArrayList<>();
+        try {
+            work = criteria.list();
+            System.out.println(work);
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (work == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return work;
     }
 
 }

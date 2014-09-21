@@ -15,21 +15,33 @@
         <h:form styleClass="col-md-12 form-horizontal">
             <p:growl id="message" life="3000" showDetail="true"/>
             <div class="form-group">
-                <h:outputLabel for="indexNoInput"  styleClass="col-md-2 control-label" value="Broj indeksa: "/>
+                <h:outputLabel for="nameInput"  styleClass="col-md-2 control-label" value="Ime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="indexNoInput" styleClass="form-control" value="#{studentSearchBean.existingStudent.indexNo}"/>
+                    <h:inputText id="nameInput" styleClass="form-control" value="#{studentSearchBean.existingStudent.person.name}"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <h:outputLabel for="jmbgInput"  styleClass="col-md-2 control-label" value="JMBG: "/>
+                <h:outputLabel for="surnameInput"  styleClass="col-md-2 control-label" value="Prezime: "/>
                 <div class="col-md-10">
-                    <h:inputText id="jmbgInput" styleClass="form-control" value="#{studentSearchBean.existingStudent.jmbg}"/>
+                    <h:inputText id="surnameInput" styleClass="form-control" value="#{studentSearchBean.existingStudent.person.surname}"/>
                 </div>
             </div>
 
-            <h:commandButton value="Pretrazi" styleClass="btn btn-primary pull-right" action="#{studentSearchBean.searchForStudent}"/>
+            <p:commandButton value="Pretrazi" update="@form" styleClass="btn btn-primary pull-right" action="#{studentSearchBean.searchForStudent}"/>
 
+            <p:dataTable rendered="#{studentSearchBean.foundStudents.size() > 0}" var="student" value="#{studentSearchBean.foundStudents}" rows="10" paginator="true" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                <p:column headerText="Ime">
+                    <h:outputText value="#{student.person.name}"/>
+                </p:column>
+                <p:column headerText="Prezime">
+                    <h:outputText value="#{student.person.surname}"/>
+                </p:column>
+                <p:column headerText="Titula">
+                    <h:outputText value="#{student.course}"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 

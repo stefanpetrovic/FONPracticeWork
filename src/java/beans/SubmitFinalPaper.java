@@ -9,6 +9,7 @@ package beans;
 import businessLogic.Controller;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
+import dao.exception.EngineDAOException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,8 +37,14 @@ public class SubmitFinalPaper {
     private UploadedFile file;
 
     @PostConstruct
-    public void getWork() {
-        work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent());
+    public void init() {
+        try {
+            work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent());
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(SubmitFinalPaper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("nema rada");
+            work = new Work();
+        }
     }
     
     public LoggedInUserBean getUser() {
@@ -55,6 +62,16 @@ public class SubmitFinalPaper {
     public void setFile(UploadedFile file) {
         this.file = file;
     }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+    
+    
     
     public void upload() {
         //delete previous user image if exists

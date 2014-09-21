@@ -10,8 +10,11 @@ import businessLogic.Controller;
 import dao.domain.core.Employee;
 import dao.domain.core.Person;
 import dao.domain.core.Title;
+import dao.exception.EngineDAOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -49,7 +52,14 @@ public class EmployeeSearchBean {
     }
     
     public void findEmployees() {
-        foundEmployees = Controller.getInstance().getEmployees(existingEmployee);
+        try {
+            if (existingEmployee.getPerson().getName().equals("")) existingEmployee.getPerson().setName(null);
+            if (existingEmployee.getPerson().getSurname().equals("")) existingEmployee.getPerson().setSurname(null);
+            foundEmployees = Controller.getInstance().getEmployees(existingEmployee);
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(EmployeeSearchBean.class.getName()).log(Level.SEVERE, null, ex);
+            foundEmployees = new ArrayList<>();
+        }
     }
     
 }

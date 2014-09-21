@@ -195,15 +195,43 @@ public class Controller {
         }
     }
     //student object has firstName, surName or both set
-    public List<Student> getStudents(Student student) {
-        //search all students by name and/or surname and return result. Exception if none found.
-        return new ArrayList<>();
+    public List<Student> getStudents(Student student) throws EngineDAOException {
+        HibernatePersonDAO hpd = new HibernatePersonDAO();
+        List<Person> persons = new ArrayList<>();
+        if(student.getPerson().getName() !=null && student.getPerson().getSurname() != null){
+            persons = hpd.getPersonsByNameAndLastname(student.getPerson().getName(), student.getPerson().getSurname());
+        }
+        if(student.getPerson().getName() != null && student.getPerson().getSurname() ==null){
+            persons = hpd.getPersonsByName(student.getPerson().getName());
+        }
+        if(student.getPerson().getName() == null && student.getPerson().getSurname() != null){
+            persons = hpd.getPersonsByLastname(student.getPerson().getSurname());
+        }
+        List<Student> students = new ArrayList<>();
+        for(Person p : persons){
+            students.add(p.getStudent());
+        }
+        return students;
     }
     
     //employee object has firstName, surName or both set
-    public List<Employee> getEmployees(Employee employee) {
-        //search all employees by name and/or surname and return result. Exception if none found.
-        return new ArrayList<>();
+    public List<Employee> getEmployees(Employee employee) throws EngineDAOException {
+        HibernatePersonDAO hpd = new HibernatePersonDAO();
+        List<Person> persons = new ArrayList<>();
+        if(employee.getPerson().getName() != null && employee.getPerson().getSurname() != null){
+            persons = hpd.getPersonsByNameAndLastname(employee.getPerson().getName(), employee.getPerson().getSurname());
+        }
+        if(employee.getPerson().getName() != null && employee.getPerson().getSurname() == null){
+            persons = hpd.getPersonsByName(employee.getPerson().getName());
+        }
+        if(employee.getPerson().getName() == null && employee.getPerson().getSurname() != null){
+            persons = hpd.getPersonsByLastname(employee.getPerson().getSurname());
+        }
+        List<Employee> employees = new ArrayList<>();
+        for(Person p : persons){
+            employees.add(p.getEmployee());
+        }
+        return employees;
     }
 
     public List<Work> searchTheses(String heading, List<String> keywords, Subject subject) throws EngineDAOException {
@@ -260,7 +288,12 @@ public class Controller {
 
     public static void main(String[] args) {
         try {
-            System.out.println(Controller.getInstance().login("sine", "123").getEmployee().getEmployeeSubjectList());
+            Person s = Controller.getInstance().login("Rango1", "123");
+            System.out.println(s.getStudent());
+            Work w = s.getStudent().getWorkList().get(0);
+            System.out.println(w);
+            System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()).get(0));
+            
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -343,10 +376,10 @@ public class Controller {
         }
     }
 
-    //returns current word of a student(word that is approved, but doesn't have final version uploaded)
-    public Work getStudentsCurrentWork(Student student) {
-        //obavezno exception i obrisati liniju ispod
-        return null;
+    //returns current work of a student(work that is approved, but doesn't have final version uploaded)
+    public List<Work> getStudentsCurrentWork(Student student) throws EngineDAOException {
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        return hwd.getApprovedWorkByStudentWithoutFinalURI(student);
     }
 
     public List<Work> getUngradedTheses(Person person) throws EngineDAOException {
@@ -386,18 +419,15 @@ public class Controller {
     }
 
     public void approveThesis(Work work) throws EngineDAOException {
-
-        /*
-         odobrava rad - postavlja ga na 1
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        work.setStatus(HibernateWorkDAO.APPROVED);
+        hwd.makePersistent(work);
     }
 
     public void denyThesis(Work work) throws EngineDAOException {
-        /*
-         Odbija rad: postavlja mu polje na -1
-         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        work.setStatus(HibernateWorkDAO.REJECTED);
+        hwd.makePersistent(work);
     }
 
 }

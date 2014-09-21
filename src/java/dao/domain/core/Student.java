@@ -21,6 +21,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -47,6 +49,7 @@ public class Student implements Serializable {
     @Column(name = "jmbg")
     private String jmbg;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Work> workList;
     @JoinColumn(name = "course", referencedColumnName = "courseID")
     @ManyToOne(optional = false)
