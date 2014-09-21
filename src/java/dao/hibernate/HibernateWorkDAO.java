@@ -15,6 +15,7 @@ import static dao.hibernate.HibernatePersonDAO.ERROR_PERSON_NOT_FOUND_BY_USERNAM
 import static dao.hibernate.HibernatePersonDAO.PASSWORD;
 import static dao.hibernate.HibernatePersonDAO.USERNAME;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -173,16 +174,17 @@ public class HibernateWorkDAO extends AbstractHibernateDAO<Work, Long> implement
     }
 
     @Override
-    public Work getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException {
+    public List<Work> getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException {
         getSession().beginTransaction();
         Criteria criteria = getSession().createCriteria(persistentClass);
-        criteria.add(Restrictions.eq(FINAL_FILE_URI, null));
+        criteria.add(Restrictions.isNull(FINAL_FILE_URI));
         criteria.add(Restrictions.eq(STUDENT, student));
         criteria.add(Restrictions.eq(STATUS, APPROVED));
         criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-        Work work;
+        List<Work> work = new ArrayList<>();
         try {
-            work = (Work) criteria.uniqueResult();
+            work = criteria.list();
+            System.out.println(work);
         } catch (RuntimeException e) {
             throw new EngineDAOException(e);
         }

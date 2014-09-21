@@ -23,6 +23,6 @@ public interface WorkDAO {
     public List<Work> getUnapprovedWorks() throws EngineDAOException;
     public List<Work> getUncommisionedWorks() throws EngineDAOException;
     public List<Work> getUngradedWorks() throws EngineDAOException;
-    public Work getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException;
+    public List<Work> getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException;
     
 }

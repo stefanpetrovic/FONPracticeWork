@@ -288,11 +288,11 @@ public class Controller {
 
     public static void main(String[] args) {
         try {
-            Person s = Controller.getInstance().login("probros", "123");
+            Person s = Controller.getInstance().login("Rango1", "123");
             System.out.println(s.getStudent());
             Work w = s.getStudent().getWorkList().get(0);
             System.out.println(w);
-            System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()));
+            System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()).get(0));
             
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -377,7 +377,7 @@ public class Controller {
     }
 
     //returns current work of a student(work that is approved, but doesn't have final version uploaded)
-    public Work getStudentsCurrentWork(Student student) throws EngineDAOException {
+    public List<Work> getStudentsCurrentWork(Student student) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         return hwd.getApprovedWorkByStudentWithoutFinalURI(student);
     }
