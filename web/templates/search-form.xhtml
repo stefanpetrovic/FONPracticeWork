@@ -25,7 +25,7 @@
                 <h:outputLabel for="course"  styleClass="col-md-2 control-label" value="Predmet: "/>
                 <div class="col-md-10">
                     <h:selectOneMenu id="course"  styleClass="form-control" value="#{thesesSearch.subject}">
-                        <f:converter converterId="courseConverter"/>
+                        <f:converter converterId="subjectConverter"/>
                         <f:selectItems value="#{dropboxesDataBean.subjects}"/>
                     </h:selectOneMenu>
                 </div>

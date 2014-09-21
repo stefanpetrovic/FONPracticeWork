@@ -46,12 +46,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!--#{loggedInUserBean.username}-->
                                 #{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}
-                                 #{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].surname}
-                               
+                                #{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].surname}
+
                                 <!-- Ime Prezime-->
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="student-info.jsf">Podaci</a></li>
+                                <!--<li><a href="student-info.jsf">Podaci</a></li>-->
                                 <li class="divider"></li>
                                 <li>
                                     <h:form>
@@ -67,11 +67,25 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-comment" style="margin-right: 5px;"></span>
-                                <span class="badge pull-right">4332</span>
+                                <span class="badge-request badge pull-right">3</span>
+                                <span class="badge-message badge pull-right">5</span>
+                                
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Poruka 1</a></li>
-                                <li><a href="#">Poruka 2</a></li>
+                                <li>
+                                    <a href="#">
+                                        <span class="notif-message glyphicon glyphicon-circle-arrow-right"></span>
+                                        Poruke:
+                                        <span class="pull-right">5</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="notif-request glyphicon glyphicon-circle-arrow-right"></span>
+                                        Zahtevi:
+                                        <span class="pull-right">3</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -80,22 +94,5 @@
         </nav>
     </div>
 
-    <!-- Content example to check transparency -->
-    <!--        <div class="col-md-12">
-                <div class="col-md-9 col-md-offset-2">
-                    <h1>Unos novog ovog onog</h1>
-                    <p>Gentrify fingerstache kale chips, Helvetica banh mi four loko food truck single-origin coffee meggings. Pug XOXO blog aesthetic. Semiotics Etsy cray, sriracha pork belly umami Godard tattooed blog farm-to-table ethnic Tonx messenger bag Tumblr. Thundercats street art Echo Park, fanny pack meggings occupy irony XOXO seitan next level. Next level literally gastropub, Blue Bottle hoodie Intelligentsia umami wayfarers. Keffiyeh viral distillery pop-up, aesthetic sustainable before they sold out. Helvetica PBRB messenger bag art party pop-up Odd Future.</p>
-    
-                    <p>Chillwave deep v bitters PBRB gastropub meh, Truffaut Echo Park raw denim Marfa Neutra hella art party. Retro fixie Pinterest keytar XOXO. VHS Odd Future fixie, Kickstarter selfies Etsy kitsch Banksy cred Pitchfork pickled lo-fi Intelligentsia sriracha stumptown. Pop-up photo booth ethnic blog selvage, wayfarers seitan slow-carb. Fashion axe Wes Anderson scenester artisan brunch. Hashtag pork belly disrupt, banh mi Cosby sweater farm-to-table selvage. Asymmetrical mumblecore tattooed, tote bag organic vinyl Etsy salvia DIY.</p>
-    
-                    <p>Umami keytar Odd Future, Wes Anderson chambray artisan banh mi iPhone. Fixie slow-carb Banksy, High Life blog cornhole Kickstarter photo booth seitan whatever wayfarers tote bag Williamsburg Portland. Irony trust fund Cosby sweater, mlkshk sustainable post-ironic tousled lo-fi ethical. Tote bag 90's paleo, pickled synth vinyl seitan Austin mlkshk banjo single-origin coffee bitters. Keytar flannel narwhal, leggings cardigan ugh umami Etsy single-origin coffee Cosby sweater letterpress Echo Park 8-bit kogi. Tofu kogi Cosby sweater irony bitters. Crucifix vinyl try-hard, pug bicycle rights fap keffiyeh forage asymmetrical hoodie leggings post-ironic next level lomo.</p>
-    
-                    <p>Seitan flexitarian keytar sustainable 8-bit fingerstache pug irony. Raw denim kale chips Odd Future photo booth seitan, gentrify Pinterest vegan direct trade quinoa pug. Trust fund tousled direct trade, pop-up literally Cosby sweater stumptown fanny pack deep v scenester jean shorts. Actually typewriter street art, Shoreditch twee plaid scenester ugh keytar DIY Godard. Brunch photo booth PBR, pour-over fingerstache yr Carles Tumblr ugh Bushwick Wes Anderson flexitarian. Ugh put a bird on it keytar, hella street art blog Wes Anderson chillwave semiotics irony brunch retro meh squid single-origin coffee. Four loko mumblecore mustache narwhal.</p>
-    
-    
-                </div>
-            </div>-->
-
-    <!--</ui:define>-->
 
 </ui:composition>
