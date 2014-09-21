@@ -36,14 +36,11 @@ public class ThesesForEmployee {
     public void init() {
         Person loggedInPerson = loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier());
         try {
-//            System.out.println("\t\tIME: "+loggedInPerson.getName()+"\t\tPrezime: "+loggedInPerson.getSurname());
             theses = Controller.getInstance().getPersonWorks(loggedInPerson);
             if (theses.size() > 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
-
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Nije pronađen rad po zadatim kriterijumima."));
-
             }
         } 
         catch (Exception e) {

@@ -4,6 +4,11 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/templates/main_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
+     <f:metadata>
+         <f:viewParam name="id" value="#{thesisAprovalBean.id}"/>
+    </f:metadata>
+
+    
     <ui:define name="title">Zahtev</ui:define>
 
     <ui:define name="heading">
@@ -13,35 +18,27 @@
     <ui:define name="content">
         <h:form  styleClass="col-md-12 form-horizontal">
             <div class="form-group">
-                <h:outputLabel for="studentName" styleClass="col-md-2 control-label" value="Student" />
-                <div class="col-md-10">
-                    <h:outputText id="studentName" value="#{bean}"/>
-
-                </div>
+                <h:outputLabel for="studentName" styleClass="col-md-2 text-right" value="Student" />
+                <h:outputText id="studentName" value="#{thesisAprovalBean.work.student.person.name} #{thesisAprovalBean.work.student.person.surname}"/> 
             </div>
             <div class="form-group">
-                <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
-                <div class="col-md-10">
-                    <h:outputText id="subject" value="#{bean}"/>
-
-                </div>
+                <h:outputLabel for="subject" styleClass="col-md-2 text-right" value="Predmet" />
+                <h:outputText id="subject" value="#{thesisAprovalBean.work.subject.name}"/>                
             </div>
             <div class="form-group">
-                <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
-                <div class="col-md-10">
-                    <h:outputText id="subject" value="#{bean}"/>
-                </div>
+                <h:outputLabel for="heading" styleClass="col-md-2 text-right" value="Naslov" />               
+                <h:outputText id="heading" value="#{thesisAprovalBean.work.title}"/>              
             </div>
             <div class="form-group">
-                <h:outputLabel for="description" styleClass="col-md-2 control-label" value="Opis" />
-                <div class="col-md-10">
-                    <h:outputText id="description" styleClass="form-control" value="d"/>
-                </div>
+                <h:outputLabel for="description" styleClass="col-md-2 text-right" value="Opis" />        
+                <p:inputTextarea id="description" rows="5" cols="74" value="#{thesisAprovalBean.work.description}"/>
+                    
+                <!--<h:outputText id="description" value="#{thesisAprovalBean.work.description}"/>-->
             </div>
             <div class="row">
-                <h:commandButton value="Odbij" styleClass="btn btn-danger pull-right" action="d" style="margin-left: 5px; margin-right: 5px;"/> 
+                <h:commandButton value="Odbij" styleClass="btn btn-danger pull-right" action="#{thesisAprovalBean.deny()}" style="margin-left: 5px; margin-right: 5px;"/> 
                 <h:commandButton value="Odgovori" styleClass="btn btn-warning pull-right" action="d" style="margin-left: 5px; margin-right: 5px;"/>
-                <h:commandButton value="Odobri" styleClass="btn btn-success pull-right" action="d" style="margin-left: 5px; margin-right: 5px;"/>
+                <h:commandButton value="Odobri" styleClass="btn btn-success pull-right" action="#{thesisAprovalBean.approve()}" style="margin-left: 5px; margin-right: 5px;"/>
             </div>
 
 

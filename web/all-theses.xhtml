@@ -19,38 +19,23 @@
     </ui:define>
 
     <ui:define name="content">
-
-
-<!--         <ui:repeat value="#{bookCatalog.books}" var="book">
-<li>
-<h:link value="#{book.title}" outcome="book">
-<f:param name="id" value="#{book.id}" />
-</h:link>
-</li>
-</ui:repeat>-->
-
-
-
-
         <div class="col-md-12">
             <ui:repeat value="#{thesesForEmployee.theses}" var="thesis">
                 <a href="#">
-                     <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
+                    <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
                         <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
                         <div class="col-md-10 student-communication" style="height:100px">
                             <h4>
                                 <h:outputText value="#{thesis.title}"  styleClass="col-md-12"/> 
-                            </h4>
+                            </h4>                           
                             <h:outputText value="#{thesis.student.person.name} #{thesis.student.person.surname}" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
-                            <h:outputText value="#{thesis.subject.name}" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28"/>
-           
-
+                            <h:outputText value="#{thesis.subject.name}" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28;"/>
                         </div>
                         <h:form styleClass="col-md-12">
-                            <h:commandButton value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-right" action="#{bean}"/>
-                            <h:commandButton value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-right" action="#{bean}"/>
-                            <h:commandButton value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-right" action="#{bean}"/>
-                            <h:commandButton value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-right" action="#{bean}"/>
+                            <h:button value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-right" outcome="thesis-approve.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
+                            <h:button value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-right" outcome="comis-add.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
+                            <h:button value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-right" outcome="evaluate.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
+                            <h:button value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-right" outcome="#"/>
                         </h:form>
                     </div>
                 </a>

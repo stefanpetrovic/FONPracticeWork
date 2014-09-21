@@ -4,6 +4,11 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/templates/main_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    
+     <f:metadata>
+         <f:viewParam name="id" value="#{gradeWorkBean.id}"/>
+    </f:metadata>
+    
     <ui:define name="title">Ocena rada</ui:define>
 
     <ui:define name="heading">
@@ -14,40 +19,31 @@
         <h:form  styleClass="col-md-12 form-horizontal">
 
             <div class="form-group">
-                <h:outputLabel for="studentName" styleClass="col-md-2 control-label" value="Student" />
-                <div class="col-md-10">
-                    <h:outputText id="studentName" value="#{bean}"/>
-
-                </div>
+                <h:outputLabel for="studentName" styleClass="col-md-2 text-right" value="Student" />
+                    <h:outputText id="studentName" value="#{gradeWorkBean.work.student.person.name} #{gradeWorkBean.work.student.person.surname}"/>
             </div>
             <div class="form-group">
-                <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
-                <div class="col-md-10">
-                    <h:outputText id="subject" value="#{bean}"/>
-
-                </div>
+                <h:outputLabel for="subject" styleClass="col-md-2 text-right" value="Predmet" /> 
+                    <h:outputText id="subject" value="#{gradeWorkBean.work.subject.name}"/>
             </div>
             <div class="form-group">
-                <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
-                <div class="col-md-10">
-                    <h:outputText id="heading" value="#{bean}"/>
-                </div>
+                <h:outputLabel for="title" styleClass="col-md-2 text-right" value="Naslov" />
+                    <h:outputText id="title" value="#{gradeWorkBean.work.title}"/>
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="ocena" styleClass="col-md-2 control-label" value="Ocena" />
                 <div class="col-md-2">
-
-
                     <h:selectOneMenu id="ocena"  styleClass="form-control" value="#{gradeWorkBean.grade}">
                         <f:converter converterId="gradesConverter"/>
                         <f:selectItems value="#{gradeWorkBean.availableGrades}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
-
+               <div class="form-group">
+                   <h:outputText id="message" styleClass="col-md-offset-2" style="color: red" value="#{gradeWorkBean.message}"/>
+            </div>
             <h:commandButton value="Oceni" styleClass="btn btn-primary center-block" action="#{gradeWorkBean.gradeWork()}" /> 
-
         </h:form>
     </ui:define>
 

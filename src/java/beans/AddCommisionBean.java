@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -32,6 +34,17 @@ public class AddCommisionBean {
     private String studentName;
     private String subjectName;
     private Long id;
+
+    @ManagedProperty(value = "#{loggedInUserBean}")
+    private LoggedInUserBean loggedInUserBean;
+
+    public LoggedInUserBean getLoggedInUserBean() {
+        return loggedInUserBean;
+    }
+
+    public void setLoggedInUserBean(LoggedInUserBean loggedInUserBean) {
+        this.loggedInUserBean = loggedInUserBean;
+    }
 
     public Long getId() {
         return id;
@@ -58,7 +71,6 @@ public class AddCommisionBean {
         this.subjectName = subjectName;
     }
 
-    
     public Work getWork() {
         return work;
     }
@@ -117,5 +129,23 @@ public class AddCommisionBean {
             Logger.getLogger(AddCommisionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void validate(FacesContext context, UIComponent component, Object object) {
+        try {
+            Long id = (Long) object;
+            System.out.println("ida: " + id);
+            Work work = Controller.getInstance().getWork(id);
+            if (!work.getMentor().getEmployeeID().equals( loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()).getPersonID())){
+                context.getExternalContext().setResponseStatus(404);
+                context.responseComplete();
+            }
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(AddCommisionBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e){
+            context.getExternalContext().setResponseStatus(404);
+                context.responseComplete();
+        }
+
     }
 }

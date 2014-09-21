@@ -76,7 +76,7 @@ public class Controller {
     public List<Subject> getSubjects() throws EngineDAOException {
         HibernateSubjectDAO hsd = new HibernateSubjectDAO(Subject.class);
         return hsd.findAll();
-    }   
+    }
 
     public Person login(String username, String password) throws EngineDAOException {
         HibernatePersonDAO hpDAO = new HibernatePersonDAO();
@@ -321,17 +321,17 @@ public class Controller {
 
     public List<Work> getPersonWorks(Person person) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
-        if(person.getStudent()==null){
+        if (person.getStudent() == null) {
             HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
             Employee employee = hed.selectByKey(person.getPersonID());
             return employee.getWorkList();
-        }else{
+        } else {
             HibernateStudentDAO hsd = new HibernateStudentDAO();
             Student student = hsd.selectByKey(person.getPersonID());
             return student.getWorkList();
         }
     }
-    
+
     //returns current word of a student(word that is approved, but doesn't have final version uploaded)
     public Work getStudentsCurrentWork(Student student) {
         //obavezno exception i obrisati liniju ispod
@@ -342,8 +342,8 @@ public class Controller {
         HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
         Employee employee = hed.selectByKey(person.getPersonID());
         List<Work> ungradedWorks = new ArrayList<>();
-        for(Work w : employee.getWorkList()){
-            if(w.getGrade()==null){
+        for (Work w : employee.getWorkList()) {
+            if (w.getGrade() == null) {
                 ungradedWorks.add(w);
             }
         }
@@ -354,8 +354,8 @@ public class Controller {
         HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
         Employee employee = hed.selectByKey(person.getPersonID());
         List<Work> uncommisionedWorks = new ArrayList<>();
-        for(Work w : employee.getWorkList()){
-            if(w.getCommision()==null){
+        for (Work w : employee.getWorkList()) {
+            if (w.getCommision() == null) {
                 uncommisionedWorks.add(w);
             }
         }
@@ -366,12 +366,27 @@ public class Controller {
         HibernateEmployeeDAO hed = new HibernateEmployeeDAO();
         Employee employee = hed.selectByKey(person.getPersonID());
         List<Work> unaprovedWorks = new ArrayList<>();
-        for(Work w : employee.getWorkList()){
-            if(w.getStatus()== HibernateWorkDAO.UNAPPROVED){
+        for (Work w : employee.getWorkList()) {
+            if (w.getStatus() == HibernateWorkDAO.UNAPPROVED) {
                 unaprovedWorks.add(w);
             }
         }
         return unaprovedWorks;
+    }
+
+    public void approveThesis(Work work) throws EngineDAOException {
+
+        /*
+         odobrava rad - postavlja ga na 1
+         */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void denyThesis(Work work) throws EngineDAOException {
+        /*
+         Odbija rad: postavlja mu polje na -1
+         */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

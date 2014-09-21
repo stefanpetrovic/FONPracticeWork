@@ -5,7 +5,7 @@
                 template="/templates/main_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
     <f:metadata>
-        <f:viewParam name="id" value="#{addCommisionBean.id}"/>
+        <f:viewParam name="id" value="#{addCommisionBean.id}" validator="#{addCommisionBean.validate}"/>/>
     </f:metadata>
 
     <ui:define name="title">Dodaj komisiju</ui:define>
@@ -18,33 +18,23 @@
         <h:form  styleClass="col-md-12 form-horizontal">
 
             <div class="form-group">
-                <h:outputLabel for="studentName" styleClass="col-md-2 control-label" value="Student" />
-                <div class="col-md-10">
-                    <h:outputText id="studentName" value="#{addCommisionBean.studentName}"/>
-
-                </div>
+                <h:outputLabel for="studentName" styleClass="col-md-2 text-right" value="Student" />
+                <h:outputText id="studentName" value="#{addCommisionBean.studentName}"/> 
             </div>
             <div class="form-group">
-                <h:outputLabel for="subject" styleClass="col-md-2 control-label" value="Predmet" />
-                <div class="col-md-10">
-                    <h:outputText id="subject" value="#{addCommisionBean.subjectName}"/>
-
-                </div>
+                <h:outputLabel for="subject" styleClass="col-md-2 text-right" value="Predmet" />
+                <h:outputText id="subject" value="#{addCommisionBean.subjectName}"/>                
             </div>
             <div class="form-group">
-                <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
-                <div class="col-md-10">
-                    <h:outputText id="heading" value="#{addCommisionBean.work.title}"/>
-                </div>
+                <h:outputLabel for="heading" styleClass="col-md-2 text-right" value="Naslov" />               
+                <h:outputText id="heading" value="#{addCommisionBean.work.title}"/>              
             </div>
 
             <h3>Članovi komisije:</h3>
 
             <div class="form-group">
-                <h:outputLabel for="clan1" styleClass="col-md-2 control-label" value="Član 1:" />
-                <div class="col-md-10">
-                    <h:outputText id="clan1" value="#{loggedInUserBean.username}"/>
-                </div>
+                <h:outputLabel for="clan1" styleClass="col-md-2 text-right" value="Član 1:" />
+                <h:outputText id="clan1" value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}"/>    
             </div>
 
             <div class="form-group">

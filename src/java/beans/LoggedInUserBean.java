@@ -112,5 +112,4 @@ public class LoggedInUserBean implements Serializable {
         }
         return "default";
     }
-
 }
