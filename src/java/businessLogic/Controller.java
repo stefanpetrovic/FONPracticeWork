@@ -101,6 +101,7 @@ public class Controller {
     public void addStudent(Student student) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         HibernateStudentDAO spd = new HibernateStudentDAO(Student.class);
+       
         if (isUsernameUnique(student.getPerson().getUsername()) && isEmailUnique(student.getPerson().getUsername()) && isJMBGUnique(student.getJmbg()) && isIndexNoUnique(student.getIndexNo())) {
             hpd.makePersistent(student.getPerson());
             Person person = hpd.getPersonByUsername(student.getPerson().getUsername());

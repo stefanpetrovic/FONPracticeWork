@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
@@ -55,22 +56,31 @@ public class ImageUploadBean {
     public void upload() {
         //delete previous user image if exists
         String picname = loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()).getPictureURI();
+        String filename = loggedInUserBean.getUsername();
+        String type = file.getFileName();
+
         if (!picname.equals("")) {
+           
             String url = pathToImg + "\\" + picname;
-            try {
+            try { 
+                //check if new file is selected or not - throws StringIndexOfBoudns...
+                type = type.substring(type.lastIndexOf("."));
+               
                 Files.deleteIfExists(new File(url).toPath());
                 System.out.println("Prethodna slika obrisana");
+            } catch (StringIndexOutOfBoundsException e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Greška", "Morate odabrati fajl."));
+                return;
             } catch (IOException ex) {
                 Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            System.out.println("vvvv");
         }
 
-        String filename = loggedInUserBean.getUsername();
-        String type = file.getFileName();
-        type = type.substring(type.lastIndexOf("."));
         File saveFile;
         try {
+
+            System.out.println("DDDAA");
             //saveFile = File.createTempFile(filename, type, new File(pathToImg));
             saveFile = new File(pathToImg + "\\" + filename + type);
             try (InputStream in = file.getInputstream()) {
