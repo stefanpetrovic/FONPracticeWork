@@ -38,13 +38,13 @@ public class SubmitFinalPaper {
 
     @PostConstruct
     public void init() {
-        try {
-            work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent());
-        } catch (EngineDAOException ex) {
-            Logger.getLogger(SubmitFinalPaper.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("nema rada");
-            work = new Work();
-        }
+//        try {
+//            work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent());
+//        } catch (EngineDAOException ex) {
+//            Logger.getLogger(SubmitFinalPaper.class.getName()).log(Level.SEVERE, null, ex);
+//            System.out.println("nema rada");
+//            work = new Work();
+//        }
     }
     
     public LoggedInUserBean getUser() {

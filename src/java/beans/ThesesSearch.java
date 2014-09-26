@@ -77,8 +77,11 @@ public class ThesesSearch {
                 System.out.println("keyword: "+keywordsList1);
             }
             System.out.println("\n\tHEADING:: "+heading);
-            System.out.println("\n\tSUBJECT:: "+subject.getName());
+            System.out.println("\n\tSUBJECT:: "+subject.getName()+"\t\n\nCLASS:: "+subject.getClass());
             
+            //ovo da se iskrpi lepo jer je sklepano ne daj boze
+            if("".equals(heading)) heading = null;
+            if("".equals(keywords)) keywordsList = null;
             resultTheses = Controller.getInstance().searchTheses(heading, keywordsList, subject);
             System.out.println("SIZE:: "+resultTheses.size());
             for (Work tg : resultTheses) {

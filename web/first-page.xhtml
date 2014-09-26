@@ -4,5 +4,12 @@
                 template="/templates/main_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">First page</ui:define>
-    <ui:define name="content">Welcome <h:outputText  value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}"/></ui:define>
+    <ui:define name="heading">
+         <h1 class="col-md-offset-2">Dobrodošli!</h1> 
+    </ui:define>
+    <ui:define name="content">
+       
+        <h:messages  globalOnly="true"  infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"/>
+        <!--<h:outputText  value="#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}"/>-->
+    </ui:define>
 </ui:composition>

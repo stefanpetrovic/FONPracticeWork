@@ -9,7 +9,10 @@
     <ui:define name="heading">
         <h1 class="col-md-offset-2">Svi radovi</h1> 
         <h3>
-            <h:outputText value="doc. dr. Ime Prezime"  styleClass="col-md-offset-2" style="margin-bottom: 25px;"/> 
+            <h:outputText value="
+                          #{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].name}
+                          #{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].surname}"
+                          styleClass="col-md-offset-2" style="margin-bottom: 25px;"/> 
         </h3>
         <h:form>
             <h:commandButton value="Na čekanju" styleClass="btn btn-danger pull-left col-md-offset-2 theses-opt-main-button" action="d" />

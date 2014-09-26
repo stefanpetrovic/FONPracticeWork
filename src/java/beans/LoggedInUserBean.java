@@ -31,7 +31,7 @@ public class LoggedInUserBean implements Serializable {
     private String password;
     private Class personIdentifier;
     private HashMap<Class, Person> loggedInPerson = new HashMap<Class, Person>();
-    
+
     public String getUsername() {
         return username;
     }
@@ -67,7 +67,7 @@ public class LoggedInUserBean implements Serializable {
     //ova metoda je za brisanje
     public void uploadImage() {
     }
-    
+
     public void updateUser() {
         try {
             Controller.getInstance().updatePerson(loggedInPerson.get(personIdentifier));
@@ -81,16 +81,22 @@ public class LoggedInUserBean implements Serializable {
 
     public String login() {
         try {
+            String message = "";
             Person person = Controller.getInstance().login(username, password);
             if (person.getStudent() != null) {
                 personIdentifier = person.getStudent().getClass();
             } else {
                 personIdentifier = person.getEmployee().getClass();
             }
+            message = "Uspešno ste se ulogovali " + person.getName() + ".";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
             loggedInPerson.put(personIdentifier, person);
             return "first-page";
         } catch (EngineDAOException ex) {
             Logger.getLogger(LoggedInUserBean.class.getName()).log(Level.SEVERE, null, ex);
+            String message = "Neuspelo prijavljivanje!";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+
             return null;
         }
     }
