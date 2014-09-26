@@ -116,7 +116,8 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.Course[ courseID=" + courseID + " ]";
+//        return "dao.domain.core.Course[ courseID=" + courseID + " ]";
+        return name;
     }
     
 }
