@@ -7,7 +7,6 @@
 package beans;
 
 import businessLogic.Controller;
-import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import java.io.File;
