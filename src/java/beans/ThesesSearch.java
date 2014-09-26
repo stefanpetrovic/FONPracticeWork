@@ -71,7 +71,22 @@ public class ThesesSearch {
             for (String k : keyw) {
                 keywordsList.add(k.trim());
             }
+            
+            System.out.println("\n\tKEYWORDS:: ");
+            for (String keywordsList1 : keywordsList) {
+                System.out.println("keyword: "+keywordsList1);
+            }
+            System.out.println("\n\tHEADING:: "+heading);
+            System.out.println("\n\tSUBJECT:: "+subject.getName()+"\t\n\nCLASS:: "+subject.getClass());
+            
+            //ovo da se iskrpi lepo jer je sklepano ne daj boze
+            if("".equals(heading)) heading = null;
+            if("".equals(keywords)) keywordsList = null;
             resultTheses = Controller.getInstance().searchTheses(heading, keywordsList, subject);
+            System.out.println("SIZE:: "+resultTheses.size());
+            for (Work tg : resultTheses) {
+                System.out.println("THESIS:: "+tg.getTitle());
+            }
             if (resultTheses.size() > 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Dobijeni radovi."));
                 return null;

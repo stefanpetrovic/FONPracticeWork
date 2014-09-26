@@ -4,10 +4,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/templates/main_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
-    <ui:define name="title">Pretrazi zaposlene</ui:define>
+    <ui:define name="title">Pretraga profesora</ui:define>
     
     <ui:define name="heading">
-          <h1 class="col-md-offset-2">Pretraga zaposlenih</h1>
+          <h1 class="col-md-offset-2">Pretraga profesora</h1>
     </ui:define>
 
     <ui:define name="content">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             
-                <p:commandButton value="Pretrazi profesore" update="@form" styleClass="btn btn-primary pull-right" action="#{employeeSearchBean.findEmployees}"/>
+            <p:commandButton value="Pretrazi profesore" update="@form" styleClass="btn btn-primary pull-right" action="#{employeeSearchBean.findEmployees}"/>
 
             <p:dataTable rendered="#{employeeSearchBean.foundEmployees.size() > 0}" var="employee" value="#{employeeSearchBean.foundEmployees}" rows="10" paginator="true" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
