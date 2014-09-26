@@ -52,7 +52,7 @@ public class StudentBean {
     }
     
     public void validateEmail(FacesContext context, UIComponent componentToValidate, Object value) throws ValidatorException {
-        EmailValidator ev = new EmailValidator();
+    EmailValidator ev = new EmailValidator();
         ev.setEmail(value.toString());
         if (!ev.isValid()) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Email is not valid");

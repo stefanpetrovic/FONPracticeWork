@@ -101,10 +101,11 @@ public class Controller {
     public void addStudent(Student student) throws EngineDAOException {
         HibernatePersonDAO hpd = new HibernatePersonDAO();
         HibernateStudentDAO spd = new HibernateStudentDAO(Student.class);
-       
-        if (isUsernameUnique(student.getPerson().getUsername()) && isEmailUnique(student.getPerson().getUsername()) && isJMBGUnique(student.getJmbg()) && isIndexNoUnique(student.getIndexNo())) {
-            hpd.makePersistent(student.getPerson());
-            Person person = hpd.getPersonByUsername(student.getPerson().getUsername());
+        Person pers = student.getPerson();
+        if (isUsernameUnique(pers.getUsername()) && isEmailUnique(pers.getUsername()) && isJMBGUnique(student.getJmbg()) && isIndexNoUnique(student.getIndexNo())) {
+            
+            hpd.makePersistent(pers);
+            Person person = hpd.getPersonByUsername(pers.getUsername());
             student.setStudentID(person.getPersonID());
             spd.makePersistent(student);
         } else {
@@ -289,11 +290,28 @@ public class Controller {
 
     public static void main(String[] args) {
         try {
-            Person s = Controller.getInstance().login("Rango1", "123");
-            System.out.println(s.getStudent());
-            Work w = s.getStudent().getWorkList().get(0);
-            System.out.println(w);
-            System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()).get(0));
+//            Person s = Controller.getInstance().login("Rango1", "123");
+//            System.out.println(s.getStudent());
+//            Work w = s.getStudent().getWorkList().get(0);
+            //System.out.println(w);
+            
+            //System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()).get(0));
+            Person p = new Person();
+            p.setEmail("basdf");
+            p.setName("asdfasf");
+            p.setPassword("asdfasd");
+            p.setPictureURI("");
+            p.setSurname("asdfasdf");
+            p.setUsername("asdfasdf");
+            Student s = new Student();
+            s.setPerson(p);
+            HibernateCourseDAO hc = new HibernateCourseDAO();
+            
+            s.setCourse(hc.selectByKey(2L));
+            s.setIndexNo("324");
+            s.setJmbg("5698745825698");
+            
+            Controller.getInstance().addStudent(s);
             
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
