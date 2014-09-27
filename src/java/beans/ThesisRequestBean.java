@@ -12,6 +12,7 @@ import dao.domain.core.Person;
 import dao.domain.core.Subject;
 import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,7 +30,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class ThesisRequestBean {
+public class ThesisRequestBean implements Serializable{
     
     private Work work;
     private List<Employee> professors;

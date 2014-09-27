@@ -63,11 +63,14 @@ public class HibernateStudentDAO extends AbstractHibernateDAO<Student, Long> imp
         try {
             student = (Student) criteria.uniqueResult();
         } catch (RuntimeException e) {
+            getSession().getTransaction().commit();
             throw new EngineDAOException(e);
         }
         if (student == null) {
+            getSession().getTransaction().commit();
             throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
         }
+        getSession().getTransaction().commit();
         return student;
     }
 
@@ -82,11 +85,14 @@ public class HibernateStudentDAO extends AbstractHibernateDAO<Student, Long> imp
         try {
             student = (Student) criteria.uniqueResult();
         } catch (RuntimeException e) {
+            getSession().getTransaction().commit();
             throw new EngineDAOException(e);
         }
         if (student == null) {
+            getSession().getTransaction().commit();
             throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
         }
+        getSession().getTransaction().commit();
         return student;
     }
 
@@ -100,11 +106,14 @@ public class HibernateStudentDAO extends AbstractHibernateDAO<Student, Long> imp
         try {
             student = (Student) criteria.uniqueResult();
         } catch (RuntimeException e) {
+            getSession().getTransaction().commit();
             throw new EngineDAOException(e);
         }
         if (student == null) {
+            getSession().getTransaction().commit();
             throw new EngineDAOException(MessageFormat.format(ERROR_STUDENT_NOT_FOUND_BY_PERSON, null));
         }
+        getSession().getTransaction().commit();
         return student;
     }
     
