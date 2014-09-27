@@ -499,7 +499,8 @@ public class Controller {
     }
     
     public List<Subject> getSubjectsByDepartment(Department department){
-        
+        HibernateSubjectDAO hsd = new HibernateSubjectDAO();
+        return hsd.getSubjectsByDepartments(department);
     }
     
     
