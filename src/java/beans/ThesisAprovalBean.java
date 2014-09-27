@@ -33,8 +33,6 @@ public class ThesisAprovalBean {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
 
     public Work getWork() {
         return work;
@@ -58,20 +56,18 @@ public class ThesisAprovalBean {
         this.work.setDescription(new String());
     }
 
-    
-    
     public void makeWork(Long id) {
         try {
             work = Controller.getInstance().getWork(id);
             System.out.println("workid: " + work.getStatus());
             if (work.getStatus() == 1) {
                 setStatus("Odobren");
-               // clearMessages();
+                // clearMessages();
 //                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Rad je već odobren.", null));
             }
             if (work.getStatus() == -1) {
                 setStatus("Odbijen");
-              //  clearMessages();
+                //  clearMessages();
 //                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Rad je već odbijen.", null));
 
             }
@@ -84,11 +80,15 @@ public class ThesisAprovalBean {
     public String approve() {
         try {
             Controller.getInstance().approveThesis(work);
-             setStatus("Odobren");
+            setStatus("Odobren");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Rad je odobren.", null));
             return null;
         } catch (EngineDAOException e) {
-           
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Došlo je do greške. Nemoguće je odobriti rad.", null));
+            return null;
+        } catch (Exception e) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Došlo je do greške. Nemoguće je odobriti rad.", null));
             return null;
         }
@@ -97,17 +97,17 @@ public class ThesisAprovalBean {
     public String deny() {
         try {
             Controller.getInstance().denyThesis(work);
-          setStatus("Odbijen");
+            setStatus("Odbijen");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Rad je odbijen.", null));
 
             return null;
         } catch (EngineDAOException e) {
-          
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Došlo je do greške. Nemoguće je odbiti rad.", null));
+            return null;
+        } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Došlo je do greške. Nemoguće je odbiti rad.", null));
             return null;
         }
     }
-
-  
 
 }
