@@ -5,10 +5,12 @@
  */
 package dao;
 
+import dao.domain.core.Department;
+
 /**
  *
  * @author Djole
  */
-public interface DepartmentDAO {
+public interface DepartmentDAO extends BasePersistentDAO<Department, Long>{
     
 }

@@ -7,11 +7,13 @@ package businessLogic;
 
 import dao.domain.core.Commision;
 import dao.domain.core.CommisionMember;
+import dao.domain.core.Communication;
 import dao.domain.core.Course;
 import dao.domain.core.Department;
 import dao.domain.core.Employee;
 import dao.domain.core.EmployeeSubject;
 import dao.domain.core.Keywords;
+import dao.domain.core.Message;
 import dao.domain.core.Person;
 import dao.domain.core.Student;
 import dao.domain.core.Subject;
@@ -20,17 +22,20 @@ import dao.domain.core.Work;
 import dao.exception.EngineDAOException;
 import dao.hibernate.HibernateCommisionDAO;
 import dao.hibernate.HibernateCommisionMemberDAO;
+import dao.hibernate.HibernateCommunicationDAO;
 import dao.hibernate.HibernateCourseDAO;
 import dao.hibernate.HibernateDepartmentDAO;
 import dao.hibernate.HibernateEmployeeDAO;
 import dao.hibernate.HibernateEmployeeSubjectDAO;
 import dao.hibernate.HibernateKeywordsDAO;
+import dao.hibernate.HibernateMessageDAO;
 import dao.hibernate.HibernatePersonDAO;
 import dao.hibernate.HibernateStudentDAO;
 import dao.hibernate.HibernateSubjectDAO;
 import dao.hibernate.HibernateTitleDAO;
 import dao.hibernate.HibernateWorkDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -440,6 +445,7 @@ public class Controller {
     public void approveThesis(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         work.setStatus(HibernateWorkDAO.APPROVED);
+        work.setAcceptanceDate(new Date());
         hwd.makePersistent(work);
     }
 
@@ -449,4 +455,53 @@ public class Controller {
         hwd.makePersistent(work);
     }
 
+    public void createCommunication(Communication com) throws EngineDAOException{
+        HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
+        hcd.makePersistent(com);
+    }
+    
+    public List<Message> getMessagesByCommunication(Communication com) throws EngineDAOException{
+        HibernateMessageDAO hmd = new HibernateMessageDAO();
+        return hmd.getMessagesByCommunication(com);
+    }
+    
+    public List<Communication> getCommunicationsByEmployee(Employee employee) throws EngineDAOException{
+        HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
+        return hcd.getCommunicationsByEmployee(employee);
+    }
+    
+    public List<Communication> getCommunicationsByStudent(Student student) throws EngineDAOException{
+        HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
+        return hcd.getCommunicationsByStudent(student);
+    }
+    
+    public void createMessage(Message message) throws EngineDAOException{
+        HibernateMessageDAO hmd = new HibernateMessageDAO();
+        hmd.makePersistent(message);
+    }
+    
+    public List<Communication> getCommunicationsWithUnreadMessages(Person person) throws EngineDAOException{
+        HibernateMessageDAO hmd = new HibernateMessageDAO();
+        List<Communication> communications = new ArrayList<>();
+        for(Message m : hmd.getUnreadMessages(person)){
+            communications.add(m.getCommunication());
+        }
+        return communications;
+    }
+    
+    public void setMessagesToSeen(Communication communication) throws EngineDAOException{
+        HibernateMessageDAO hmd = new HibernateMessageDAO();
+        List<Message> messages = hmd.getMessagesByCommunication(communication);
+        for(Message m : messages){
+            m.setRead(true);
+            hmd.makePersistent(m);
+        }        
+    }
+    
+    public List<Subject> getSubjectsByDepartment(Department department) throws EngineDAOException{
+        HibernateSubjectDAO hsd = new HibernateSubjectDAO();
+        return hsd.getSubjectsByDepartments(department);
+    }
+    
+    
 }

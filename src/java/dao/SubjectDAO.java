@@ -5,10 +5,16 @@
  */
 package dao;
 
+import dao.domain.core.Department;
+import dao.domain.core.Subject;
+import dao.exception.EngineDAOException;
+import java.util.List;
+
 /**
  *
  * @author Djole
  */
-public interface SubjectDAO {
+public interface SubjectDAO extends BasePersistentDAO<Subject, Long>{
     
+    public List<Subject> getSubjectsByDepartments(Department department) throws EngineDAOException;
 }

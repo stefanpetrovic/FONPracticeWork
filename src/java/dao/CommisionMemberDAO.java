@@ -5,10 +5,12 @@
  */
 package dao;
 
+import dao.domain.core.CommisionMember;
+
 /**
  *
  * @author Djole
  */
-public interface CommisionMemberDAO {
+public interface CommisionMemberDAO extends BasePersistentDAO<CommisionMember, Long> {
     
 }

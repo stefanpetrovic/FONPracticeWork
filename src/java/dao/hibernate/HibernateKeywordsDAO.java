@@ -42,7 +42,7 @@ public class HibernateKeywordsDAO extends AbstractHibernateDAO<Keywords, Long> i
         for(Keywords k : keywords){
             getSession().beginTransaction();
             Criteria criteria = getSession().createCriteria(persistentClass);
-            criteria.add(Restrictions.eq(KEYWORD, k.getKeyword()));
+            criteria.add(Restrictions.like(KEYWORD, "%"+k.getKeyword()+"%"));
             criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
             Keywords keyword;
             try {
