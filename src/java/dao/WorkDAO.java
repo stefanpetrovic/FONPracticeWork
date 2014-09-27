@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djole
  */
-public interface WorkDAO {
+public interface WorkDAO extends BaseCrudDAO<Work, Long>{
     
     public List<Work> getWorkByTitle(String title) throws EngineDAOException;
     public List<Work> getWorksByTitleAndSubject(String title, Subject subject) throws EngineDAOException;

@@ -5,10 +5,12 @@
  */
 package dao;
 
+import dao.domain.core.Course;
+
 /**
  *
  * @author Djole
  */
-public interface CourseDAO {
+public interface CourseDAO extends BasePersistentDAO<Course, Long>{
     
 }

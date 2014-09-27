@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djole
  */
-public interface EmployeeSubjectDAO {
+public interface EmployeeSubjectDAO extends BasePersistentDAO<EmployeeSubject, Long>{
     
     public List<EmployeeSubject> getSubjectsByEmployee(Employee employee) throws EngineDAOException;
 }

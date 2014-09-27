@@ -5,10 +5,12 @@
  */
 package dao;
 
+import dao.domain.core.Title;
+
 /**
  *
  * @author Djole
  */
-public interface TitleDAO {
+public interface TitleDAO extends BasePersistentDAO<Title, Long>{
     
 }

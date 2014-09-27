@@ -5,8 +5,8 @@
  */
 package dao;
 
-import dao.domain.core.Department;
-import dao.domain.core.Subject;
+import dao.domain.core.Communication;
+import dao.domain.core.Employee;
 import dao.exception.EngineDAOException;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Djole
  */
-public interface SubjectDAO extends BasePersistentDAO<Subject, Long>{
+public interface CommunicationDAO extends BasePersistentDAO<Communication, Long>{
     
-    public List<Subject> getSubjectsByDepartments(Department department) throws EngineDAOException;
+    public List<Communication> getCommunicationsByEmployee(Employee employee) throws EngineDAOException;
 }

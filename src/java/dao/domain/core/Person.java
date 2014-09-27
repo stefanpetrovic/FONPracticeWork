@@ -6,6 +6,7 @@
 package dao.domain.core;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,9 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,6 +39,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password"),
     @NamedQuery(name = "Person.findByPictureURI", query = "SELECT p FROM Person p WHERE p.pictureURI = :pictureURI")})
 public class Person implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reciever")
+    private List<Message> messageList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    private List<Message> messageList1;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -175,6 +182,24 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "dao.domain.core.Person[ personID=" + personID + " ]";
+    }
+
+    @XmlTransient
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
+    @XmlTransient
+    public List<Message> getMessageList1() {
+        return messageList1;
+    }
+
+    public void setMessageList1(List<Message> messageList1) {
+        this.messageList1 = messageList1;
     }
     
 }

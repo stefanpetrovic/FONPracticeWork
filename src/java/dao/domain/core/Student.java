@@ -37,6 +37,8 @@ import org.hibernate.annotations.LazyCollectionOption;
     @NamedQuery(name = "Student.findByIndexNo", query = "SELECT s FROM Student s WHERE s.indexNo = :indexNo"),
     @NamedQuery(name = "Student.findByJmbg", query = "SELECT s FROM Student s WHERE s.jmbg = :jmbg")})
 public class Student implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private List<Communication> communicationList;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -143,6 +145,15 @@ public class Student implements Serializable {
     @Override
     public String toString() {
         return "dao.domain.core.Student[ studentID=" + studentID + " ]";
+    }
+
+    @XmlTransient
+    public List<Communication> getCommunicationList() {
+        return communicationList;
+    }
+
+    public void setCommunicationList(List<Communication> communicationList) {
+        this.communicationList = communicationList;
     }
     
 }

@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Djole
  */
-public interface KeywordsDAO {
+public interface KeywordsDAO extends BasePersistentDAO<Keywords, Long>{
     
     public List<Keywords> getKeywordsByKeywords(List<Keywords> keywords) throws EngineDAOException;
 }
