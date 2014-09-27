@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -56,10 +58,17 @@ public class EmployeeSearchBean {
             if (existingEmployee.getPerson().getName().equals("")) existingEmployee.getPerson().setName(null);
             if (existingEmployee.getPerson().getSurname().equals("")) existingEmployee.getPerson().setSurname(null);
             foundEmployees = Controller.getInstance().getEmployees(existingEmployee);
+            if (foundEmployees.isEmpty()) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem nije pronasao profesore."));
+            }else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem je pronasao profesore."));
+            }
         } catch (EngineDAOException ex) {
             Logger.getLogger(EmployeeSearchBean.class.getName()).log(Level.SEVERE, null, ex);
             foundEmployees = new ArrayList<>();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem nije pronasao profesore."));
         }
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     }
     
 }

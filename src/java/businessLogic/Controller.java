@@ -216,7 +216,9 @@ public class Controller {
         }
         List<Student> students = new ArrayList<>();
         for(Person p : persons){
-            students.add(p.getStudent());
+            if (p.getStudent() != null) {
+                students.add(p.getStudent());
+            }
         }
         return students;
     }
@@ -236,7 +238,9 @@ public class Controller {
         }
         List<Employee> employees = new ArrayList<>();
         for(Person p : persons){
-            employees.add(p.getEmployee());
+            if (p.getEmployee() != null) {
+                employees.add(p.getEmployee());
+            }
         }
         return employees;
     }
@@ -289,6 +293,7 @@ public class Controller {
     }
 
     public void addThesisRequest(Work thesis) throws EngineDAOException {
+        thesis.setStatus(0);
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         hwd.makePersistent(thesis);
     }
