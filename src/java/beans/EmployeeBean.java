@@ -7,6 +7,7 @@
 package beans;
 
 import businessLogic.Controller;
+import dao.domain.core.Department;
 import dao.domain.core.Employee;
 import dao.domain.core.EmployeeSubject;
 import dao.domain.core.Person;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
@@ -33,11 +35,32 @@ public class EmployeeBean {
     
     private Employee employee;
     private List<Subject> selectedSubjects;
-    
+    private List<Subject> allSubjectsOfDepartment;
+
     public EmployeeBean() {
         employee = new Employee();
         employee.setPerson(new Person());
         selectedSubjects = new ArrayList<>();
+    }
+    @PostConstruct
+    public void init() {
+        List<Department> departments = null;
+        try {
+            departments = Controller.getInstance().getDepartments();
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(EmployeeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (departments != null && departments.size() > 0) {
+            employee.setDepartment(departments.get(0));
+            try {
+                allSubjectsOfDepartment = Controller.getInstance().getSubjectsByDepartment(employee.getDepartment());
+            } catch (EngineDAOException ex) {
+                Logger.getLogger(EmployeeBean.class.getName()).log(Level.SEVERE, null, ex);
+                allSubjectsOfDepartment = new ArrayList<>();
+            }
+        }else {
+            allSubjectsOfDepartment = new ArrayList<>();
+        }
     }
 
     public Employee getEmployee() {
@@ -56,6 +79,14 @@ public class EmployeeBean {
         this.selectedSubjects = selectedSubjects;
     }
     
+    public List<Subject> getAllSubjectsOfDepartment() {
+        return allSubjectsOfDepartment;
+    }
+
+    public void setAllSubjectsOfDepartment(List<Subject> allSubjectsOfDepartment) {
+        this.allSubjectsOfDepartment = allSubjectsOfDepartment;
+    }
+    
     public void validateEmail(FacesContext context, UIComponent componentToValidate, Object value) throws ValidatorException {
         EmailValidator ev = new EmailValidator();
         ev.setEmail(value.toString());
@@ -64,6 +95,20 @@ public class EmployeeBean {
             throw new ValidatorException(message);
         }
     }
+    
+    public void onDepartmentChange() {
+        if (employee.getDepartment() != null) {
+            try {
+                allSubjectsOfDepartment = Controller.getInstance().getSubjectsByDepartment(employee.getDepartment());
+            } catch (EngineDAOException ex) {
+                Logger.getLogger(ThesisRequestBean.class.getName()).log(Level.SEVERE, null, ex);
+                allSubjectsOfDepartment = new ArrayList<>();
+            }
+        }else {
+            allSubjectsOfDepartment = new ArrayList<>();
+        }
+    }
+    
     
     public void validateUsername(FacesContext context, UIComponent componentToValidate, Object value) throws ValidatorException{
         UsernameValidator uv = new UsernameValidator();

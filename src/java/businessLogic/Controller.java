@@ -508,5 +508,11 @@ public class Controller {
         return hsd.getSubjectsByDepartments(department);
     }
     
+    public void updateWork(Work work) {
+        //update work or throw exception
+        //promeni i metodu getStudentsCurrentWork da vraca rad, a ne listu radova
+        //takodje promeni bazu za superadmina i update-uj model, naravno posalji nam bazu
+    }
+    
     
 }

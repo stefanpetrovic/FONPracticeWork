@@ -46,13 +46,14 @@
                 <h:outputLabel for="departmentDropbox" styleClass="col-md-2 control-label"  value="Katedra: "/>
                 <div class="col-md-10">
                     <h:selectOneMenu id="departmentDropbox" styleClass="form-control" value="#{employeeBean.employee.department}">
+                        <p:ajax event="click" listener="#{employeeBean.onDepartmentChange}" update="subjectDropbox"/>
                         <f:converter converterId="departmentConverter"/>
                         <f:selectItems value="#{dropboxesDataBean.departments}"/>
                     </h:selectOneMenu>
                 </div>
             </div>
             <div class="form-group">
-                <h:outputLabel for="subjectDropbox" styleClass="col-md-2 control-label"   value="Predmet: "/>
+                <h:outputLabel for="subjectDropbox" styleClass="col-md-2 control-label" value="Predmet: "/>
                 <div class="col-md-10">
                     <p:selectManyMenu id="subjectDropbox" value="#{employeeBean.selectedSubjects}" style="width: 300px;" converter="subjectConverter" showCheckbox="true">
                         <f:selectItems value="#{dropboxesDataBean.subjects}"/>
