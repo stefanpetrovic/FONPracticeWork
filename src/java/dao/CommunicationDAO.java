@@ -7,6 +7,7 @@ package dao;
 
 import dao.domain.core.Communication;
 import dao.domain.core.Employee;
+import dao.domain.core.Student;
 import dao.exception.EngineDAOException;
 import java.util.List;
 
@@ -17,4 +18,5 @@ import java.util.List;
 public interface CommunicationDAO extends BasePersistentDAO<Communication, Long>{
     
     public List<Communication> getCommunicationsByEmployee(Employee employee) throws EngineDAOException;
+    public List<Communication> getCommunicationsByStudent(Student student) throws EngineDAOException;
 }
