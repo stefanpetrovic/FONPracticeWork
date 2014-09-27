@@ -86,6 +86,7 @@ public class Work implements Serializable {
     private List<Keywords> keywordsList;
 
     public Work() {
+        description = new String();
     }
 
     public Work(Long workID) {

@@ -29,12 +29,18 @@
                 <h:outputLabel for="heading" styleClass="col-md-2 text-right" value="Naslov" />               
                 <h:outputText id="heading" value="#{thesisAprovalBean.work.title}"/>              
             </div>
+             <div class="form-group">
+                <h:outputLabel for="status" styleClass="col-md-2 text-right" value="Status" />               
+                <h:outputText id="status" value="#{thesisAprovalBean.status}"/>              
+            </div>
             <div class="form-group">
                 <h:outputLabel for="description" styleClass="col-md-2 text-right" value="Opis" />        
                 <p:inputTextarea id="description" rows="5" cols="74" value="#{thesisAprovalBean.work.description}"/>
-                    
-                <!--<h:outputText id="description" value="#{thesisAprovalBean.work.description}"/>-->
+                <!--<h:outputText id="description" value="#{thesisAprovalBean.work.description}"/>-->              
             </div>
+            <h:messages errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
             <div class="row">
                 <h:commandButton value="Odbij" styleClass="btn btn-danger pull-right" action="#{thesisAprovalBean.deny()}" style="margin-left: 5px; margin-right: 5px;"/> 
                 <!--<h:commandButton value="Odgovori" styleClass="btn btn-warning pull-right" action="d" style="margin-left: 5px; margin-right: 5px;"/>-->

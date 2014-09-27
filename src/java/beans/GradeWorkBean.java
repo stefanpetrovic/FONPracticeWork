@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,24 +30,24 @@ public class GradeWorkBean {
     private List<Integer> availableGrades;
     private Long id;
     
-    private String message;
+//    private String message;
 
-    public String getMessage() {
-        return message;
-    }
+//    public String getMessage() {
+//        return message;
+//    }
 
-    public void setMessage(String message) {
-        if(work.getGrade() != null){
-            this.message = "Rad je već ocenjen ocenom "+work.getGrade();
-        }
-    }
+//    public void setMessage(String message) {
+//        if(work.getGrade() != null){
+//            this.message = "Rad je već ocenjen ocenom "+work.getGrade();
+//        }
+//    }
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-        System.out.println("\n\n\t\t ID rada: " + id);
+//        System.out.println("\n\n\t\t ID rada: " + id);
         makeWork(id);
        
     }
@@ -94,7 +96,11 @@ public class GradeWorkBean {
     public String gradeWork() {
         try {
             Controller.getInstance().gradeWork(work, grade);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Rad je uspešno ocenjen.", null));
+            
         } catch (EngineDAOException e) {
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Došlo je do greške. Nemoguće je oceniti rad.", null));
+            
         }
 
         return null;

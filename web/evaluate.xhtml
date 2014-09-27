@@ -30,6 +30,10 @@
                 <h:outputLabel for="title" styleClass="col-md-2 text-right" value="Naslov" />
                     <h:outputText id="title" value="#{gradeWorkBean.work.title}"/>
             </div>
+            <div class="form-group">
+                <h:outputLabel for="grade" styleClass="col-md-2 text-right" value="Trenutna ocena" />
+                <h:outputText id="grade" value="#{gradeWorkBean.work.grade}"/>
+            </div>
 
             <div class="form-group">
                 <h:outputLabel for="ocena" styleClass="col-md-2 control-label" value="Ocena" />
@@ -40,9 +44,9 @@
                     </h:selectOneMenu>
                 </div>
             </div>
-               <div class="form-group">
-                   <h:outputText id="message" styleClass="col-md-offset-2" style="color: red" value="#{gradeWorkBean.message}"/>
-            </div>
+            <h:messages errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
             <h:commandButton value="Oceni" styleClass="btn btn-primary center-block" action="#{gradeWorkBean.gradeWork()}" /> 
         </h:form>
     </ui:define>
