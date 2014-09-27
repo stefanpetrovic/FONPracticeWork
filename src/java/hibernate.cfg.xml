@@ -26,5 +26,9 @@
     <mapping class="dao.domain.core.Work"/>
     <mapping class="dao.domain.core.Keywords"/>
     <mapping class="dao.domain.core.EmployeeSubject"/>
+    <mapping class="dao.domain.core.Communication"/>
+    <mapping class="dao.domain.core.Message"/>
+    <mapping class="dao.domain.core.SuperAdmin"/>
+
   </session-factory>
 </hibernate-configuration>
