@@ -14,7 +14,7 @@
 
         <h:form styleClass="col-md-12 form-horizontal">
            
-            <p:growl  life="3000" showDetail="true" />
+            <!--<p:growl  life="3000" showDetail="true" />-->
             
             <div class="form-group">
                 <h:outputLabel for="nameInput" styleClass="col-md-2 control-label" value="Ime: "/>
@@ -94,6 +94,11 @@
 
             <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{studentBean.addStudent}"/>
 
+            
+              <h:messages showSummary="false"
+        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
         </h:form>
     </ui:define>
 
