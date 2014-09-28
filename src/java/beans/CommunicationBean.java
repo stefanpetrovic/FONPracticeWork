@@ -21,16 +21,17 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class CommunicationBean {
     
-    private long id;
+    private Long id;
     private Communication communication;
     private Message newMessage;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+        System.out.println(id);
         loadCommunication();
     }
 

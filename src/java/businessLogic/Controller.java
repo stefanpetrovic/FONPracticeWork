@@ -322,7 +322,7 @@ public class Controller {
 //            s.setJmbg("5698745825698");
 //            
 //            Controller.getInstance().addStudent(s);
-            System.out.println(Controller.getInstance().getCommunicationByID(1L));
+            System.out.println(Controller.getInstance().getCommunicationByID(1L).getMessageList());
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
