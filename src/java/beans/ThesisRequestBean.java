@@ -50,7 +50,12 @@ public class ThesisRequestBean implements Serializable{
             Logger.getLogger(ThesisRequestBean.class.getName()).log(Level.SEVERE, null, ex);
             professors = new ArrayList<>();
         }
-        subjects = new ArrayList<>();
+        if (professors.size() > 0) {
+            work.setMentor(professors.get(0));
+            onProfessorChange();
+        }else {
+            subjects = new ArrayList<>();
+        }
     }
     
     public Work getWork() {

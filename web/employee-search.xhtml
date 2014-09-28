@@ -11,8 +11,8 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form styleClass="col-md-12 form-horizontal">
-
+        <h:form id="form" styleClass="col-md-12 form-horizontal">
+            <p:growl id="messages" life="3000" autoUpdate="true" showDetail="true"/>
            
               
                 <!--<h:outputText value="Unos profesora" style="font-size: 20px;"/>-->
@@ -31,20 +31,21 @@
                 </div>
             </div>
             
-            <p:commandButton value="Pretrazi profesore" update="@form" styleClass="btn btn-primary pull-right" action="#{employeeSearchBean.findEmployees}"/>
+                <p:commandButton value="Pretrazi profesore" update="@form,messages" process="@this,@form" styleClass="btn btn-primary pull-right" actionListener="#{employeeSearchBean.findEmployees}"/>
 
-            <p:dataTable rendered="#{employeeSearchBean.foundEmployees.size() > 0}" var="employee" value="#{employeeSearchBean.foundEmployees}" rows="10" paginator="true" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-                <p:column headerText="Ime">
-                    <h:outputText value="#{employee.person.name}"/>
-                </p:column>
-                <p:column headerText="Prezime">
-                    <h:outputText value="#{employee.person.surname}"/>
-                </p:column>
-                <p:column headerText="Titula">
-                    <h:outputText value="#{employee.title}"/>
-                </p:column>
-            </p:dataTable>
+            <ui:repeat value="#{employeeSearchBean.foundEmployees}" var="emp" rendered="#{employeeSearchBean.foundEmployees.size() > 0}">
+                <a href="#">
+                    <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
+                        <p:graphicImage value="/uploads/profilePictures/#{emp.person.pictureURI}" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
+                        <div class="col-md-10 student-communication" style="height:100px">
+                                                    
+                            <h:outputText value="#{emp.person.name} #{emp.person.surname}" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
+                           
+                        </div>
+                        
+                    </div>
+                </a>
+            </ui:repeat>
         </h:form>
     </ui:define>
 

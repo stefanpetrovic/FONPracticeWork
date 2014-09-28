@@ -54,9 +54,15 @@ public class StudentSearchBean {
             if (existingStudent.getPerson().getName().equals("")) existingStudent.getPerson().setName(null);
             if (existingStudent.getPerson().getSurname().equals("")) existingStudent.getPerson().setSurname(null);
             foundStudents = Controller.getInstance().getStudents(existingStudent);
+            if (foundStudents.size() > 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem je pronasao studente."));
+            }else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem nije pronasao studente."));
+            }
         } catch (EngineDAOException ex) {
             Logger.getLogger(StudentSearchBean.class.getName()).log(Level.SEVERE, null, ex);
             foundStudents = new ArrayList<>();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem nije pronasao studente."));
         }
     }
 

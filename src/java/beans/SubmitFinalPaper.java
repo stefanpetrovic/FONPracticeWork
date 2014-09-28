@@ -37,13 +37,13 @@ public class SubmitFinalPaper {
 
     @PostConstruct
     public void init() {
-//        try {
-//            work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent());
-//        } catch (EngineDAOException ex) {
-//            Logger.getLogger(SubmitFinalPaper.class.getName()).log(Level.SEVERE, null, ex);
-//            System.out.println("nema rada");
-//            work = new Work();
-//        }
+        try {
+            work = Controller.getInstance().getStudentsCurrentWork(user.getLoggedInPerson().get(user.getPersonIdentifier()).getStudent()).get(0);
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(SubmitFinalPaper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("nema rada");
+            work = new Work();
+        }
     }
     
     public LoggedInUserBean getUser() {
@@ -73,26 +73,17 @@ public class SubmitFinalPaper {
     
     
     public void upload() {
-        //delete previous user image if exists
-//        String picname = user.getLoggedInPerson().get(user.getPersonIdentifier()).getPictureURI();
-//        if (!picname.equals("")) {
-//            String url = pathToUpload + "\\" + picname;
-//            try {
-//                Files.deleteIfExists(new File(url).toPath());
-//                System.out.println("Prethodna slika obrisana");
-//            } catch (IOException ex) {
-//                Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        }
 
         String filename = user.getUsername();
         String type = file.getFileName();
         type = type.substring(type.lastIndexOf("."));
         File saveFile;
+        File userFolder;
         try {
+            userFolder = new File(pathToUpload + "\\" + filename);
+            if (!userFolder.exists()) userFolder.mkdir();
             //saveFile = File.createTempFile(filename, type, new File(pathToImg));
-            saveFile = new File(pathToUpload + "\\" + filename + type);
+            saveFile = new File(pathToUpload + "\\" + filename + "\\" + filename + type);
             try (InputStream in = file.getInputstream()) {
                 Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(saveFile.getName());
