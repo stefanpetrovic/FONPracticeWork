@@ -5,18 +5,18 @@
                 template="/templates/main_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
     <ui:define name="title">Add employee</ui:define>
-    
+
     <ui:define name="heading">
-          <h1 class="col-md-offset-2">Unos profesora</h1>
+        <h1 class="col-md-offset-2">Unos profesora</h1>
     </ui:define>
 
     <ui:define name="content">
         <h:form styleClass="col-md-12 form-horizontal">
 
-                <!--<h:outputText value="Unos profesora" style="font-size: 20px;"/>-->
+            <!--<h:outputText value="Unos profesora" style="font-size: 20px;"/>-->
 
-                <!--<p:growl showDetail="true" life="3000"/>-->
-            
+            <!--<p:growl showDetail="true" life="3000"/>-->
+
             <div class="form-group">
                 <h:outputLabel for="nameInput" styleClass="col-md-2 control-label" value="Ime: "/>
                 <div class="col-md-10">
@@ -85,12 +85,12 @@
                 </div>
             </div>
 
-           
 
-                <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{employeeBean.addEmployee}"/>
+
+            <h:commandButton value="Unesi" styleClass="btn btn-primary pull-right" action="#{employeeBean.addEmployee}"/>
 
             <h:messages showSummary="false"
-        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
                         infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
                         />
 

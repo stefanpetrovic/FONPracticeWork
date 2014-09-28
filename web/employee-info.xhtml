@@ -68,10 +68,14 @@
             <h:form enctype="multipart/form-data">
                 <!--<p:growl id="messages" showDetail="true"/>-->
                 <p:fileUpload mode="simple" styleClass="btn btn-defult" value="#{imageUploadBean.file}" style="margin: 10px 4px;"/>
-                <p:growl id="messages2" showDetail="true"/>
-                <h:message for="messages" id="messages" style=""/>
+                <!--<p:growl id="messages2" showDetail="true"/>-->
+                
                 <p:commandButton styleClass="btn btn-success"  value="Promeni sliku" ajax="false" actionListener="#{imageUploadBean.upload}" style="margin: 10px 4px;"/>
             </h:form>
+              <h:messages showSummary="false"
+        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
         </div>
         
     </ui:define>

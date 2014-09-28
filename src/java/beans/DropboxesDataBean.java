@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import utils.Paths;
 
 /**
  *
@@ -32,6 +33,8 @@ public class DropboxesDataBean {
     private List<Course> courses;
     private List<Subject> subjects;
     private List<Employee> employees;
+    
+    private String pathToRepository;
 
     public DropboxesDataBean() {
         try {
@@ -40,6 +43,7 @@ public class DropboxesDataBean {
             courses = Controller.getInstance().getCourses();
             subjects = Controller.getInstance().getSubjects();
             employees = Controller.getInstance().getAllProfessors();
+            pathToRepository = Paths.getInstance().PATH_TO_REPOSITORY;
         } catch (EngineDAOException ex) {
             Logger.getLogger(DropboxesDataBean.class.getName()).log(Level.SEVERE, null, ex);
             titles = new ArrayList<>();
@@ -49,6 +53,16 @@ public class DropboxesDataBean {
             employees = new ArrayList<>();
         }
     }
+
+    public String getPathToRepository() {
+        return pathToRepository;
+    }
+
+    public void setPathToRepository(String pathToRepository) {
+        this.pathToRepository = pathToRepository;
+    }
+    
+    
 
     public List<Title> getTitles() {
         return titles;

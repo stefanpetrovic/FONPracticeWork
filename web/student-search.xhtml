@@ -30,22 +30,10 @@
 
             <p:commandButton value="Pretrazi" update="@form" styleClass="btn btn-primary pull-right" actionListener="#{studentSearchBean.searchForStudent}"/>
 
-<!--            <p:dataTable rendered="#{studentSearchBean.foundStudents.size() > 0}" var="student" value="#{studentSearchBean.foundStudents}" rows="10" paginator="true" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-                <p:column headerText="Ime">
-                    <h:outputText value="#{student.person.name}"/>
-                </p:column>
-                <p:column headerText="Prezime">
-                    <h:outputText value="#{student.person.surname}"/>
-                </p:column>
-                <p:column headerText="Titula">
-                    <h:outputText value="#{student.course}"/>
-                </p:column>
-            </p:dataTable>-->
             <ui:repeat value="#{studentSearchBean.foundStudents}" var="stu" rendered="#{studentSearchBean.foundStudents.size() > 0}">
                 <a href="#">
                     <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
-                        <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px;"/>
+                        <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{stu.person.pictureURI}" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px; padding:0px;"/>
                         <div class="col-md-10 student-communication" style="height:100px">
                                                     
                             <h:outputText value="#{stu.person.name} #{stu.person.surname}" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
@@ -55,6 +43,11 @@
                     </div>
                 </a>
             </ui:repeat>
+            
+             <h:messages showSummary="false"
+                        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
         </h:form>
     </ui:define>
 

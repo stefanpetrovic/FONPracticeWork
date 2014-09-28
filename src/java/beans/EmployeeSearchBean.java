@@ -61,7 +61,7 @@ public class EmployeeSearchBean {
             if (foundEmployees.isEmpty()) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem nije pronasao profesore."));
             }else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem je pronasao profesore."));
+//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Sistem je pronasao profesore."));
             }
         } catch (EngineDAOException ex) {
             Logger.getLogger(EmployeeSearchBean.class.getName()).log(Level.SEVERE, null, ex);

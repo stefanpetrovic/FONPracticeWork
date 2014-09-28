@@ -38,8 +38,15 @@
     
     <h3>Rezultati pretrage:</h3>
     <ui:repeat var="work" value="#{thesesSearch.resultTheses}" >
-        <h1>#{work.subject}</h1>
+        <div class="col-md-12">
+            <h3>#{work.title}</h3>
+            <h5>#{work.subject.name}</h5>
+            <h6>#{work.student.person.name} #{work.student.person.surname}</h6>
+        </div>
     </ui:repeat>
-        
+         <h:messages showSummary="false"
+                        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
 
 </ui:composition>

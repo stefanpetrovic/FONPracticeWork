@@ -12,7 +12,7 @@
 
     <ui:define name="content">
         <h:form  styleClass="col-md-12 form-horizontal">
-            <p:growl life="3000" showDetail="true"/>
+            <!--<p:growl life="3000" showDetail="true"/>-->
             <div class="form-group">
                 <h:outputLabel for="profesorName" styleClass="col-md-2 control-label" value="Profesor" />
                 <div class="col-md-10">
@@ -48,6 +48,10 @@
             <h:commandButton value="Pošalji" styleClass="btn btn-primary pull-right" action="#{thesisRequestBean.sendRequest}"/>
 
         </h:form>
+          <h:messages showSummary="false"
+                        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
     </ui:define>
 
 </ui:composition>
