@@ -19,4 +19,5 @@ public interface CommunicationDAO extends BasePersistentDAO<Communication, Long>
     
     public List<Communication> getCommunicationsByEmployee(Employee employee) throws EngineDAOException;
     public List<Communication> getCommunicationsByStudent(Student student) throws EngineDAOException;
+    public Communication getCommunicationByEmployeeAndStudent(Employee employee,Student student) throws EngineDAOException;
 }

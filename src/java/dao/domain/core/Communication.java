@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -52,6 +54,7 @@ public class Communication implements Serializable {
     @JoinColumn(name = "student", referencedColumnName = "studentID")
     @ManyToOne(optional = false)
     private Student student;
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "communication")
     private List<Message> messageList;
 

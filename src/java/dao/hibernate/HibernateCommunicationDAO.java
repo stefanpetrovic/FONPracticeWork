@@ -77,6 +77,27 @@ public class HibernateCommunicationDAO extends AbstractHibernateDAO<Communicatio
         getSession().getTransaction().commit();
         return cs; 
     }
+
+    @Override
+    public Communication getCommunicationByEmployeeAndStudent(Employee employee, Student student) throws EngineDAOException {
+        getSession().beginTransaction();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        criteria.add(Restrictions.eq(STUDENT, student));
+        criteria.add(Restrictions.eq(EMPLOYEE, employee));
+        criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Communication communication = null;
+        try {
+            communication = (Communication) criteria.uniqueResult();
+        } catch (RuntimeException e) {
+            throw new EngineDAOException(e);
+        }
+        if (communication == null) {
+            getSession().getTransaction().rollback();
+            throw new EngineDAOException(MessageFormat.format(ERROR_PERSON_NOT_FOUND_BY_USERNAME_AND_PASSWORD, null));            
+        }
+        getSession().getTransaction().commit();
+        return communication; 
+    }
     
     
 }

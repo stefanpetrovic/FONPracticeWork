@@ -39,8 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password"),
     @NamedQuery(name = "Person.findByPictureURI", query = "SELECT p FROM Person p WHERE p.pictureURI = :pictureURI")})
 public class Person implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
-    private List<SuperAdmin> superAdminList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
+    private SuperAdmin superAdmin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reciever")
     private List<Message> messageList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
@@ -204,13 +204,12 @@ public class Person implements Serializable {
         this.messageList1 = messageList1;
     }
 
-    @XmlTransient
-    public List<SuperAdmin> getSuperAdminList() {
-        return superAdminList;
+    public SuperAdmin getSuperAdmin() {
+        return superAdmin;
     }
 
-    public void setSuperAdminList(List<SuperAdmin> superAdminList) {
-        this.superAdminList = superAdminList;
+    public void setSuperAdmin(SuperAdmin superAdmin) {
+        this.superAdmin = superAdmin;
     }
     
 }

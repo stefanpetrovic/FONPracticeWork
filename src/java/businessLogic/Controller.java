@@ -306,23 +306,23 @@ public class Controller {
             //System.out.println(w);
             
             //System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()).get(0));
-            Person p = new Person();
-            p.setEmail("basdf");
-            p.setName("asdfasf");
-            p.setPassword("asdfasd");
-            p.setPictureURI("");
-            p.setSurname("asdfasdf");
-            p.setUsername("asdfasdf");
-            Student s = new Student();
-            s.setPerson(p);
-            HibernateCourseDAO hc = new HibernateCourseDAO();
-            
-            s.setCourse(hc.selectByKey(2L));
-            s.setIndexNo("324");
-            s.setJmbg("5698745825698");
-            
-            Controller.getInstance().addStudent(s);
-            
+//            Person p = new Person();
+//            p.setEmail("basdf");
+//            p.setName("asdfasf");
+//            p.setPassword("asdfasd");
+//            p.setPictureURI("");
+//            p.setSurname("asdfasdf");
+//            p.setUsername("asdfasdf");
+//            Student s = new Student();
+//            s.setPerson(p);
+//            HibernateCourseDAO hc = new HibernateCourseDAO();
+//            
+//            s.setCourse(hc.selectByKey(2L));
+//            s.setIndexNo("324");
+//            s.setJmbg("5698745825698");
+//            
+//            Controller.getInstance().addStudent(s);
+            System.out.println(Controller.getInstance().getCommunicationByID(1L).getMessageList());
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -447,33 +447,71 @@ public class Controller {
         return unaprovedWorks;
     }
 
-    public void approveThesis(Work work) throws EngineDAOException {
+    public Communication approveThesis(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
+        HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
+        HibernateMessageDAO hmd = new HibernateMessageDAO();
         work.setStatus(HibernateWorkDAO.APPROVED);
         work.setAcceptanceDate(new Date());
         hwd.makePersistent(work);
-        //ovde treba da se doda deo vezan za komunikaciju
-        //prvo da se vrati komunikacija za studenta i profesora, ako ne postoji onda se pravi nova, na nju se postave
-        //student i profesor i locked=false, i da se sacuva u bazu
-        //Communication c = new Communication();
-        //c.setEmployee(work.getMentor());
-        //c.setStudent(work.getStudent());
-        //c.setLocked(false);
-        
-        //zatim da se napravi nova poruka za tu komunikaciju gde je sender profesor, receiver student, telo poruke "Tema je odobrena", read=false i fileURI=""
-        //i da se sacuva u bazu
+        Communication communication;
+        try{
+            communication = hcd.getCommunicationByEmployeeAndStudent(work.getMentor(), work.getStudent());
+        }catch(EngineDAOException ex){
+            communication = new Communication();
+            communication.setEmployee(work.getMentor());
+            communication.setStudent(work.getStudent());
+            communication.setLocked(false);
+            hcd.makePersistent(communication);
+        }
+        Message message = new Message();
+        message.setCommunication(communication);
+        message.setFileURI(null);
+        message.setRead(false);
+        message.setReciever(work.getStudent().getPerson());
+        message.setSender(work.getMentor().getPerson());
+        message.setText("Tema je odobrena.");
+        hmd.makePersistent(message);
+        return communication;
     }
 
-    public void denyThesis(Work work) throws EngineDAOException {
+    public Communication denyThesis(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
+        HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
+        HibernateMessageDAO hmd = new HibernateMessageDAO();
         work.setStatus(HibernateWorkDAO.REJECTED);
         hwd.makePersistent(work);
+        Communication communication;
+        try{
+            communication = hcd.getCommunicationByEmployeeAndStudent(work.getMentor(), work.getStudent());
+            communication.setLocked(true);
+            hcd.makePersistent(communication);
+        }catch(EngineDAOException ex){
+            communication = new Communication();
+            communication.setEmployee(work.getMentor());
+            communication.setStudent(work.getStudent());
+            communication.setLocked(true);
+            hcd.makePersistent(communication);
+        }
+        Message message = new Message();
+        message.setCommunication(communication);
+        message.setFileURI(null);
+        message.setRead(false);
+        message.setReciever(work.getStudent().getPerson());
+        message.setSender(work.getMentor().getPerson());
+        message.setText("Tema je odbijena.");
+        hmd.makePersistent(message);
+        return communication;
         //ovde takodje ide deo kao gore, samo se stavlja locked=true, takodje se salje poruka "Tema je odbijena", read=false i 
     }
 
     public void createCommunication(Communication com) throws EngineDAOException{
         HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
-        hcd.makePersistent(com);
+        try{
+            Communication checkCom = hcd.getCommunicationByEmployeeAndStudent(com.getEmployee(), com.getStudent());
+        }catch(EngineDAOException ex){
+            hcd.makePersistent(com);
+        }  
     }
     
     public List<Message> getMessagesByCommunication(Communication com) throws EngineDAOException{
@@ -489,6 +527,11 @@ public class Controller {
     public List<Communication> getCommunicationsByStudent(Student student) throws EngineDAOException{
         HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
         return hcd.getCommunicationsByStudent(student);
+    }
+    
+    public Communication getCommunicationByID(Long id) throws EngineDAOException {
+        HibernateCommunicationDAO hcdao = new HibernateCommunicationDAO();
+        return hcdao.selectByKey(id);
     }
     
     public void createMessage(Message message) throws EngineDAOException{
