@@ -174,16 +174,16 @@ public class HibernateWorkDAO extends AbstractHibernateDAO<Work, Long> implement
     }
 
     @Override
-    public List<Work> getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException {
+    public Work getApprovedWorkByStudentWithoutFinalURI(Student student) throws EngineDAOException {
         getSession().beginTransaction();
         Criteria criteria = getSession().createCriteria(persistentClass);
         criteria.add(Restrictions.isNull(FINAL_FILE_URI));
         criteria.add(Restrictions.eq(STUDENT, student));
         criteria.add(Restrictions.eq(STATUS, APPROVED));
         criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-        List<Work> work = new ArrayList<>();
+        Work work;
         try {
-            work = criteria.list();
+            work = (Work) criteria.uniqueResult();
             System.out.println(work);
         } catch (RuntimeException e) {
             throw new EngineDAOException(e);

@@ -406,7 +406,7 @@ public class Controller {
     }
 
     //returns current work of a student(work that is approved, but doesn't have final version uploaded)
-    public List<Work> getStudentsCurrentWork(Student student) throws EngineDAOException {
+    public Work getStudentsCurrentWork(Student student) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         return hwd.getApprovedWorkByStudentWithoutFinalURI(student);
     }
@@ -508,10 +508,9 @@ public class Controller {
         return hsd.getSubjectsByDepartments(department);
     }
     
-    public void updateWork(Work work) {
-        //update work or throw exception
-        //promeni i metodu getStudentsCurrentWork da vraca rad, a ne listu radova
-        //takodje promeni bazu za superadmina i update-uj model, naravno posalji nam bazu
+    public void updateWork(Work work) throws EngineDAOException {
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        hwd.makePersistent(work);
     }
     
     
