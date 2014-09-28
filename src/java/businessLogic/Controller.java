@@ -406,7 +406,7 @@ public class Controller {
     }
 
     //returns current work of a student(work that is approved, but doesn't have final version uploaded)
-    public List<Work> getStudentsCurrentWork(Student student) throws EngineDAOException {
+    public Work getStudentsCurrentWork(Student student) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         return hwd.getApprovedWorkByStudentWithoutFinalURI(student);
     }
@@ -452,12 +452,23 @@ public class Controller {
         work.setStatus(HibernateWorkDAO.APPROVED);
         work.setAcceptanceDate(new Date());
         hwd.makePersistent(work);
+        //ovde treba da se doda deo vezan za komunikaciju
+        //prvo da se vrati komunikacija za studenta i profesora, ako ne postoji onda se pravi nova, na nju se postave
+        //student i profesor i locked=false, i da se sacuva u bazu
+        //Communication c = new Communication();
+        //c.setEmployee(work.getMentor());
+        //c.setStudent(work.getStudent());
+        //c.setLocked(false);
+        
+        //zatim da se napravi nova poruka za tu komunikaciju gde je sender profesor, receiver student, telo poruke "Tema je odobrena", read=false i fileURI=""
+        //i da se sacuva u bazu
     }
 
     public void denyThesis(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         work.setStatus(HibernateWorkDAO.REJECTED);
         hwd.makePersistent(work);
+        //ovde takodje ide deo kao gore, samo se stavlja locked=true, takodje se salje poruka "Tema je odbijena", read=false i 
     }
 
     public void createCommunication(Communication com) throws EngineDAOException{
@@ -508,10 +519,9 @@ public class Controller {
         return hsd.getSubjectsByDepartments(department);
     }
     
-    public void updateWork(Work work) {
-        //update work or throw exception
-        //promeni i metodu getStudentsCurrentWork da vraca rad, a ne listu radova
-        //takodje promeni bazu za superadmina i update-uj model, naravno posalji nam bazu
+    public void updateWork(Work work) throws EngineDAOException {
+        HibernateWorkDAO hwd = new HibernateWorkDAO();
+        hwd.makePersistent(work);
     }
     
     
