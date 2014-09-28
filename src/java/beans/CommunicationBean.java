@@ -8,6 +8,7 @@ package beans;
 
 import businessLogic.Controller;
 import dao.domain.core.Communication;
+import dao.domain.core.Employee;
 import dao.domain.core.Message;
 import dao.exception.EngineDAOException;
 import java.util.logging.Level;
@@ -21,10 +22,14 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class CommunicationBean {
     
-    private Long id;
+    private Long id = new Long(1);
     private Communication communication;
     private Message newMessage;
 
+    public CommunicationBean() {
+        loadCommunication();
+    }
+    
     public Long getId() {
         return id;
     }
@@ -33,6 +38,7 @@ public class CommunicationBean {
         this.id = id;
         System.out.println(id);
         loadCommunication();
+        
     }
 
     public Communication getCommunication() {
@@ -49,6 +55,11 @@ public class CommunicationBean {
 
     public void setNewMessage(Message newMessage) {
         this.newMessage = newMessage;
+    }
+    
+    public boolean isSenderEmployee(Message message) {
+        if (message.getSender().getEmployee() instanceof Employee) return true;
+        return false;
     }
     
     public void loadCommunication(){

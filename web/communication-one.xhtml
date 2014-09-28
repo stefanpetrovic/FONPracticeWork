@@ -18,9 +18,9 @@
         #{communicationBean.id}
         <ui:repeat value="#{communicationBean.communication.messageList}" var="msg">
             <div class="col-md-12 message_container">
-                <div class="col-md-1 #{(msg.sender.getClass().getSimpleName eq 'Employee')? 'pull-right' : ''}">
+                <div class="col-md-1 #{(communicationBean.isSenderEmployee(msg))? 'pull-right' : ''}">
                 </div>
-                <div class="col-md-10 #{(msg.sender.getClass().getSimpleName eq 'Employee')? 'received_message pull-right' : ''}">
+                <div class="col-md-10 #{(communicationBean.isSenderEmployee(msg))? 'received_message pull-right' : 'sent_message'}">
                     Leggings fap asymmetrical Pinterest. Tumblr Neutra mixtape vinyl, stumptown +1 street art drinking vinegar hoodie ugh keytar. +1 viral literally, Shoreditch Kickstarter kale chips occupy actually trust fund sriracha. Narwhal gastropub occupy Wes Anderson ennui. Sustainable gluten-free post-ironic asymmetrical, master cleanse Etsy fanny pack butcher pop-up fap tofu brunch tousled yr. Fingerstache forage Odd Future, chia slow-carb Pitchfork occupy. Tofu synth photo booth ugh, mixtape mustache authentic sartorial Helvetica Pitchfork banh mi hoodie before they sold out PB
                 </div>
                 <div class="col-md-1">
