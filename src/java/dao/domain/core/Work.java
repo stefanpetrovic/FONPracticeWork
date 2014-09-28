@@ -211,7 +211,7 @@ public class Work implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.Work[ workID=" + workID + " ]";
+        return title;
     }
 
     public Subject getSubject() {
