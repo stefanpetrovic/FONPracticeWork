@@ -306,23 +306,23 @@ public class Controller {
             //System.out.println(w);
             
             //System.out.println(Controller.getInstance().getStudentsCurrentWork(s.getStudent()).get(0));
-            Person p = new Person();
-            p.setEmail("basdf");
-            p.setName("asdfasf");
-            p.setPassword("asdfasd");
-            p.setPictureURI("");
-            p.setSurname("asdfasdf");
-            p.setUsername("asdfasdf");
-            Student s = new Student();
-            s.setPerson(p);
-            HibernateCourseDAO hc = new HibernateCourseDAO();
-            
-            s.setCourse(hc.selectByKey(2L));
-            s.setIndexNo("324");
-            s.setJmbg("5698745825698");
-            
-            Controller.getInstance().addStudent(s);
-            
+//            Person p = new Person();
+//            p.setEmail("basdf");
+//            p.setName("asdfasf");
+//            p.setPassword("asdfasd");
+//            p.setPictureURI("");
+//            p.setSurname("asdfasdf");
+//            p.setUsername("asdfasdf");
+//            Student s = new Student();
+//            s.setPerson(p);
+//            HibernateCourseDAO hc = new HibernateCourseDAO();
+//            
+//            s.setCourse(hc.selectByKey(2L));
+//            s.setIndexNo("324");
+//            s.setJmbg("5698745825698");
+//            
+//            Controller.getInstance().addStudent(s);
+            System.out.println(Controller.getInstance().getCommunicationByID(1L));
         } catch (EngineDAOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -523,6 +523,11 @@ public class Controller {
     public List<Communication> getCommunicationsByStudent(Student student) throws EngineDAOException{
         HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
         return hcd.getCommunicationsByStudent(student);
+    }
+    
+    public Communication getCommunicationByID(Long id) throws EngineDAOException {
+        HibernateCommunicationDAO hcdao = new HibernateCommunicationDAO();
+        return hcdao.selectByKey(id);
     }
     
     public void createMessage(Message message) throws EngineDAOException{

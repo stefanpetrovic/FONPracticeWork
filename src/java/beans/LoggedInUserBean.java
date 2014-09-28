@@ -85,8 +85,10 @@ public class LoggedInUserBean implements Serializable {
             Person person = Controller.getInstance().login(username, password);
             if (person.getStudent() != null) {
                 personIdentifier = person.getStudent().getClass();
-            } else {
+            } else if (person.getEmployee() != null){
                 personIdentifier = person.getEmployee().getClass();
+            }else {
+                personIdentifier = person.getSuperAdminList().get(0).getClass();
             }
             message = "Uspešno ste se ulogovali " + person.getName() + ".";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
