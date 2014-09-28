@@ -507,7 +507,11 @@ public class Controller {
 
     public void createCommunication(Communication com) throws EngineDAOException{
         HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
-        hcd.makePersistent(com);
+        try{
+            Communication checkCom = hcd.getCommunicationByEmployeeAndStudent(com.getEmployee(), com.getStudent());
+        }catch(EngineDAOException ex){
+            hcd.makePersistent(com);
+        }  
     }
     
     public List<Message> getMessagesByCommunication(Communication com) throws EngineDAOException{

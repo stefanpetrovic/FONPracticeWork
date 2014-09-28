@@ -41,8 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Person implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
     private SuperAdmin superAdmin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
-    private List<SuperAdmin> superAdminList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reciever")
     private List<Message> messageList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
@@ -204,15 +202,6 @@ public class Person implements Serializable {
 
     public void setMessageList1(List<Message> messageList1) {
         this.messageList1 = messageList1;
-    }
-
-    @XmlTransient
-    public List<SuperAdmin> getSuperAdminList() {
-        return superAdminList;
-    }
-
-    public void setSuperAdminList(List<SuperAdmin> superAdminList) {
-        this.superAdminList = superAdminList;
     }
 
     public SuperAdmin getSuperAdmin() {
