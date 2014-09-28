@@ -9,11 +9,11 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,52 +27,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SuperAdmin.findAll", query = "SELECT s FROM SuperAdmin s"),
-    @NamedQuery(name = "SuperAdmin.findByAdminID", query = "SELECT s FROM SuperAdmin s WHERE s.adminID = :adminID"),
-    @NamedQuery(name = "SuperAdmin.findByPerson", query = "SELECT s FROM SuperAdmin s WHERE s.person = :person")})
+    @NamedQuery(name = "SuperAdmin.findBySuperadminID", query = "SELECT s FROM SuperAdmin s WHERE s.superadminID = :superadminID")})
 public class SuperAdmin implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "adminID")
-    private Long adminID;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "person")
-    private long person;
+    @Column(name = "super_adminID")
+    private Long superadminID;
+    @JoinColumn(name = "super_adminID", referencedColumnName = "personID", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private Person person;
 
     public SuperAdmin() {
     }
 
-    public SuperAdmin(Long adminID) {
-        this.adminID = adminID;
+    public SuperAdmin(Long superadminID) {
+        this.superadminID = superadminID;
     }
 
-    public SuperAdmin(Long adminID, long person) {
-        this.adminID = adminID;
-        this.person = person;
+    public Long getSuperadminID() {
+        return superadminID;
     }
 
-    public Long getAdminID() {
-        return adminID;
+    public void setSuperadminID(Long superadminID) {
+        this.superadminID = superadminID;
     }
 
-    public void setAdminID(Long adminID) {
-        this.adminID = adminID;
-    }
-
-    public long getPerson() {
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson(long person) {
+    public void setPerson(Person person) {
         this.person = person;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (adminID != null ? adminID.hashCode() : 0);
+        hash += (superadminID != null ? superadminID.hashCode() : 0);
         return hash;
     }
 
@@ -83,7 +76,7 @@ public class SuperAdmin implements Serializable {
             return false;
         }
         SuperAdmin other = (SuperAdmin) object;
-        if ((this.adminID == null && other.adminID != null) || (this.adminID != null && !this.adminID.equals(other.adminID))) {
+        if ((this.superadminID == null && other.superadminID != null) || (this.superadminID != null && !this.superadminID.equals(other.superadminID))) {
             return false;
         }
         return true;
@@ -91,7 +84,7 @@ public class SuperAdmin implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.domain.core.SuperAdmin[ adminID=" + adminID + " ]";
+        return "dao.domain.core.SuperAdmin[ superadminID=" + superadminID + " ]";
     }
     
 }
