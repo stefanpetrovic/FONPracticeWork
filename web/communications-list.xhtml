@@ -11,42 +11,35 @@
     </ui:define>
 
     <ui:define name="content">
-<!--         <ui:repeat value="#{bookCatalog.books}" var="book">
-        <li>
-            <h:link value="#{book.title}" outcome="book">
-                <f:param name="id" value="#{book.id}" />
-            </h:link>
-        </li>
-    </ui:repeat>-->
         <div class="col-md-12">
-            
-            
-            
-            
             <ui:repeat value="#{listCommunicationsBean.communications}" var="communication">
                 <a href="communication-one.jsf?id=#{communication.communicationID}">
-                <div class="col-md-12" style="margin: 10px 0px;">
-                    
-                    <div class="col-md-10 student-communication"  style="height:100px">
-                        <h5>
-                            Profesor: 
-                        </h5>
-                        <h6>
-                             <h:outputText value="#{communication.employee.person.name} #{communication.employee.person.surname}"  styleClass="col-md-12 col-md-offset-1"/> 
-                        </h6>
-                          <h5>
-                            Student 
-                        </h5>
-                        <h6>
-                             <h:outputText value="#{communication.student.person.name} #{communication.student.person.surname}"  styleClass="col-md-12 col-md-offset-1"/> 
-                        </h6>
-                       
-                       
+                    <div class="col-md-12" style="margin: 10px 0px;">
+
+                        <div class="col-md-10 student-communication"  style="height:150px">
+                            <h3>Komunikacija:</h3>
+                            <h5>
+                                Profesor: 
+                            </h5>
+                            <h6>
+                                <h:outputText value="#{communication.employee.person.name} #{communication.employee.person.surname}"  styleClass="col-md-12 col-md-offset-1"/> 
+                            </h6>
+                            <h5>
+                                Student
+                            </h5>
+                            <h6>
+                                <h:outputText value="#{communication.student.person.name} #{communication.student.person.surname}"  styleClass="col-md-12 col-md-offset-1"/> 
+                            </h6>
+
+
+                        </div>
                     </div>
-                </div>
-            </a>
-   </ui:repeat>
-            
+                </a>
+            </ui:repeat>
+            <h:messages showSummary="false"
+                        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
         </div>
 
     </ui:define>

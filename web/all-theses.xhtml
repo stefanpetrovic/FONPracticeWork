@@ -15,38 +15,46 @@
                           styleClass="col-md-offset-2" style="margin-bottom: 25px;"/> 
         </h3>
         <h:form>
-            <h:commandButton value="Na čekanju" styleClass="btn btn-danger pull-left col-md-offset-2 theses-opt-main-button" action="d" />
-            <h:commandButton value="Za dodavanje komisije" styleClass="btn btn-warning pull-left col-md-offset-2 theses-opt-main-button" action="d" /> 
-            <h:commandButton value="Neocenjeni" styleClass="btn btn-success pull-left col-md-offset-2 theses-opt-main-button" action="d" /> 
+            <h:commandButton value="Na čekanju" styleClass="btn btn-danger pull-left col-md-offset-2 theses-opt-main-button" action="#{thesesForEmployee.getUnaprovedTheses}" />
+            <h:commandButton value="Za dodavanje komisije" styleClass="btn btn-warning pull-left col-md-offset-2 theses-opt-main-button" action="#{thesesForEmployee.getUncomissionedTheses}" /> 
+            <h:commandButton value="Neocenjeni" styleClass="btn btn-success pull-left col-md-offset-2 theses-opt-main-button" action="#{thesesForEmployee.getUngradedTheses}" /> 
         </h:form>
     </ui:define>
 
     <ui:define name="content">
-        
+
         <div class="col-md-12">
-            
+
             <ui:repeat value="#{thesesForEmployee.theses}" var="thesis">
-                <a href="#">
-                    <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
-                        <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{thesis.student.person.pictureURI}" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px; padding: 0px;"/>
-                        <div class="col-md-10 student-communication" style="height:100px">
-                            <h4>
-                                <h:outputText value="#{thesis.title}"  styleClass="col-md-12"/> 
-                            </h4>                           
+                <!--<a href="#">-->
+                <div class="col-md-12" style="margin: 10px 0px; border-top: 1px solid #428bca; padding-left: 0px; padding-right: 0px;">
+                    <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{thesis.student.person.pictureURI}" alt="Nema slike" styleClass="col-md-2" style="border: 1px solid; width: 100px; height: 100px; padding: 0px;"/>
+                    <div class="col-md-10" style="height:100px">
+                        <h4>
+                            <h:outputText value="#{thesis.title}"  styleClass="col-md-12"/> 
+                        </h4>
+                        <div class="col-md-10">
                             <h:outputText value="#{thesis.student.person.name} #{thesis.student.person.surname}" styleClass="col-md-4" style="margin-top: 10px; margin-right: 20px; display: inline-block;"/>
                             <h:outputText value="#{thesis.subject.name}" styleClass="col-md-4 pull-right text-right" style="margin-top: 10px; display: inline-block; padding-right: 0px; color: #b92c28;"/>
+
                         </div>
-                        <h:form styleClass="col-md-12">
-                            <h:button value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-right" outcome="thesis-approve.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
-                            <h:button value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-right" outcome="comis-add.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
-                            <h:button value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-right" outcome="evaluate.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
-                            <h:button value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-right" outcome="communication-one.jsf?id=#{loggedInUserBean.loggedInPerson[loggedInUserBean.personIdentifier].personID}"/>
-                        </h:form>
+                        <div class="col-md-2">
+                            <h:outputText value="#{thesis.status==-1 ? 'odbijen' : (thesis.status==0 ? 'ceka' : 'odobren')}"
+                                          styleClass="btn btn-lg btn-#{thesis.status==-1 ? 'danger' : (thesis.status==0 ? 'warning' : 'success')}" style="cursor: default;"/>
+
+                        </div>
                     </div>
-                </a>
+                    <h:form styleClass="col-md-12">
+                        <h:button value="Odobri/Odbij" styleClass="btn btn-xs btn-danger theses-action pull-left" outcome="thesis-approve.jsf?id=#{thesis.workID}"/>
+                        <h:button value="Dodaj komisiju" styleClass="btn btn-xs btn-warning theses-action pull-left" outcome="comis-add.jsf?id=#{thesis.workID}"/>
+                        <h:button value="Oceni" styleClass="btn btn-xs btn-success theses-action pull-left" outcome="evaluate.jsf?id=#{thesis.workID}"/>
+                        <h:button value="Komunikacija" styleClass="btn btn-xs btn-info theses-action pull-left" outcome="communication-one.jsf?id=#{thesis.workID}"/>
+                    </h:form>
+                </div>
+                <!--</a>-->
             </ui:repeat>
 
-       <h:messages errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+            <h:messages errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
                         infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
                         />
         </div>

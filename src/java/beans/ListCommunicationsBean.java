@@ -54,6 +54,16 @@ public class ListCommunicationsBean {
 
         }
     }
+
+    public LoggedInUserBean getLoggedInUserBean() {
+        return loggedInUserBean;
+    }
+
+    public void setLoggedInUserBean(LoggedInUserBean loggedInUserBean) {
+        this.loggedInUserBean = loggedInUserBean;
+    }
+    
+    
     
 
     public ListCommunicationsBean() {

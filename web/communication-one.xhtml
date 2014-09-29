@@ -15,41 +15,44 @@
     </ui:define>
 
     <ui:define name="content">
-        #{communicationBean.id}
+
         <ui:repeat value="#{communicationBean.communication.messageList}" var="msg">
             <div class="col-md-12 message_container">
                 <div class="col-md-1 #{(communicationBean.isSenderEmployee(msg))? 'pull-right' : ''}">
                 </div>
                 <div class="col-md-10 #{(communicationBean.isSenderEmployee(msg))? 'received_message pull-right' : 'sent_message'}">
-                    Leggings fap asymmetrical Pinterest. Tumblr Neutra mixtape vinyl, stumptown +1 street art drinking vinegar hoodie ugh keytar. +1 viral literally, Shoreditch Kickstarter kale chips occupy actually trust fund sriracha. Narwhal gastropub occupy Wes Anderson ennui. Sustainable gluten-free post-ironic asymmetrical, master cleanse Etsy fanny pack butcher pop-up fap tofu brunch tousled yr. Fingerstache forage Odd Future, chia slow-carb Pitchfork occupy. Tofu synth photo booth ugh, mixtape mustache authentic sartorial Helvetica Pitchfork banh mi hoodie before they sold out PB
+                    #{msg.text}
                 </div>
                 <div class="col-md-1">
-                    <p:graphicImage value="resources/images/pic.jpg" alt="Nema slike" style="border: 1px solid; width: 40px; height:40px;"/>
-                    <p class="message_person_name">Bratislav Petrovic</p>
+                    <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{msg.sender.pictureURI}" alt="Nema slike" style="border: 1px solid; width: 40px; height:40px;"/>
+                    <p class="message_person_name">#{msg.sender.name} #{msg.sender.surname}</p>
                 </div>
             </div>
         </ui:repeat>
 
         <!--Slanje poruke-->
 
-        <h:form  styleClass="col-md-10 col-md-offset-1 form-horizontal" style="margin-top: 20px;"> 
+        <h:form  styleClass="col-md-10 col-md-offset-1 form-horizontal" enctype="multipart/form-data" style="margin-top: 20px;"> 
             <div class="form-group">
                 <h:outputLabel for="description" styleClass="col-md-4" value="Nova poruka" />        
-                <p:inputTextarea id="description" rows="5" cols="74" value="#{thesisAprovalBean.work.description}"/>
-                <!--<h:outputText id="description" value="#{thesisAprovalBean.work.description}"/>-->              
+                <p:inputTextarea id="description" rows="5" cols="74" value="#{communicationBean.newMessage.text}"/>
+
             </div>
-            <h:messages errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
-                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
-                        />
+
+            <!--<a href="communications-list.xhtml"></a>-->
             <div class="row">
                 <div class="col-md-12" style="margin-bottom: 10px;">
                     <p:fileUpload mode="simple" style="display: inline-block;" styleClass="pull-left" value="#{submitFile}"/>
                     <p:commandButton value="Submit file" ajax="false" style="display: inline-block;" styleClass="btn btn-default pull-right"  actionListener="#{upload}"/>
                 </div>
-                <h:commandButton value="Pošalji poruku" styleClass="btn btn-success btn-lg pull-right" action="#{bean}" style="margin-left: 5px; margin-right: 5px;"/> 
+                <h:commandButton value="Pošalji poruku" styleClass="btn btn-success btn-lg pull-right" action="#{communicationBean.sendMessage}" style="margin-left: 5px; margin-right: 5px;"/> 
             </div>
-
+ <h:messages showSummary="false"
+                    showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                    infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                    />
         </h:form>
+       
     </ui:define>
 
 </ui:composition>

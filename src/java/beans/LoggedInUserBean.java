@@ -9,6 +9,7 @@ import businessLogic.Controller;
 import dao.domain.core.Employee;
 import dao.domain.core.Person;
 import dao.domain.core.Student;
+import dao.domain.core.SuperAdmin;
 import dao.exception.EngineDAOException;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -117,6 +118,8 @@ public class LoggedInUserBean implements Serializable {
             return "student-menu";
         } else if (personIdentifier == Employee.class) {
             return "professor-menu";
+        } else if (personIdentifier == SuperAdmin.class){
+            return "superadministrator-menu";
         }
         return "default";
     }

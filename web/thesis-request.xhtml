@@ -34,13 +34,17 @@
             <div class="form-group">
                 <h:outputLabel for="heading" styleClass="col-md-2 control-label" value="Naslov" />
                 <div class="col-md-10">
-                    <h:inputText id="heading" styleClass="form-control" value="#{thesisRequestBean.work.title}"/>
+                    <h:inputText id="heading" styleClass="form-control" value="#{thesisRequestBean.work.title}" 
+                                 required="true" requiredMessage="Morate uneti naslov"/>
+                    <p:message for="heading" severity="error"/>
                 </div>
             </div>
              <div class="form-group">
                 <h:outputLabel for="description" styleClass="col-md-2 control-label" value="Opis" />
                 <div class="col-md-10">
-                    <p:inputTextarea id="description" rows="5" cols="74" maxlength="500" counter="display" counterTemplate="{0} karaktera preostalo" value="#{thesisRequestBean.work.description}"/>
+                    <p:inputTextarea id="description" rows="5" cols="74" maxlength="500" counter="display" counterTemplate="{0} karaktera preostalo" value="#{thesisRequestBean.work.description}"
+                                     required="true" requiredMessage="Morate uneti opis"/>
+                    <p:message for="description" severity="error"/>
                     <h:outputText value="(do 500 karaktera)" styleClass="pull-right"/>
                     <h:outputText id="display"/>
                 </div>

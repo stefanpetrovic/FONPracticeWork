@@ -28,6 +28,7 @@ public class NotificationsBean {
     
     @ManagedProperty(value="#{loggedInUserBean}")
     private LoggedInUserBean user;
+    
     private int unreadCommunications;
     private int newThesisRequests;
     

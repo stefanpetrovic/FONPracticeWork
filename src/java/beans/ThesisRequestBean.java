@@ -104,7 +104,18 @@ public class ThesisRequestBean implements Serializable{
     }
     
     public String sendRequest() {
-        try { 
+        try {
+            List<Work> worksStudent = Controller.getInstance().getPersonWorks(loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()));
+//            System.out.println("BROJ radova: "+worksStudent.size());
+            for (Work worksStudent1 : worksStudent) {
+                int status = worksStudent1.getStatus();
+                if(status == 0 || status == 1){
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Ne možete poslati novi rad, dok vam se ne odbije postojeći zahtev."));
+                    return null;
+                }
+//                System.out.println("\t\t"+worksStudent1.getTitle());
+//                System.out.println("\t\t"+worksStudent1.getStatus());
+            }
             Controller.getInstance().addThesisRequest(work);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Zahtev je uspešno poslat."));
         } catch (EngineDAOException ex) {

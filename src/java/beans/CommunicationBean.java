@@ -13,7 +13,10 @@ import dao.domain.core.Message;
 import dao.exception.EngineDAOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -22,12 +25,22 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class CommunicationBean {
     
+    
     private Long id = new Long(1);
+    
     private Communication communication;
     private Message newMessage;
 
     public CommunicationBean() {
-        loadCommunication();
+//        loadCommunication();
+//       prepareMessage();
+    }
+    
+    @PostConstruct
+    public void init(){
+        loadCommunication(id);
+        prepareMessage();
+        
     }
     
     public Long getId() {
@@ -36,8 +49,7 @@ public class CommunicationBean {
 
     public void setId(Long id) {
         this.id = id;
-        System.out.println(id);
-        loadCommunication();
+       // loadCommunication(id);
         
     }
 
@@ -62,12 +74,36 @@ public class CommunicationBean {
         return false;
     }
     
-    public void loadCommunication(){
+    public void loadCommunication(Long id){
         try {
             communication = Controller.getInstance().getCommunicationByID(id);
         } catch (EngineDAOException ex) {
             Logger.getLogger(CommunicationBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String sendMessage(){
+         try { 
+//            Controller.getInstance().addThesisRequest(work);
+           
+            Controller.getInstance().createMessage(newMessage);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Poruka uspešno poslata."));
+        } catch (EngineDAOException ex) {
+            Logger.getLogger(ThesisRequestBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Nije moguće poslati poruku."));
+        }
+        return null;
+    }
+    
+    public void prepareMessage(){
+       newMessage = new Message();
+        newMessage.setText("");
+        newMessage.setRead(false);
+        newMessage.setReciever(communication.getStudent().getPerson());
+        newMessage.setSender(communication.getEmployee().getPerson());
+      //  newMessage.setFileURI("");
+        newMessage.setCommunication(communication);
+       
     }
     
     

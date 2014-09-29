@@ -28,7 +28,7 @@ and open the template in the editor.
 
 .theses-opt-main-button{
     margin-bottom: 10px;
-    display: inline;
+    display: inline-block;
     /*width:100%;*/
 }
 

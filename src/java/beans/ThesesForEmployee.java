@@ -101,9 +101,9 @@ public class ThesesForEmployee {
         return null;
     }
 
-    public String getUngradedTheses(Person person) {
+    public String getUngradedTheses() {
         try {
-            theses = Controller.getInstance().getUngradedTheses(person);
+            theses = Controller.getInstance().getUngradedTheses(loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()));
             if (theses.size() > 0) {
 //                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dobijeni radovi.", null));
                 return null;
@@ -118,9 +118,9 @@ public class ThesesForEmployee {
         return null;
     }
 
-    public String getUncomissionedTheses(Person person) {
+    public String getUncomissionedTheses() {
         try {
-            theses = Controller.getInstance().getUncomissionedTheses(person);
+            theses = Controller.getInstance().getUncomissionedTheses(loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()));
             if (theses.size() > 0) {
 //                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dobijeni radovi.", null));
                 return null;
@@ -135,9 +135,9 @@ public class ThesesForEmployee {
         return null;
     }
 
-    public String getUnaprovedTheses(Person person) {
+    public String getUnaprovedTheses() {
         try {
-            theses = Controller.getInstance().getUnaprovedTheses(person);
+            theses = Controller.getInstance().getUnaprovedTheses(loggedInUserBean.getLoggedInPerson().get(loggedInUserBean.getPersonIdentifier()));
             if (theses.size() > 0) {
 //                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dobijeni radovi.", null));
                 return null;
