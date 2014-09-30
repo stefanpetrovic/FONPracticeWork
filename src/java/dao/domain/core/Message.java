@@ -157,5 +157,4 @@ public class Message implements Serializable {
     public String toString() {
         return "dao.domain.core.Message[ messageID=" + messageID + " ]";
     }
-    
 }
