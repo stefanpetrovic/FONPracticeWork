@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findByMessageID", query = "SELECT m FROM Message m WHERE m.messageID = :messageID"),
     @NamedQuery(name = "Message.findByFileURI", query = "SELECT m FROM Message m WHERE m.fileURI = :fileURI"),
-    @NamedQuery(name = "Message.findByRead", query = "SELECT m FROM Message m WHERE m.read = :read")})
+    @NamedQuery(name = "Message.findByIsRead", query = "SELECT m FROM Message m WHERE m.isRead = :isRead")})
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,17 +52,17 @@ public class Message implements Serializable {
     private String fileURI;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "read")
-    private boolean read;
+    @Column(name = "isRead")
+    private boolean isRead;
+    @JoinColumn(name = "communication", referencedColumnName = "communicationID")
+    @ManyToOne(optional = false)
+    private Communication communication;
     @JoinColumn(name = "reciever", referencedColumnName = "personID")
     @ManyToOne(optional = false)
     private Person reciever;
     @JoinColumn(name = "sender", referencedColumnName = "personID")
     @ManyToOne(optional = false)
     private Person sender;
-    @JoinColumn(name = "communication", referencedColumnName = "communicationID")
-    @ManyToOne(optional = false)
-    private Communication communication;
 
     public Message() {
     }
@@ -71,10 +71,10 @@ public class Message implements Serializable {
         this.messageID = messageID;
     }
 
-    public Message(Long messageID, String text, boolean read) {
+    public Message(Long messageID, String text, boolean isRead) {
         this.messageID = messageID;
         this.text = text;
-        this.read = read;
+        this.isRead = isRead;
     }
 
     public Long getMessageID() {
@@ -101,12 +101,20 @@ public class Message implements Serializable {
         this.fileURI = fileURI;
     }
 
-    public boolean getRead() {
-        return read;
+    public boolean getIsRead() {
+        return isRead;
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public Communication getCommunication() {
+        return communication;
+    }
+
+    public void setCommunication(Communication communication) {
+        this.communication = communication;
     }
 
     public Person getReciever() {
@@ -123,14 +131,6 @@ public class Message implements Serializable {
 
     public void setSender(Person sender) {
         this.sender = sender;
-    }
-
-    public Communication getCommunication() {
-        return communication;
-    }
-
-    public void setCommunication(Communication communication) {
-        this.communication = communication;
     }
 
     @Override
@@ -157,4 +157,5 @@ public class Message implements Serializable {
     public String toString() {
         return "dao.domain.core.Message[ messageID=" + messageID + " ]";
     }
+    
 }

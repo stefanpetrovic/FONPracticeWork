@@ -467,7 +467,7 @@ public class Controller {
         Message message = new Message();
         message.setCommunication(communication);
         message.setFileURI(null);
-        message.setRead(false);
+        message.setIsRead(false);
         message.setReciever(work.getStudent().getPerson());
         message.setSender(work.getMentor().getPerson());
         message.setText("Tema je odobrena.");
@@ -496,7 +496,7 @@ public class Controller {
         Message message = new Message();
         message.setCommunication(communication);
         message.setFileURI(null);
-        message.setRead(false);
+        message.setIsRead(false);
         message.setReciever(work.getStudent().getPerson());
         message.setSender(work.getMentor().getPerson());
         message.setText("Tema je odbijena.");
@@ -552,7 +552,7 @@ public class Controller {
         HibernateMessageDAO hmd = new HibernateMessageDAO();
         List<Message> messages = hmd.getMessagesByCommunication(communication);
         for(Message m : messages){
-            m.setRead(true);
+            m.setIsRead(true);
             hmd.makePersistent(m);
         }        
     }
@@ -565,6 +565,11 @@ public class Controller {
     public void updateWork(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
         hwd.makePersistent(work);
+    }
+    
+    public Communication getCommunicationByEmployeeAndStudent(Employee e, Student s) throws EngineDAOException{
+        HibernateCommunicationDAO hcd = new HibernateCommunicationDAO();
+        return hcd.getCommunicationByEmployeeAndStudent(e, s);
     }
     
     

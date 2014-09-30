@@ -30,7 +30,7 @@ public class HibernateMessageDAO extends AbstractHibernateDAO<Message, Long> imp
     public static final String SENDER = "sender";
     public static final String RECIEVER = "reciever";
     public static final String COMMUNICATION = "communication";
-    public static final String READ = "read";
+    public static final String READ = "isRead";
 
     public HibernateMessageDAO(Class<Message> persistentClass) {
         super(persistentClass);

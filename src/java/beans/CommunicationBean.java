@@ -98,7 +98,7 @@ public class CommunicationBean {
     public void prepareMessage(){
        newMessage = new Message();
         newMessage.setText("");
-        newMessage.setRead(false);
+        newMessage.setIsRead(false);
         newMessage.setReciever(communication.getStudent().getPerson());
         newMessage.setSender(communication.getEmployee().getPerson());
       //  newMessage.setFileURI("");
