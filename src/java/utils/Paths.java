@@ -11,7 +11,7 @@ package utils;
  */
 public class Paths {
     
-    public static String PATH_TO_REPOSITORY = "uploads\\profilePictures\\";
+    public static String PATH_TO_REPOSITORY = "uploads/profilePictures/";
     
     private static Paths instance;
     private Paths (){

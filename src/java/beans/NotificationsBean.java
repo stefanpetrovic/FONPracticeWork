@@ -43,7 +43,7 @@ public class NotificationsBean {
         if (!user.getLoggedInPerson().isEmpty()) {
             try {
                 communications = Controller.getInstance().getCommunicationsWithUnreadMessages(user.getLoggedInPerson().get(user.getPersonIdentifier()));
-                unapprovedThesis = Controller.getInstance().getUnaprovedTheses(user.getLoggedInPerson().get(user.getPersonIdentifier()));
+                if (user.getPersonIdentifier() == Employee.class) unapprovedThesis = Controller.getInstance().getUnaprovedTheses(user.getLoggedInPerson().get(user.getPersonIdentifier()));
             } catch (EngineDAOException ex) {
                 Logger.getLogger(NotificationsBean.class.getName()).log(Level.SEVERE, null, ex);
             }

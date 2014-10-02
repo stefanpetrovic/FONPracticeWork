@@ -566,7 +566,7 @@ public class Controller {
     
     public void updateWork(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
-        hwd.makePersistent(work);
+        hwd.merge(work);
     }
     
     public Communication getCommunicationByEmployeeAndStudent(Employee e, Student s) throws EngineDAOException{
