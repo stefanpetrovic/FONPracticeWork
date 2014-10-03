@@ -11,15 +11,19 @@ import dao.exception.EngineDAOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author MIRA
  */
 @ManagedBean
+@ViewScoped
 public class ThesisAprovalBean {
 
     private Work work;
@@ -28,6 +32,12 @@ public class ThesisAprovalBean {
 
     public String getStatus() {
         return status;
+    }
+    @PostConstruct
+    public void init() {
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        id = Long.parseLong(req.getParameter("id"));
+        makeWork(id);
     }
 
     public void setStatus(String status) {
@@ -48,7 +58,7 @@ public class ThesisAprovalBean {
 
     public void setId(Long id) {
         this.id = id;
-        makeWork(id);
+        //makeWork(id);
     }
 
     public ThesisAprovalBean() {

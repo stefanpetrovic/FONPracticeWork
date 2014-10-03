@@ -21,6 +21,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
+import utils.Paths;
 
 /**
  *
@@ -29,7 +30,7 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 public class SubmitFinalPaper {
 
-    private String pathToUpload = "C:\\praksa\\uploads\\finalPapers";
+    private final String pathToUpload = Paths.PATH_TO_FINAL_PAPERS_FILES;
 
     @ManagedProperty(value = "#{loggedInUserBean}")
     private LoggedInUserBean user;
@@ -72,7 +73,7 @@ public class SubmitFinalPaper {
     }
 
     public String upload() {
-        if (work.getFinalFileURI() != null && !work.getFinalFileURI().equals("")) {
+        if (work.getFinalFileURI() == null || !work.getFinalFileURI().equals("")) {
             String filename = user.getUsername();
             String type = file.getFileName();
             type = type.substring(type.lastIndexOf("."));
@@ -85,7 +86,7 @@ public class SubmitFinalPaper {
                 }
                 //saveFile = File.createTempFile(filename, type, new File(pathToImg));
                 saveFile = new File(pathToUpload + "\\" + filename + "\\" + filename + type);
-
+                System.out.println(saveFile.toPath());
                 try (InputStream in = file.getInputstream()) {
                     Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     System.out.println(saveFile.getName());

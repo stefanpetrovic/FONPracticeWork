@@ -27,7 +27,16 @@
                         <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{msg.sender.pictureURI}" alt="Nema slike" style="border: 1px solid; width: 40px; height:40px;"/>
                         <p class="message_person_name">#{msg.sender.name} #{msg.sender.surname}</p>
                     </div>
+                    <h:form>
+                        
+                            
+                        
+                        <h:commandButton  rendered="#{msg.fileURI != null}" value="Download" action="#{communicationBean.downloadFile(msg.fileURI)}"/>#{communicationBean.getFilename(msg.fileURI)}
+                    </h:form>
+                    
+                    
                 </div>
+                
             </ui:repeat>
         </h:panelGroup>
 
@@ -44,10 +53,10 @@
             <!--<a href="communications-list.xhtml"></a>-->
             <div class="row">
                 <div class="col-md-12" style="margin-bottom: 10px;">
-                    <p:fileUpload mode="simple" style="display: inline-block;" styleClass="pull-left" value="#{submitFile}"/>
-                    <p:commandButton value="Submit file" ajax="false" style="display: inline-block;" styleClass="btn btn-default pull-right"  actionListener="#{upload}"/>
+                    <p:fileUpload mode="simple" style="display: inline-block;" styleClass="pull-left" value="#{communicationBean.file}"/>
+                    <!--<p:commandButton value="Submit file" ajax="false" style="display: inline-block;" styleClass="btn btn-default pull-right"  actionListener="#{upload}"/>-->
                 </div>
-                <h:commandButton value="Pošalji poruku" styleClass="btn btn-success btn-lg pull-right" action="#{communicationBean.sendMessage}" style="margin-left: 5px; margin-right: 5px;"/> 
+                <h:commandButton value="Pošalji poruku" styleClass="btn btn-success btn-lg pull-right" action="#{communicationBean.sendMessage}" style="margin-left: 5px; margin-right: 5px;"/>
             </div>
             <h:messages showSummary="false"
                         showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"

@@ -12,7 +12,8 @@ package utils;
 public class Paths {
     
     public static String PATH_TO_REPOSITORY = "uploads/profilePictures/";
-    
+    public static final String PATH_TO_MESSAGE_FILES = "C:\\praksa\\uploads\\messageFiles\\";
+    public static final String PATH_TO_FINAL_PAPERS_FILES = "C:\\praksa\\uploads\\finalPapers";
     private static Paths instance;
     private Paths (){
         
