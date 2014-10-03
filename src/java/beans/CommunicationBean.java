@@ -172,7 +172,7 @@ public class CommunicationBean implements Serializable {
             try (InputStream in = file.getInputstream()) {
                 Files.copy(in, saveFile.toPath());
                 System.out.println(saveFile.getName());
-                newMessage.setFileURI(filename + "/" + filename + type);
+                newMessage.setFileURI(filename + "\\" + filename + type);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Uspešno ste prosledili fajl."));
             } catch (IOException ex) {
                 Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);

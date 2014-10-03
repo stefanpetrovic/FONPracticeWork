@@ -28,9 +28,6 @@
                         <p class="message_person_name">#{msg.sender.name} #{msg.sender.surname}</p>
                     </div>
                     <h:form>
-                        
-                            
-                        
                         <h:commandButton  rendered="#{msg.fileURI != null}" value="Download" action="#{communicationBean.downloadFile(msg.fileURI)}"/>#{communicationBean.getFilename(msg.fileURI)}
                     </h:form>
                     
