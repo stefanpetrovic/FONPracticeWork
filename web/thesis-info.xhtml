@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    <ui:define name="title">Podaci o radu</ui:define>
+
+    <ui:define name="heading">
+        <h1 class="col-md-offset-2">Podaci o radu</h1>
+        <div class="col-md-12">
+            <p:graphicImage styleClass="center-block" style="border: 1px solid;" height="200" width="200" value="/uploads/profilePictures/probros.png" alt="nema slike"/>
+            <div class='text-center'>
+                <h3>
+                    <h:outputText id="studentName" value="Petar"/>
+                    <br/>
+                    <h:outputText id="studentSurname" value="Petrovic"/>
+                </h3>
+
+            </div>
+
+
+            <div class="form-group">
+                <h:outputLabel for="date1" styleClass="col-md-6 text-right"  value="Datum prijave: "/>
+                <h:outputText id="date1" value="14.01.2014."/>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="date2" styleClass="col-md-6 text-right" value="Datum odbrane: "/>
+                <h:outputText id="date2" value="28.01.2014."/>
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="content">
+        <!--<h:form styleClass="col-md-7 form-horizontal">-->
+
+
+        <div class="form-group">
+            <!--<h:outputLabel for="title" styleClass="col-md-4 text-right"  value="Naslov: "/>-->
+            <h3>
+                <h:outputText id="title" value="Razvoj informacionog sistema knjizare"/>
+            </h3>
+
+        </div>
+        <div class="form-group">               
+            <!--<h:outputLabel for="subject" styleClass="col-md-4 text-right"  value="Predmet: "/>-->
+            <h:outputText id="subject" value="Projektovanje informacionih sistema"/>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Komisija:</h4>
+            </div>
+            <div class="panel-body row">
+
+                <div class="col-md-4 text-center">
+
+                    <!--<h:outputLabel for="mentor" styleClass="col-md-2 text-right" value="Mentor: "/>-->
+                    <p:graphicImage styleClass="center-block" style="border: 1px solid;" height="100" width="100" value="/uploads/profilePictures/probros.png" alt="nema slike"/>
+
+                    <h:outputText id="mentor" value="Siniša Vlajić"/>
+                    <p>Mentor</p>
+                </div>
+
+                  <div class=" col-md-4 text-center">
+
+                    <!--<h:outputLabel for="mentor" styleClass="col-md-2 text-right" value="Mentor: "/>-->
+                    <p:graphicImage styleClass="center-block" style="border: 1px solid;" height="100" width="100" value="/uploads/profilePictures/probros.png" alt="nema slike"/>
+
+                    <h:outputText id="member1" value="Siniša Nešković"/>
+                    <p>Član 1</p>
+                </div>
+                  <div class="col-md-4 text-center">
+
+                    <!--<h:outputLabel for="mentor" styleClass="col-md-2 text-right" value="Mentor: "/>-->
+                    <p:graphicImage styleClass="center-block" style="border: 1px solid;" height="100" width="100" value="/uploads/profilePictures/probros.png" alt="nema slike"/>
+
+                    <h:outputText id="member2" value="Vladan Devedžić"/>
+                    <p>Član 2</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class='col-md-12 row' style="margin-top: 15px;">
+            <div class='col-md-2 text-center' style='background-color: green; color: white;'>
+                <h:outputText id="grade" value="10"  styleClass="text-center" style="font-size: 48px; padding: 0px;"/>
+                <br/>
+                <span>Ocena</span>
+            </div>
+
+
+            <div class='col-md-3 text-center' style='bottom:0;'>
+                <h:outputText id="status" value="Odobren" style="font-size: 24px; color: darkorange;"/>
+                <br/>
+                <p>Status</p>
+            </div>
+            <div class='col-md-2 text-center'>
+                <!--<h:outputText id="download" value="10"/>-->
+                 <span class="glyphicon glyphicon-file" style='font-size: 48px; margin-top: 10px; color: red'></span>
+                <p>Download</p>
+            </div>
+        </div>
+
+        <!--</h:form>-->
+
+
+
+    </ui:define>
+
+</ui:composition>

@@ -72,12 +72,12 @@ public class ThesesSearch {
                 keywordsList.add(k.trim());
             }
             
-            System.out.println("\n\tKEYWORDS:: ");
-            for (String keywordsList1 : keywordsList) {
-                System.out.println("keyword: "+keywordsList1);
-            }
-            System.out.println("\n\tHEADING:: "+heading);
-            System.out.println("\n\tSUBJECT:: "+subject.getName()+"\t\n\nCLASS:: "+subject.getClass());
+//            System.out.println("\n\tKEYWORDS:: ");
+//            for (String keywordsList1 : keywordsList) {
+////                System.out.println("keyword: "+keywordsList1);
+//            }
+//            System.out.println("\n\tHEADING:: "+heading);
+//            System.out.println("\n\tSUBJECT:: "+subject.getName()+"\t\n\nCLASS:: "+subject.getClass());
             
             //ovo da se iskrpi lepo jer je sklepano ne daj boze
             if("".equals(heading)) heading = null;
