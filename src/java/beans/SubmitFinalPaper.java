@@ -43,7 +43,7 @@ public class SubmitFinalPaper {
         } catch (EngineDAOException ex) {
             Logger.getLogger(SubmitFinalPaper.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("nema rada");
-            work = new Work();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Ne mozete vise puta slati finalnu verziju rada."));
         }
     }
 
@@ -72,35 +72,41 @@ public class SubmitFinalPaper {
     }
 
     public String upload() {
+        if (work.getFinalFileURI() != null && !work.getFinalFileURI().equals("")) {
+            String filename = user.getUsername();
+            String type = file.getFileName();
+            type = type.substring(type.lastIndexOf("."));
+            File saveFile;
+            File userFolder;
+            try {
+                userFolder = new File(pathToUpload + "\\" + filename);
+                if (!userFolder.exists()) {
+                    userFolder.mkdir();
+                }
+                //saveFile = File.createTempFile(filename, type, new File(pathToImg));
+                saveFile = new File(pathToUpload + "\\" + filename + "\\" + filename + type);
 
-        String filename = user.getUsername();
-        String type = file.getFileName();
-        type = type.substring(type.lastIndexOf("."));
-        File saveFile;
-        File userFolder;
-        try {
-            userFolder = new File(pathToUpload + "\\" + filename);
-            if (!userFolder.exists()) {
-                userFolder.mkdir();
-            }
-            //saveFile = File.createTempFile(filename, type, new File(pathToImg));
-            saveFile = new File(pathToUpload + "\\" + filename + "\\" + filename + type);
-            
-            try (InputStream in = file.getInputstream()) {
-                Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println(saveFile.getName());
-                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Uspešno ste prosledili završnu verziju rada."));
-                 return null;
-            } catch (IOException ex) {
+                try (InputStream in = file.getInputstream()) {
+                    Files.copy(in, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println(saveFile.getName());
+                    work.setFinalFileURI(filename + "\\" + filename + type);
+                    Controller.getInstance().updateWork(work);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Uspešno ste prosledili završnu verziju rada."));
+                    return null;
+                } catch (IOException ex) {
+                    Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Nije moguće sačuvati završnu verziju rada."));
+                    return null;
+                }
+            } catch (Exception ex) {
                 Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Nije moguće sačuvati završnu verziju rada."));
                 return null;
             }
-        } catch (Exception ex) {
-            Logger.getLogger(ImageUploadBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Nije moguće sačuvati završnu verziju rada."));
+        }else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Ne mozete dva puta dodati finalnu verziju."));
             return null;
         }
-       // return null;
+        // return null;
     }
 }

@@ -300,7 +300,9 @@ public class Controller {
 
     public static void main(String[] args) {
         try {
-//            Person s = Controller.getInstance().login("Rango1", "123");
+            Person s = Controller.getInstance().login("probros", "123");
+            System.out.println("povukao");
+            //System.out.println(Controller.getInstance().getCommunicationsWithUnreadMessages(s));
 //            System.out.println(s.getStudent());
 //            Work w = s.getStudent().getWorkList().get(0);
             //System.out.println(w);
@@ -564,7 +566,7 @@ public class Controller {
     
     public void updateWork(Work work) throws EngineDAOException {
         HibernateWorkDAO hwd = new HibernateWorkDAO();
-        hwd.makePersistent(work);
+        hwd.merge(work);
     }
     
     public Communication getCommunicationByEmployeeAndStudent(Employee e, Student s) throws EngineDAOException{

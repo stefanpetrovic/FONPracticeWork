@@ -15,20 +15,22 @@
     </ui:define>
 
     <ui:define name="content">
+        <h:panelGroup id="messageListDivs">
+            <ui:repeat value="#{communicationBean.communication.messageList}" var="msg">
+                <div class="col-md-12 message_container">
+                    <div class="col-md-1 #{(communicationBean.isSenderEmployee(msg))? 'pull-right' : ''}">
+                    </div>
+                    <div class="col-md-10 #{(communicationBean.isSenderEmployee(msg))? 'received_message pull-right' : 'sent_message'}">
+                        #{msg.text}
+                    </div>
+                    <div class="col-md-1">
+                        <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{msg.sender.pictureURI}" alt="Nema slike" style="border: 1px solid; width: 40px; height:40px;"/>
+                        <p class="message_person_name">#{msg.sender.name} #{msg.sender.surname}</p>
+                    </div>
+                </div>
+            </ui:repeat>
+        </h:panelGroup>
 
-        <ui:repeat value="#{communicationBean.communication.messageList}" var="msg">
-            <div class="col-md-12 message_container">
-                <div class="col-md-1 #{(communicationBean.isSenderEmployee(msg))? 'pull-right' : ''}">
-                </div>
-                <div class="col-md-10 #{(communicationBean.isSenderEmployee(msg))? 'received_message pull-right' : 'sent_message'}">
-                    #{msg.text}
-                </div>
-                <div class="col-md-1">
-                    <p:graphicImage value="#{dropboxesDataBean.pathToRepository}#{msg.sender.pictureURI}" alt="Nema slike" style="border: 1px solid; width: 40px; height:40px;"/>
-                    <p class="message_person_name">#{msg.sender.name} #{msg.sender.surname}</p>
-                </div>
-            </div>
-        </ui:repeat>
 
         <!--Slanje poruke-->
 
@@ -47,12 +49,12 @@
                 </div>
                 <h:commandButton value="Pošalji poruku" styleClass="btn btn-success btn-lg pull-right" action="#{communicationBean.sendMessage}" style="margin-left: 5px; margin-right: 5px;"/> 
             </div>
- <h:messages showSummary="false"
-                    showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
-                    infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
-                    />
+            <h:messages showSummary="false"
+                        showDetail="true" errorStyle="font-size: 20px; color: darkred;" errorClass="list-unstyled"
+                        infoStyle="font-size: 20px; color: darkgreen;" infoClass="list-unstyled"
+                        />
         </h:form>
-       
+
     </ui:define>
 
 </ui:composition>

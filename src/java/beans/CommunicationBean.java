@@ -10,27 +10,36 @@ import businessLogic.Controller;
 import dao.domain.core.Communication;
 import dao.domain.core.Employee;
 import dao.domain.core.Message;
+import dao.domain.core.Person;
 import dao.exception.EngineDAOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author stefan
  */
 @ManagedBean
-public class CommunicationBean {
+@ViewScoped
+public class CommunicationBean implements Serializable{
     
     
-    private Long id = new Long(1);
+    private Long id;
     
     private Communication communication;
     private Message newMessage;
-
+    
+    @ManagedProperty(value="#{loggedInUserBean}")
+    private LoggedInUserBean user;
+    
     public CommunicationBean() {
 //        loadCommunication();
 //       prepareMessage();
@@ -38,19 +47,26 @@ public class CommunicationBean {
     
     @PostConstruct
     public void init(){
+        HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        id = Long.parseLong(req.getParameter("id"));
         loadCommunication(id);
         prepareMessage();
-        
     }
-    
+
+    public LoggedInUserBean getUser() {
+        return user;
+    }
+
+    public void setUser(LoggedInUserBean user) {
+        this.user = user;
+    }
+        
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
-       // loadCommunication(id);
-        
+        this.id = id;        
     }
 
     public Communication getCommunication() {
@@ -82,25 +98,31 @@ public class CommunicationBean {
         }
     }
     
-    public String sendMessage(){
+    public void sendMessage(){
          try { 
 //            Controller.getInstance().addThesisRequest(work);
            
             Controller.getInstance().createMessage(newMessage);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Poruka uspešno poslata."));
+            communication.getMessageList().add(newMessage);
+            prepareMessage();
         } catch (EngineDAOException ex) {
             Logger.getLogger(ThesisRequestBean.class.getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Nije moguće poslati poruku."));
         }
-        return null;
     }
     
     public void prepareMessage(){
        newMessage = new Message();
         newMessage.setText("");
         newMessage.setIsRead(false);
-        newMessage.setReciever(communication.getStudent().getPerson());
-        newMessage.setSender(communication.getEmployee().getPerson());
+        Person sender = user.getLoggedInPerson().get(user.getPersonIdentifier());
+        if (sender.getStudent() != null) {
+            newMessage.setReciever(communication.getEmployee().getPerson());
+        }else {
+            newMessage.setReciever(communication.getStudent().getPerson());
+        }
+        newMessage.setSender(sender);
       //  newMessage.setFileURI("");
         newMessage.setCommunication(communication);
        
