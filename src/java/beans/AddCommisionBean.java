@@ -15,16 +15,20 @@ import dao.exception.EngineDAOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author MIRA
  */
 @ManagedBean
+@ViewScoped
 public class AddCommisionBean {
 
     private Work work;
@@ -38,6 +42,13 @@ public class AddCommisionBean {
     @ManagedProperty(value = "#{loggedInUserBean}")
     private LoggedInUserBean loggedInUserBean;
 
+    @PostConstruct
+    public void init() {
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        id = Long.parseLong(req.getParameter("id"));
+        makeWork(id);
+    }
+    
     public LoggedInUserBean getLoggedInUserBean() {
         return loggedInUserBean;
     }
@@ -52,7 +63,7 @@ public class AddCommisionBean {
 
     public void setId(Long id) {
         this.id = id;
-        makeWork(id);
+        //makeWork(id);
     }
 
     public String getStudentName() {
@@ -121,14 +132,14 @@ public class AddCommisionBean {
 
     }
 
-    public String addCommision() {
+    public void addCommision() {
         try {
             Controller.getInstance().addCommision(work, firstMember, secondMember, thirdMember);
             //return null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Komisija dodata"));
         } catch (EngineDAOException ex) {
             Logger.getLogger(AddCommisionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
     }
 
     public void validate(FacesContext context, UIComponent component, Object object) {

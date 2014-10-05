@@ -354,6 +354,9 @@ public class Controller {
         work.setCommision(commision);
         //update work
         hwd.makePersistent(work);
+        hcmd.makePersistent(member1);
+        hcmd.makePersistent(member2);
+        hcmd.makePersistent(member3);
     }
 
     public List<Work> searchUnapprovedTheses() throws EngineDAOException {

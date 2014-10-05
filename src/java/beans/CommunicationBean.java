@@ -125,7 +125,10 @@ public class CommunicationBean implements Serializable {
     public void sendMessage() {
         try {
 //            Controller.getInstance().addThesisRequest(work);\
-            uploadFile();
+            System.out.println("File size: " + file.getSize());
+            if (file.getSize() > 0) {
+                uploadFile();
+            }
             Controller.getInstance().createMessage(newMessage);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Poruka uspešno poslata."));
             communication.getMessageList().add(newMessage);
