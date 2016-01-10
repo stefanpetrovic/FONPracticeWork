@@ -1,4 +1,4 @@
 PraksaFon
 =========
 
-Softver za pracenje zavrsnih radova na fakultetima
+JavaEE project for managing final thesis process for college graduates
